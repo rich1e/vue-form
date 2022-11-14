@@ -1,8 +1,8 @@
 <!--
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
- * @LastEditors: gongyuqi@max-optics.com
- * @LastEditTime: 2022-11-11 13:31:06
+ * @LastEditors: rich1e
+ * @LastEditTime: 2022-11-14 14:46:27
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Biserial.vue
  * @Description:
  *
@@ -52,7 +52,7 @@
 
 <template>
   <ElForm>
-    <!-- // TODO ElRow 默认会添加 margin 值，手动设置后可以覆盖默认行为 -->
+    <!-- TODO ElRow 默认会添加 margin 值，手动设置后可以覆盖默认行为 -->
     <ElRow :gutter="20" align="middle" justify="space-between">
       <ElCol :span="12">
         <ElFormItem label="姓名">

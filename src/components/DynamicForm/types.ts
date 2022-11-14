@@ -1,23 +1,46 @@
 /*
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-10 14:52:56
- * @LastEditors: gongyuqi@max-optics.com
- * @LastEditTime: 2022-11-11 16:31:19
+ * @LastEditors: rich1e
+ * @LastEditTime: 2022-11-14 12:45:21
  * @FilePath: /vue-form/src/components/DynamicForm/types.ts
  * @Description:
  *
  */
-
-import { type } from 'os';
 import { ComponentPublicInstance, PropType, Ref } from 'vue';
 
+/**
+ * @see https://www.freecodecamp.org/chinese/news/advanced-typescript-types-cheatsheet/
+ */
+
+export type FieldType = {
+  /** 表单输入类型 */
+  controlType: 'Input' | 'Switch' | 'Select';
+  label?: string;
+  prop: string;
+  props: {
+    type?: 'text';
+    activeText?: string;
+    inactiveText?: string;
+    placeholder?: string;
+    modelValue: string;
+  };
+  options?: any[];
+  bind: string;
+  default?: string;
+  disabled?: boolean;
+};
+
+/**
+ * 表单配置
+ */
 export type ConfigType = {
   /** 表单样式场景 */
   scene: string;
-  /** 表单输入类型 */
-  field: any[];
+  /** 表单字段项 */
+  field: FieldType[];
   /** 表单验证规则 */
-  rule: any;
+  rule?: any;
   /** 表单操作 */
   actions?: any;
   /** 表单插槽 */

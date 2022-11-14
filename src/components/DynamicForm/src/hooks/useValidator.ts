@@ -1,15 +1,17 @@
 /*
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 16:00:31
- * @LastEditors: gongyuqi@max-optics.com
- * @LastEditTime: 2022-11-11 16:41:29
+ * @LastEditors: rich1e
+ * @LastEditTime: 2022-11-14 11:14:27
  * @FilePath: /vue-form/src/components/DynamicForm/src/hooks/useValidator.ts
  * @Description:
  *
  */
 export const checkAge = (rule: any, value: any, callback: any) => {
+  // debugger;
+  console.log('checkAge rule#', rule);
   if (!value) {
-    return callback(new Error('Please input the age'));
+    return callback(new Error('Please input the age for hooks'));
   }
   setTimeout(() => {
     if (!Number.isInteger(value)) {
@@ -25,7 +27,8 @@ export const checkAge = (rule: any, value: any, callback: any) => {
 };
 
 export const checkEmpty = (rule: any, value: any, callback: any) => {
-  if (value === '') {
+  console.log('checkEmpty rule#', rule);
+  if (!value || value === '') {
     callback(new Error(`It's Empty!`));
   } else {
     callback();

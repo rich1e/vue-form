@@ -1,8 +1,8 @@
 <!--
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-03 14:10:27
- * @LastEditors: gongyuqi@max-optics.com
- * @LastEditTime: 2022-11-07 17:50:56
+ * @LastEditors: rich1e
+ * @LastEditTime: 2022-11-14 14:48:51
  * @FilePath: /vue-form/src/views/Tab.vue
  * @Description:
  *
@@ -10,33 +10,11 @@
 <script setup lang="ts">
   import BaseViewVue from '/@/components/Layouts/BaseView.vue';
   import DynamicForm from '/@/components/DynamicForm';
+  import { ConfigType } from '../components/DynamicForm/types';
 
-  const formConfig = {
-    // scene: 'halver | trisector | group | tab | none',
+  const formConfig: ConfigType = {
     scene: 'tab',
-    field: [
-      {
-        type: 'input',
-        label: 'name',
-        prop: 'username',
-        bind: 'x',
-        default: '-',
-      },
-      {
-        type: 'swich',
-        label: 'name',
-        prop: 'married',
-        bind: 'x',
-        disabled: true,
-      },
-    ],
-    rule: {},
-    options: {
-      onSubmit: () => {},
-      onCancel: () => {},
-      onApply: () => {},
-    },
-    slots: () => {},
+    field: [],
   };
 </script>
 

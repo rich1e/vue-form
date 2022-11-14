@@ -1,8 +1,8 @@
 <!--
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-03 14:10:27
- * @LastEditors: gongyuqi@max-optics.com
- * @LastEditTime: 2022-11-11 17:55:14
+ * @LastEditors: rich1e
+ * @LastEditTime: 2022-11-14 11:51:46
  * @FilePath: /vue-form/src/views/Uniseriate.vue
  * @Description:
  *
@@ -17,8 +17,50 @@
 <script setup lang="ts">
   import BaseViewVue from '/@/components/Layouts/BaseView.vue';
   import DynamicForm from '/@/components/DynamicForm';
+  import {
+    checkAge,
+    checkEmpty,
+  } from '../components/DynamicForm/src/hooks/useValidator';
+  import { ConfigType } from '../components/DynamicForm/types';
 
-  const formConfig = {
+  const rule = {
+    username: [{ validator: checkEmpty, trigger: 'blur', required: true }],
+    age: [{ validator: checkAge, trigger: 'blur', required: true }],
+    birth: [{ validator: checkEmpty, trigger: 'blur', required: true }],
+  };
+
+  const actions = {
+    onSubmit: {
+      btnText: '提交',
+      handler: (formEl: any) => {
+        if (!formEl) return;
+        formEl.validate((valid: any) => {
+          if (valid) {
+            console.log('submit for view!');
+          } else {
+            console.log('error submit!');
+            return false;
+          }
+        });
+      },
+    },
+    onCancel: {
+      btnText: '取消',
+      handler: () => {
+        console.log('onCancel');
+      },
+    },
+    onRest: {
+      btnText: '重置',
+      handler: (formEl: any) => {
+        console.log('onRest for view');
+        if (!formEl) return;
+        formEl.resetFields();
+      },
+    },
+  };
+
+  const formConfig: ConfigType = {
     scene: 'uniseriate',
     field: [
       {
@@ -29,6 +71,18 @@
           type: 'text',
           placeholder: '请输入姓名',
           modelValue: 'username',
+        },
+        bind: 'x',
+        default: '-',
+      },
+      {
+        controlType: 'Input',
+        label: '曾用名',
+        prop: 'iiusername',
+        props: {
+          type: 'text',
+          placeholder: '请输入姓名',
+          modelValue: 'iiusername',
         },
         bind: 'x',
         default: '-',
@@ -91,72 +145,8 @@
         disabled: true,
       },
     ],
-    rule: {
-      username: [
-        {
-          required: true,
-          message: 'Please input user name',
-          trigger: 'blur',
-        },
-        {
-          min: 3,
-          max: 20,
-          message: 'Age should be 3 to 20',
-          trigger: 'blur',
-        },
-      ],
-      age: [
-        {
-          required: true,
-          message: 'Please input user age',
-          trigger: 'change',
-        },
-        {
-          min: 18,
-          max: 99,
-          message: 'Age should be 18 to 99',
-          trigger: 'blur',
-        },
-      ],
-      birth: [
-        {
-          required: true,
-          message: 'Please select Place of birth',
-          trigger: 'change',
-        },
-      ],
-    },
-    actions: {
-      onSubmit: {
-        btnText: '提交',
-        handler: (formEl: any) => {
-          console.log('onSubmit');
-          if (!formEl) return;
-          formEl.validate((valid: any) => {
-            if (valid) {
-              console.log('submit!');
-            } else {
-              console.log('error submit!');
-              return false;
-            }
-          });
-        },
-      },
-      onCancel: {
-        btnText: '取消',
-        handler: () => {
-          console.log('onCancel');
-        },
-      },
-      onRest: {
-        btnText: '重置',
-        handler: (formEl: any) => {
-          console.log('onRest');
-          if (!formEl) return;
-          formEl.resetFields();
-        },
-      },
-    },
+    rule,
+    actions,
     slots: () => {},
   };
 </script>
