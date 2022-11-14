@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: rich1e
- * @LastEditTime: 2022-11-14 16:52:23
+ * @LastEditTime: 2022-11-14 17:14:18
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Biserial.vue
  * @Description:
  *
