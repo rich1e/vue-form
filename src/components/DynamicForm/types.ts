@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-10 14:52:56
  * @LastEditors: rich1e
- * @LastEditTime: 2022-11-14 18:02:50
+ * @LastEditTime: 2022-11-14 18:22:54
  * @FilePath: /vue-form/src/components/DynamicForm/types.ts
  * @Description:
  *
@@ -48,6 +48,8 @@ export type ConfigType = {
   scene: SceneType;
   /** 表单字段组合 */
   groups?: GroupsType;
+  /** 表单字段队列 */
+  ranks?: FieldType[][];
   /** 表单字段项 */
   field?: FieldType[];
   /** 表单验证规则 */

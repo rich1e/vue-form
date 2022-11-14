@@ -2,8 +2,8 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: rich1e
- * @LastEditTime: 2022-11-14 23:52:25
- * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Uniseriate.vue
+ * @LastEditTime: 2022-11-14 20:22:41
+ * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Group.vue
  * @Description:
  *
 -->
@@ -12,17 +12,15 @@
    * @see https://github.com/vuejs/rfcs/discussions/273
    * @see https://github.com/vuejs/rfcs/blob/master/active-rfcs/0040-script-setup.md#automatic-name-inference
    */
-  export default { name: 'Uniseriate' };
+  export default { name: 'Group' };
 </script>
 
 <script setup lang="ts">
   import type { PropType } from 'vue';
-  import { reactive, ref } from 'vue';
-  import { ElForm } from 'element-plus';
 
+  import FormGroup from '../components/FormGroup.vue';
   import FormFields from '../components/FormFields.vue';
   import FormActions from '../components/FormActions.vue';
-
   import type { ConfigType } from '../../types';
 
   const props = defineProps({
@@ -32,31 +30,21 @@
     },
   });
 
-  console.log('This Uniseriate', props);
+  console.log('This Group', props);
 
-  const { scene, field, actions, rule } = props.config;
-
-  /** 表单引用 */
-  const formRef = ref<InstanceType<typeof ElForm> | null | any>(null);
-
-  /** 动态表单字段 */
-  const dynamicFormModel: any = reactive({});
+  const { scene, ranks, actions, rule } = props.config;
 </script>
 
 <template>
-  <ElForm
-    :model="dynamicFormModel"
-    ref="formRef"
-    :rules="rule"
-    label-width="auto"
-  >
+  <FormGroup :ranks="ranks" :rule="rule">
     <!-- 渲染表单字段 -->
-    <FormFields
-      :scene="scene"
-      :field="field"
-      :dynamic-model="dynamicFormModel"
-    />
+    <template #="{ rank, dynamicModel }">
+      <FormFields :scene="scene" :field="rank" :dynamic-model="dynamicModel" />
+    </template>
+
     <!-- 渲染操作按钮 -->
-    <FormActions :actions="actions" />
-  </ElForm>
+    <template #actions>
+      <FormActions :actions="actions" />
+    </template>
+  </FormGroup>
 </template>

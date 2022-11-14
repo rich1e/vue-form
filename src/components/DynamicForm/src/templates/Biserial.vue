@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: rich1e
- * @LastEditTime: 2022-11-14 17:14:18
+ * @LastEditTime: 2022-11-14 23:52:52
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Biserial.vue
  * @Description:
  *
@@ -43,8 +43,13 @@
 </script>
 
 <template>
-  <ElForm :model="dynamicFormModel" ref="formRef" :rules="rule">
-    <!-- TODO ElRow 默认会添加 margin 值，手动设置后可以覆盖默认行为 -->
+  <!-- TODO ElRow 默认会添加 margin 值，手动设置后可以覆盖默认行为 -->
+  <ElForm
+    :model="dynamicFormModel"
+    ref="formRef"
+    :rules="rule"
+    label-width="auto"
+  >
     <ElRow
       :gutter="20"
       align="middle"
@@ -82,7 +87,6 @@
 
       <ElCol :span="24">
         <ElFormItem>
-          <!-- 渲染操作按钮 -->
           <template v-if="actions">
             <ElButton
               v-if="actions.onSubmit"

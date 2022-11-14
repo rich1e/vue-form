@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:37:02
  * @LastEditors: rich1e
- * @LastEditTime: 2022-11-14 17:18:35
+ * @LastEditTime: 2022-11-14 23:39:39
  * @FilePath: /vue-form/src/components/DynamicForm/Default.vue
  * @Description:
  *
@@ -18,6 +18,7 @@
   import Biserial from './src/templates/Biserial.vue';
   import Uniseriate from './src/templates/Uniseriate.vue';
   import Tab from './src/templates/Tab.vue';
+  import Group from './src/templates/Group.vue';
 
   import { ConfigType } from './types';
 
@@ -33,8 +34,9 @@
 
   // TODO 优化列表
   const componentTable: Record<string, Component> = {
-    biserial: Biserial,
     uniseriate: Uniseriate,
+    biserial: Biserial,
+    group: Group,
     tab: Tab,
   };
 
@@ -42,5 +44,7 @@
 </script>
 
 <template>
-  <component :is="componentTable[componentName]" :config="config" />
+  <div :style="{ textAlign: 'left' }">
+    <component :is="componentTable[componentName]" :config="config" />
+  </div>
 </template>

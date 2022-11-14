@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: rich1e
- * @LastEditTime: 2022-11-14 18:04:50
+ * @LastEditTime: 2022-11-14 23:53:35
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Uniseriate.vue
  * @Description:
  *
@@ -22,6 +22,7 @@
 
   import FormFields from '../components/FormFields.vue';
   import FormActions from '../components/FormActions.vue';
+  import FormGroup from '../components/FormGroup.vue';
 
   import type { ConfigType, FieldType } from '../../types';
 
@@ -38,7 +39,7 @@
    * groups?.uniseriate / groups?.biserial
    * @see https://bobbyhadz.com/blog/typescript-property-does-not-exist-on-type
    */
-  const { scene, groups, actions, rule } = props.config;
+  const { scene, groups, actions, rule, ranks } = props.config;
 
   /** 表单引用 */
   const formRef = ref<InstanceType<typeof ElForm> | null | any>(null);
@@ -51,7 +52,12 @@
   <!-- TODO ElTabPane slots -->
   <ElTabs type="border-card">
     <ElTabPane label="Uniseriate">
-      <ElForm :model="dynamicFormModel" ref="formRef" :rules="rule">
+      <ElForm
+        :model="dynamicFormModel"
+        ref="formRef"
+        :rules="rule"
+        label-width="auto"
+      >
         <!-- 渲染表单字段 -->
         <FormFields
           :scene="scene"
@@ -62,18 +68,34 @@
         <FormActions :actions="actions" />
       </ElForm>
     </ElTabPane>
-    <ElTabPane label="Biserial">
+
+    <!-- <ElTabPane label="Biserial">
       <ElForm :model="dynamicFormModel" ref="formRef" :rules="rule">
-        <!-- 渲染表单字段 -->
         <FormFields
           :scene="scene"
           :field="groups?.biserial"
           :dynamic-model="dynamicFormModel"
         />
-        <!-- 渲染操作按钮 -->
         <FormActions :actions="actions" />
       </ElForm>
+    </ElTabPane> -->
+
+    <ElTabPane label="Group">
+      <FormGroup :ranks="ranks" :rule="rule">
+        <!-- 渲染表单字段 -->
+        <template #="{ rank, dynamicModel }">
+          <FormFields
+            :scene="scene"
+            :field="rank"
+            :dynamic-model="dynamicModel"
+          />
+        </template>
+
+        <!-- 渲染操作按钮 -->
+        <template #actions>
+          <FormActions :actions="actions" />
+        </template>
+      </FormGroup>
     </ElTabPane>
-    <ElTabPane label="Group">Group</ElTabPane>
   </ElTabs>
 </template>

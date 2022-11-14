@@ -2,8 +2,8 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: rich1e
- * @LastEditTime: 2022-11-14 23:52:25
- * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Uniseriate.vue
+ * @LastEditTime: 2022-11-14 23:53:17
+ * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Group.vue
  * @Description:
  *
 -->
@@ -12,29 +12,29 @@
    * @see https://github.com/vuejs/rfcs/discussions/273
    * @see https://github.com/vuejs/rfcs/blob/master/active-rfcs/0040-script-setup.md#automatic-name-inference
    */
-  export default { name: 'Uniseriate' };
+  export default { name: 'FormGroup' };
 </script>
 
 <script setup lang="ts">
-  import type { PropType } from 'vue';
   import { reactive, ref } from 'vue';
   import { ElForm } from 'element-plus';
 
-  import FormFields from '../components/FormFields.vue';
-  import FormActions from '../components/FormActions.vue';
-
-  import type { ConfigType } from '../../types';
-
   const props = defineProps({
-    config: {
-      type: Object as PropType<ConfigType>,
+    /** 表单规则 */
+    rule: {
+      type: Object as any,
+      default: {},
+    },
+    /** 表单队列 */
+    ranks: {
+      type: Object as any,
       default: {},
     },
   });
 
-  console.log('This Uniseriate', props);
+  console.log('This Group', props);
 
-  const { scene, field, actions, rule } = props.config;
+  const { ranks, rule } = props;
 
   /** 表单引用 */
   const formRef = ref<InstanceType<typeof ElForm> | null | any>(null);
@@ -50,13 +50,24 @@
     :rules="rule"
     label-width="auto"
   >
-    <!-- 渲染表单字段 -->
-    <FormFields
-      :scene="scene"
-      :field="field"
-      :dynamic-model="dynamicFormModel"
-    />
+    <div
+      class="cust-group"
+      v-for="(rank, idx) in ranks"
+      :key="`${rank}_${idx}`"
+    >
+      <!-- 渲染表单字段 -->
+      <slot :rank="rank" :dynamicModel="dynamicFormModel" />
+    </div>
+
     <!-- 渲染操作按钮 -->
-    <FormActions :actions="actions" />
+    <slot name="actions" />
   </ElForm>
 </template>
+
+<style lang="scss" scoped>
+  .cust-group {
+    border: 1px solid #333;
+    margin-bottom: 15px;
+    padding: 20px;
+  }
+</style>

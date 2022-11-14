@@ -2,7 +2,7 @@
  * @Author: rich1e
  * @Date: 2022-11-14 12:58:36
  * @LastEditors: rich1e
- * @LastEditTime: 2022-11-14 14:44:48
+ * @LastEditTime: 2022-11-14 20:45:14
 -->
 <script lang="ts">
   export default {
@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
   import { getCurrentInstance } from 'vue';
-  import { ElButton } from 'element-plus';
+  import { ElButton, ElFormItem } from 'element-plus';
 
   const props = defineProps({
     /** 表单操作 */
@@ -36,21 +36,23 @@
 
 <template>
   <template v-if="actions">
-    <ElButton
-      v-if="actions.onSubmit"
-      @click="actions.onSubmit.handler(formRef)"
-    >
-      {{ actions.onSubmit.btnText }}
-    </ElButton>
-    <ElButton
-      v-if="actions.onCancel"
-      @click="actions.onCancel.handler(formRef)"
-    >
-      {{ actions.onCancel.btnText }}
-    </ElButton>
-    <ElButton v-if="actions.onRest" @click="actions.onRest.handler(formRef)">
-      {{ actions.onRest.btnText }}
-    </ElButton>
+    <ElFormItem>
+      <ElButton
+        v-if="actions.onSubmit"
+        @click="actions.onSubmit.handler(formRef)"
+      >
+        {{ actions.onSubmit.btnText }}
+      </ElButton>
+      <ElButton
+        v-if="actions.onCancel"
+        @click="actions.onCancel.handler(formRef)"
+      >
+        {{ actions.onCancel.btnText }}
+      </ElButton>
+      <ElButton v-if="actions.onRest" @click="actions.onRest.handler(formRef)">
+        {{ actions.onRest.btnText }}
+      </ElButton>
+    </ElFormItem>
   </template>
   <!-- TODO FormActions 异常逻辑 -->
 </template>

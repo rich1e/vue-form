@@ -2,7 +2,7 @@
  * @Author: rich1e
  * @Date: 2022-11-14 12:37:25
  * @LastEditors: rich1e
- * @LastEditTime: 2022-11-14 16:50:31
+ * @LastEditTime: 2022-11-14 23:27:14
 -->
 <script lang="ts">
   export default {
@@ -26,7 +26,12 @@
       type: String as PropType<SceneType>,
       default: [],
     },
-    /** 表单字段项 */
+    /** 单个表单字段 */
+    item: {
+      type: Object as PropType<FieldType>,
+      default: {},
+    },
+    /** 表单字段列表 */
     field: {
       type: Array as PropType<FieldType[]>,
       default: [],
@@ -38,22 +43,22 @@
     },
   });
 
-  const { scene, field, dynamicModel } = props;
+  const { scene, field, item, dynamicModel } = props;
 
-  console.log(scene);
-  console.log(field);
+  console.log('This FormFields', scene);
+  console.log('This FormFields', field);
 
   const getType = (sceneType: string) => {
     if (!field) return false;
-    if (sceneType === 'uniseriate' && field) return true;
-    if (sceneType === 'biserial' && field) return true;
-    if (sceneType === 'tab' && field) return true;
-    if (sceneType === 'group' && field) return true;
+    if (scene === sceneType && field) return true;
+    if (scene === sceneType && field) return true;
+    if (scene === sceneType && field) return true;
+    if (scene === sceneType && field) return true;
   };
 </script>
 
 <template>
-  <template v-if="getType(scene)">
+  <template v-if="getType('uniseriate')">
     <ElFormItem
       v-for="(item, index) in field"
       :key="`${item.prop}_${index}`"
@@ -82,34 +87,86 @@
     </ElFormItem>
   </template>
 
-  <template v-else-if="getType(scene)">
-    <ElCol
-      :span="12"
+  <template v-else-if="getType('biserial')">
+    <ElFormItem :label="item.label" :prop="`${item.prop}`">
+      <ElInput
+        v-if="item.control === 'Input'"
+        v-model.number="dynamicModel[`${item.prop}`]"
+      />
+      <ElSwitch
+        v-else-if="item.control === 'Switch'"
+        v-model="dynamicModel[`${item.prop}`]"
+      />
+      <ElSelect
+        v-else="item.control === 'Select'"
+        v-model="dynamicModel[`${item.prop}`]"
+      >
+        <ElOption
+          v-for="opt in item.options"
+          :key="opt.value"
+          :label="opt.label"
+          :value="opt.value"
+        />
+      </ElSelect>
+    </ElFormItem>
+  </template>
+
+  <template v-else-if="getType('tab')">
+    <ElFormItem
       v-for="(item, index) in field"
       :key="`${item.prop}_${index}`"
+      :label="item.label"
+      :prop="`${item.prop}`"
     >
-      <ElFormItem :label="item.label" :prop="`${item.prop}`">
-        <ElInput
-          v-if="item.control === 'Input'"
-          v-model.number="dynamicModel[`${item.prop}`]"
+      <ElInput
+        v-if="item.control === 'Input'"
+        v-model.number="dynamicModel[`${item.prop}`]"
+      />
+      <ElSwitch
+        v-else-if="item.control === 'Switch'"
+        v-model="dynamicModel[`${item.prop}`]"
+      />
+      <ElSelect
+        v-else="item.control === 'Select'"
+        v-model="dynamicModel[`${item.prop}`]"
+      >
+        <ElOption
+          v-for="opt in item.options"
+          :key="opt.value"
+          :label="opt.label"
+          :value="opt.value"
         />
-        <ElSwitch
-          v-else-if="item.control === 'Switch'"
-          v-model="dynamicModel[`${item.prop}`]"
+      </ElSelect>
+    </ElFormItem>
+  </template>
+
+  <template v-else-if="getType('group')">
+    <ElFormItem
+      v-for="(item, index) in field"
+      :key="`${item.prop}_${index}`"
+      :label="item.label"
+      :prop="`${item.prop}`"
+    >
+      <ElInput
+        v-if="item.control === 'Input'"
+        v-model.number="dynamicModel[`${item.prop}`]"
+      />
+      <ElSwitch
+        v-else-if="item.control === 'Switch'"
+        v-model="dynamicModel[`${item.prop}`]"
+      />
+      <ElSelect
+        v-else="item.control === 'Select'"
+        v-model="dynamicModel[`${item.prop}`]"
+      >
+        <ElOption
+          v-for="opt in item.options"
+          :key="opt.value"
+          :label="opt.label"
+          :value="opt.value"
         />
-        <ElSelect
-          v-else="item.control === 'Select'"
-          v-model="dynamicModel[`${item.prop}`]"
-        >
-          <ElOption
-            v-for="opt in item.options"
-            :key="opt.value"
-            :label="opt.label"
-            :value="opt.value"
-          />
-        </ElSelect>
-      </ElFormItem>
-    </ElCol>
+      </ElSelect>
+    </ElFormItem>
   </template>
 
   <!-- TODO FormFields 异常逻辑 -->
