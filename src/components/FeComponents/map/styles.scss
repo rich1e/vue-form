@@ -1,0 +1,40 @@
+.an-map {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 15px;
+  color: #606266;
+  &-label,
+  &-suffix {
+    box-sizing: border-box;
+    display: inline-block;
+    flex: none;
+    overflow: hidden;
+    font-size: 14px;
+    text-align: left;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    white-space: nowrap;
+  }
+  &-label {
+    flex: 1 1;
+    min-height: 1px;
+    margin-right: 12px;
+    text-transform: capitalize;
+  }
+  &-content {
+    position: relative;
+    display: flex;
+    flex: 1.5;
+    align-items: center;
+    font-size: 14px;
+    .content-item {
+      flex: 1;
+      text-align: left;
+    }
+  }
+  &-suffix {
+    margin-left: 10px;
+  }
+}
