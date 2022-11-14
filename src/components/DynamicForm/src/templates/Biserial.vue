@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: rich1e
- * @LastEditTime: 2022-11-14 14:46:27
+ * @LastEditTime: 2022-11-14 16:52:23
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Biserial.vue
  * @Description:
  *
@@ -16,70 +16,65 @@
 </script>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
-  import {
-    ElRow,
-    ElCol,
-    ElForm,
-    ElFormItem,
-    ElInput,
-    ElSelect,
-    ElOption,
-    ElButton,
-  } from 'element-plus';
+  import { PropType, reactive, ref } from 'vue';
+  import { ElRow, ElCol, ElForm, ElFormItem, ElButton } from 'element-plus';
 
-  const value = ref('');
+  import FormFields from '../components/FormFields.vue';
+  import FormActions from '../components/FormActions.vue';
 
-  const options = [
-    {
-      value: 'Option1',
-      label: '上海',
+  import type { ConfigType } from '../../types';
+
+  const props = defineProps({
+    config: {
+      type: Object as PropType<ConfigType>,
+      default: {},
     },
-    {
-      value: 'Option2',
-      label: '北京',
-    },
-    {
-      value: 'Option3',
-      label: '深圳',
-    },
-    {
-      value: 'Option3',
-      label: '重庆',
-    },
-  ];
+  });
+
+  console.log('This Biserial', props);
+
+  const { scene, field, actions, rule } = props.config;
+
+  /** 表单引用 */
+  const formRef = ref<InstanceType<typeof ElForm> | null | any>(null);
+
+  /** 动态表单字段 */
+  const dynamicFormModel: any = reactive({});
 </script>
 
 <template>
-  <ElForm>
+  <ElForm :model="dynamicFormModel" ref="formRef" :rules="rule">
     <!-- TODO ElRow 默认会添加 margin 值，手动设置后可以覆盖默认行为 -->
-    <ElRow :gutter="20" align="middle" justify="space-between">
-      <ElCol :span="12">
-        <ElFormItem label="姓名">
-          <ElInput />
-        </ElFormItem>
-      </ElCol>
-
-      <ElCol :span="12">
-        <ElFormItem label="年龄">
-          <ElInput />
-        </ElFormItem>
-      </ElCol>
-
-      <ElCol :span="12">
-        <ElFormItem label="已婚">
-          <ElInput />
-        </ElFormItem>
-      </ElCol>
-
-      <ElCol :span="12">
-        <ElFormItem label="出生地">
-          <ElSelect v-model="value" placeholder="请选择出生地">
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+    <ElRow
+      :gutter="20"
+      align="middle"
+      justify="space-between"
+      :style="{ margin: 0 }"
+    >
+      <!-- 渲染表单字段 -->
+      <ElCol
+        :span="12"
+        v-for="(item, index) in field"
+        :key="`${item.prop}_${index}`"
+      >
+        <ElFormItem :label="item.label" :prop="`${item.prop}`">
+          <ElInput
+            v-if="item.control === 'Input'"
+            v-model.number="dynamicFormModel[`${item.prop}`]"
+          />
+          <ElSwitch
+            v-else-if="item.control === 'Switch'"
+            v-model="dynamicFormModel[`${item.prop}`]"
+          />
+          <ElSelect
+            v-else="item.control === 'Select'"
+            v-model="dynamicFormModel[`${item.prop}`]"
+          >
+            <ElOption
+              v-for="opt in item.options"
+              :key="opt.value"
+              :label="opt.label"
+              :value="opt.value"
             />
           </ElSelect>
         </ElFormItem>
@@ -87,9 +82,27 @@
 
       <ElCol :span="24">
         <ElFormItem>
-          <ElButton> Cancel </ElButton>
-          <ElButton> Apply </ElButton>
-          <ElButton> Submit 33</ElButton>
+          <!-- 渲染操作按钮 -->
+          <template v-if="actions">
+            <ElButton
+              v-if="actions.onSubmit"
+              @click="actions.onSubmit.handler(formRef)"
+            >
+              {{ actions.onSubmit.btnText }}
+            </ElButton>
+            <ElButton
+              v-if="actions.onCancel"
+              @click="actions.onCancel.handler(formRef)"
+            >
+              {{ actions.onCancel.btnText }}
+            </ElButton>
+            <ElButton
+              v-if="actions.onRest"
+              @click="actions.onRest.handler(formRef)"
+            >
+              {{ actions.onRest.btnText }}
+            </ElButton>
+          </template>
         </ElFormItem>
       </ElCol>
     </ElRow>

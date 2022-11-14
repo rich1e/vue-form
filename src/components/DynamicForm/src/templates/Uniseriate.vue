@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: rich1e
- * @LastEditTime: 2022-11-14 14:33:16
+ * @LastEditTime: 2022-11-14 15:31:21
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Uniseriate.vue
  * @Description:
  *
@@ -16,12 +16,14 @@
 </script>
 
 <script setup lang="ts">
-  import { onMounted, PropType, reactive, ref } from 'vue';
-  import { ElForm, ElButton } from 'element-plus';
+  import type { PropType } from 'vue';
+  import { reactive, ref } from 'vue';
+  import { ElForm } from 'element-plus';
+
   import FormFields from '../components/FormFields.vue';
   import FormActions from '../components/FormActions.vue';
 
-  import { ConfigType } from '../../types';
+  import type { ConfigType } from '../../types';
 
   const props = defineProps({
     config: {
@@ -32,7 +34,7 @@
 
   console.log('This Uniseriate', props);
 
-  const { field, actions, rule } = props.config;
+  const { scene, field, actions, rule } = props.config;
 
   /** 表单引用 */
   const formRef = ref<InstanceType<typeof ElForm> | null | any>(null);
@@ -44,7 +46,11 @@
 <template>
   <ElForm :model="dynamicFormModel" ref="formRef" :rules="rule">
     <!-- 渲染表单字段 -->
-    <FormFields :field="field" :dynamic-model="dynamicFormModel" />
+    <FormFields
+      :scene="scene"
+      :field="field"
+      :dynamic-model="dynamicFormModel"
+    />
     <!-- 渲染操作按钮 -->
     <FormActions :actions="actions" />
   </ElForm>

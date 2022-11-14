@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-03 14:10:27
  * @LastEditors: rich1e
- * @LastEditTime: 2022-11-14 11:51:46
+ * @LastEditTime: 2022-11-14 15:15:40
  * @FilePath: /vue-form/src/views/Uniseriate.vue
  * @Description:
  *
@@ -64,7 +64,7 @@
     scene: 'uniseriate',
     field: [
       {
-        controlType: 'Input',
+        control: 'Input',
         label: '姓名',
         prop: 'username',
         props: {
@@ -76,7 +76,7 @@
         default: '-',
       },
       {
-        controlType: 'Input',
+        control: 'Input',
         label: '曾用名',
         prop: 'iiusername',
         props: {
@@ -88,7 +88,7 @@
         default: '-',
       },
       {
-        controlType: 'Input',
+        control: 'Input',
         label: '年龄',
         prop: 'age',
         props: {
@@ -100,7 +100,7 @@
         default: '-',
       },
       {
-        controlType: 'Switch',
+        control: 'Switch',
         label: '已婚',
         prop: 'married',
         props: {
@@ -112,7 +112,7 @@
         default: '-',
       },
       {
-        controlType: 'Select',
+        control: 'Select',
         label: '出生地',
         prop: 'birth',
         props: {
