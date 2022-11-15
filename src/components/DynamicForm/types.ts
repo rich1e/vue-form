@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-10 14:52:56
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-15 17:51:50
+ * @LastEditTime: 2022-11-15 18:31:58
  * @FilePath: /vue-form/src/components/DynamicForm/types.ts
  * @Description:
  *
@@ -30,7 +30,10 @@ export type ControlType = 'Input' | 'Switch' | 'Select';
 export type SceneType = 'uniseriate' | 'biserial' | 'group' | 'tab';
 
 /** 表单字段组合 */
-export type GroupsType = Omit<Partial<Record<SceneType, FieldType[]>>, 'tab'>;
+export type TabsType = Partial<
+  Omit<Record<SceneType, FieldType[]>, 'tab' | 'group'> &
+    Pick<Record<SceneType, FieldType[][]>, 'group'>
+>;
 
 /** 控件功能参数，任意 key-value 对象 */
 export type ControlPropsType = {
@@ -93,7 +96,7 @@ export type ConfigType = {
   /** 表单UI类型 */
   scene: SceneType;
   /** 表单字段组合 */
-  tabs?: GroupsType;
+  tabs?: TabsType;
   /** 表单字段队列 */
   groups?: FieldType[][];
   /** 表单字段项 */

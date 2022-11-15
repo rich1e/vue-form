@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-15 17:52:19
+ * @LastEditTime: 2022-11-15 18:57:49
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Tab.vue
  * @Description:
  *
@@ -23,8 +23,9 @@
   import FormFields from '../components/FormFields.vue';
   import FormActions from '../components/FormActions.vue';
   import FormGroup from '../components/FormGroup.vue';
+  import FormBiserial from '../components/FormBiserial.vue';
 
-  import type { ConfigType, FieldType } from '../../types';
+  import type { ConfigType, SceneType } from '../../types';
 
   const props = defineProps({
     config: {
@@ -39,18 +40,24 @@
    * tabs?.uniseriate / tabs?.biserial
    * @see https://bobbyhadz.com/blog/typescript-property-does-not-exist-on-type
    */
-  const { scene, tabs, actions, rule, groups } = props.config;
+  const { scene, tabs, actions, rule } = props.config;
 
   /** 表单引用 */
   const formRef = ref<InstanceType<typeof ElForm> | null | any>(null);
 
   /** 动态表单字段 */
   const dynamicFormModel: any = reactive({});
+
+  const biserialScene: SceneType = 'biserial';
+
+  const tabClickHandler = (pane: any, ev: Event) => {
+    console.log(pane, ev);
+  };
 </script>
 
 <template>
   <!-- TODO ElTabPane slots -->
-  <ElTabs type="border-card">
+  <ElTabs type="border-card" @tab-click="tabClickHandler">
     <ElTabPane label="Uniseriate">
       <ElForm
         :model="dynamicFormModel"
@@ -70,18 +77,23 @@
     </ElTabPane>
 
     <!-- <ElTabPane label="Biserial">
-      <ElForm :model="dynamicFormModel" ref="formRef" :rules="rule">
-        <FormFields
-          :scene="scene"
-          :field="tabs?.biserial"
-          :dynamic-model="dynamicFormModel"
-        />
-        <FormActions :actions="actions" />
-      </ElForm>
+      <FormBiserial :field="tabs?.biserial" :rule="rule">
+        <template #="{ field, dynamicModel }">
+          <FormFields
+            :scene="biserialScene"
+            :item="field"
+            :dynamic-model="dynamicModel"
+          />
+        </template>
+
+        <template #actions>
+          <FormActions :scene="scene" :actions="actions" />
+        </template>
+      </FormBiserial>
     </ElTabPane> -->
 
     <ElTabPane label="Group">
-      <FormGroup :groups="groups" :rule="rule">
+      <FormGroup :groups="tabs?.group" :rule="rule">
         <!-- 渲染表单字段 -->
         <template #="{ rank, dynamicModel }">
           <FormFields
