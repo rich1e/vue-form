@@ -1,8 +1,8 @@
 <!--
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
- * @LastEditors: rich1e
- * @LastEditTime: 2022-11-14 23:52:52
+ * @LastEditors: yuqigong@outlook.com
+ * @LastEditTime: 2022-11-15 12:41:55
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Biserial.vue
  * @Description:
  *
@@ -19,6 +19,7 @@
   import { PropType, reactive, ref } from 'vue';
   import { ElRow, ElCol, ElForm, ElFormItem, ElButton } from 'element-plus';
 
+  // TODO FormActions & FormFields
   import FormFields from '../components/FormFields.vue';
   import FormActions from '../components/FormActions.vue';
 
@@ -26,7 +27,7 @@
 
   const props = defineProps({
     config: {
-      type: Object as PropType<ConfigType>,
+      type: Object as PropType<ConfigType> | any,
       default: {},
     },
   });
@@ -90,21 +91,27 @@
           <template v-if="actions">
             <ElButton
               v-if="actions.onSubmit"
-              @click="actions.onSubmit.handler(formRef)"
+              @click="actions?.onSubmit.handler(formRef)"
             >
               {{ actions.onSubmit.btnText }}
             </ElButton>
             <ElButton
               v-if="actions.onCancel"
-              @click="actions.onCancel.handler(formRef)"
+              @click="actions?.onCancel.handler(formRef)"
             >
               {{ actions.onCancel.btnText }}
             </ElButton>
             <ElButton
               v-if="actions.onRest"
-              @click="actions.onRest.handler(formRef)"
+              @click="actions?.onRest.handler(formRef)"
             >
               {{ actions.onRest.btnText }}
+            </ElButton>
+            <ElButton
+              v-if="actions.onBack"
+              @click="actions?.onBack.handler(formRef)"
+            >
+              {{ actions.onBack.btnText }}
             </ElButton>
           </template>
         </ElFormItem>

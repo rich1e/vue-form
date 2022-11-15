@@ -1,9 +1,9 @@
 <!--
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
- * @LastEditors: rich1e
- * @LastEditTime: 2022-11-14 23:53:17
- * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Group.vue
+ * @LastEditors: yuqigong@outlook.com
+ * @LastEditTime: 2022-11-15 09:14:46
+ * @FilePath: /vue-form/src/components/DynamicForm/src/components/FormGroup.vue
  * @Description:
  *
 -->
@@ -66,7 +66,7 @@
 
 <style lang="scss" scoped>
   .cust-group {
-    border: 1px solid #333;
+    border: 1px solid #e3e3e3;
     margin-bottom: 15px;
     padding: 20px;
   }

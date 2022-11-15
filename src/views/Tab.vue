@@ -1,8 +1,8 @@
 <!--
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-03 14:10:27
- * @LastEditors: rich1e
- * @LastEditTime: 2022-11-14 23:21:21
+ * @LastEditors: yuqigong@outlook.com
+ * @LastEditTime: 2022-11-15 09:24:16
  * @FilePath: /vue-form/src/views/Tab.vue
  * @Description:
  *
@@ -15,6 +15,7 @@
     checkAge,
     checkEmpty,
   } from '../components/DynamicForm/src/hooks/useValidator';
+  import { pageBack } from '../components/DynamicForm/src/hooks/useActions';
 
   const rule = {
     username: [{ validator: checkEmpty, trigger: 'blur', required: true }],
@@ -35,6 +36,13 @@
             return false;
           }
         });
+      },
+    },
+    onBack: {
+      btnText: '返回',
+      handler: () => {
+        console.log('onBack');
+        pageBack();
       },
     },
     onCancel: {
