@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-10 14:52:56
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-15 13:18:25
+ * @LastEditTime: 2022-11-15 17:51:50
  * @FilePath: /vue-form/src/components/DynamicForm/types.ts
  * @Description:
  *
@@ -77,13 +77,13 @@ export type ActionsDetail = {
   btnText: string;
   /** 按钮事件处理函数 */
   handler: (el: any) => void;
-}
+};
 
 /**
  * Cannot invoke an object which is possibly 'undefined'.ts(2722)
  * @see https://stackoverflow.com/questions/56913963/cannot-invoke-an-object-which-is-possibly-undefined-ts2722
  */
-export type ActionsType = Partial<Record<ActionsEventType, ActionsDetail>>
+export type ActionsType = Partial<Record<ActionsEventType, ActionsDetail>>;
 
 /**
  * @type {object}
@@ -93,9 +93,9 @@ export type ConfigType = {
   /** 表单UI类型 */
   scene: SceneType;
   /** 表单字段组合 */
-  groups?: GroupsType;
+  tabs?: GroupsType;
   /** 表单字段队列 */
-  ranks?: FieldType[][];
+  groups?: FieldType[][];
   /** 表单字段项 */
   field?: FieldType[];
   /** 表单验证规则 */

@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-03 14:10:27
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-15 09:24:16
+ * @LastEditTime: 2022-11-15 17:52:31
  * @FilePath: /vue-form/src/views/Tab.vue
  * @Description:
  *
@@ -63,7 +63,7 @@
 
   const formConfig: ConfigType = {
     scene: 'tab',
-    groups: {
+    tabs: {
       uniseriate: [
         {
           control: 'Input',
@@ -231,7 +231,7 @@
         },
       ],
     },
-    ranks: [
+    groups: [
       [
         {
           control: 'Input',

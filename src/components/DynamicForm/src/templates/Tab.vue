@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-15 17:13:28
+ * @LastEditTime: 2022-11-15 17:52:19
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Tab.vue
  * @Description:
  *
@@ -36,10 +36,10 @@
   console.log('This Tab', props);
 
   /**
-   * groups?.uniseriate / groups?.biserial
+   * tabs?.uniseriate / tabs?.biserial
    * @see https://bobbyhadz.com/blog/typescript-property-does-not-exist-on-type
    */
-  const { scene, groups, actions, rule, ranks } = props.config;
+  const { scene, tabs, actions, rule, groups } = props.config;
 
   /** 表单引用 */
   const formRef = ref<InstanceType<typeof ElForm> | null | any>(null);
@@ -56,12 +56,12 @@
         :model="dynamicFormModel"
         ref="formRef"
         :rules="rule"
-        label-width="60px"
+        label-width="70px"
       >
         <!-- 渲染表单字段 -->
         <FormFields
           :scene="scene"
-          :field="groups?.uniseriate"
+          :field="tabs?.uniseriate"
           :dynamic-model="dynamicFormModel"
         />
         <!-- 渲染操作按钮 -->
@@ -73,7 +73,7 @@
       <ElForm :model="dynamicFormModel" ref="formRef" :rules="rule">
         <FormFields
           :scene="scene"
-          :field="groups?.biserial"
+          :field="tabs?.biserial"
           :dynamic-model="dynamicFormModel"
         />
         <FormActions :actions="actions" />
@@ -81,7 +81,7 @@
     </ElTabPane> -->
 
     <ElTabPane label="Group">
-      <FormGroup :ranks="ranks" :rule="rule">
+      <FormGroup :groups="groups" :rule="rule">
         <!-- 渲染表单字段 -->
         <template #="{ rank, dynamicModel }">
           <FormFields

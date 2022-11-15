@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-15 17:23:37
+ * @LastEditTime: 2022-11-15 17:53:27
  * @FilePath: /vue-form/src/components/DynamicForm/src/components/FormGroup.vue
  * @Description:
  *
@@ -26,7 +26,7 @@
       default: {},
     },
     /** 表单队列 */
-    ranks: {
+    groups: {
       type: Object as any,
       default: {},
     },
@@ -34,7 +34,7 @@
 
   console.log('This Group', props);
 
-  const { ranks, rule } = props;
+  const { groups, rule } = props;
 
   /** 表单引用 */
   const formRef = ref<InstanceType<typeof ElForm> | null | any>(null);
@@ -44,16 +44,16 @@
 </script>
 
 <template>
-  <!-- TODO label-width="60px" -->
+  <!-- TODO label-width="70px" -->
   <ElForm
     :model="dynamicFormModel"
     ref="formRef"
     :rules="rule"
-    label-width="60px"
+    label-width="70px"
   >
     <div
       class="cust-group"
-      v-for="(rank, idx) in ranks"
+      v-for="(rank, idx) in groups"
       :key="`${rank}_${idx}`"
     >
       <!-- 渲染表单字段 -->

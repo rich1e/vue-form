@@ -48,7 +48,7 @@
     :model="dynamicFormModel"
     ref="formRef"
     :rules="rule"
-    label-width="60px"
+    label-width="70px"
   >
     <!-- 渲染表单字段 -->
     <FormFields

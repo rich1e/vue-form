@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-03 14:10:27
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-15 12:37:55
+ * @LastEditTime: 2022-11-15 17:52:26
  * @FilePath: /vue-form/src/views/Group.vue
  * @Description:
  *
@@ -63,7 +63,7 @@
 
   const formConfig: ConfigType = {
     scene: 'group',
-    ranks: [
+    groups: [
       [
         {
           control: 'Input',
