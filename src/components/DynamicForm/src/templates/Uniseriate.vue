@@ -1,8 +1,8 @@
 <!--
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
- * @LastEditors: rich1e
- * @LastEditTime: 2022-11-14 23:52:25
+ * @LastEditors: yuqigong@outlook.com
+ * @LastEditTime: 2022-11-15 17:20:14
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Uniseriate.vue
  * @Description:
  *
@@ -48,7 +48,7 @@
     :model="dynamicFormModel"
     ref="formRef"
     :rules="rule"
-    label-width="auto"
+    label-width="60px"
   >
     <!-- 渲染表单字段 -->
     <FormFields
@@ -57,6 +57,6 @@
       :dynamic-model="dynamicFormModel"
     />
     <!-- 渲染操作按钮 -->
-    <FormActions :actions="actions" />
+    <FormActions :scene="scene" :actions="actions" />
   </ElForm>
 </template>

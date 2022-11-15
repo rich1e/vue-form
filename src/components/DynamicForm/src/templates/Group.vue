@@ -1,8 +1,8 @@
 <!--
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
- * @LastEditors: rich1e
- * @LastEditTime: 2022-11-14 20:22:41
+ * @LastEditors: yuqigong@outlook.com
+ * @LastEditTime: 2022-11-15 17:13:19
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Group.vue
  * @Description:
  *
@@ -37,14 +37,12 @@
 
 <template>
   <FormGroup :ranks="ranks" :rule="rule">
-    <!-- 渲染表单字段 -->
     <template #="{ rank, dynamicModel }">
       <FormFields :scene="scene" :field="rank" :dynamic-model="dynamicModel" />
     </template>
 
-    <!-- 渲染操作按钮 -->
     <template #actions>
-      <FormActions :actions="actions" />
+      <FormActions :scene="scene" :actions="actions" />
     </template>
   </FormGroup>
 </template>

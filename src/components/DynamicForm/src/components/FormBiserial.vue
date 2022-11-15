@@ -1,9 +1,9 @@
 <!--
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
- * @LastEditors: rich1e
- * @LastEditTime: 2022-11-14 22:39:44
- * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Biserial.vue
+ * @LastEditors: yuqigong@outlook.com
+ * @LastEditTime: 2022-11-15 17:35:00
+ * @FilePath: /vue-form/src/components/DynamicForm/src/components/FormBiserial.vue
  * @Description:
  *
 -->
@@ -16,33 +16,38 @@
 </script>
 
 <script setup lang="ts">
-  import { reactive, ref } from 'vue';
+  import { inject, reactive } from 'vue';
   import { ElRow, ElCol, ElForm } from 'element-plus';
 
   const props = defineProps({
+    /** 表单规则 */
     rule: {
       type: Object as any,
       default: {},
     },
+    /** 表单字段 */
     field: {
       type: Object as any,
       default: {},
     },
   });
 
-  console.log('This Biserial', props);
+  console.log('This Biserial');
 
   const { field, rule } = props;
-
-  /** 表单引用 */
-  const formRef = ref<InstanceType<typeof ElForm> | null | any>(null);
+  const injectRef = inject('FORM_REF');
 
   /** 动态表单字段 */
   const dynamicFormModel: any = reactive({});
 </script>
 
 <template>
-  <ElForm :model="dynamicFormModel" ref="formRef" :rules="rule">
+  <ElForm
+    :model="dynamicFormModel"
+    ref="injectRef"
+    :rules="rule"
+    label-width="60px"
+  >
     <!-- TODO ElRow 默认会添加 margin 值，手动设置后可以覆盖默认行为 -->
     <ElRow
       :gutter="20"

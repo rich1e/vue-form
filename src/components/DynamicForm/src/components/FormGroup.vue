@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-15 09:14:46
+ * @LastEditTime: 2022-11-15 17:23:37
  * @FilePath: /vue-form/src/components/DynamicForm/src/components/FormGroup.vue
  * @Description:
  *
@@ -44,11 +44,12 @@
 </script>
 
 <template>
+  <!-- TODO label-width="60px" -->
   <ElForm
     :model="dynamicFormModel"
     ref="formRef"
     :rules="rule"
-    label-width="auto"
+    label-width="60px"
   >
     <div
       class="cust-group"
