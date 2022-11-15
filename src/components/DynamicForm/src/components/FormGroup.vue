@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-15 17:53:27
+ * @LastEditTime: 2022-11-15 19:15:53
  * @FilePath: /vue-form/src/components/DynamicForm/src/components/FormGroup.vue
  * @Description:
  *
@@ -16,8 +16,9 @@
 </script>
 
 <script setup lang="ts">
-  import { reactive, ref } from 'vue';
+  import { PropType, reactive, ref } from 'vue';
   import { ElForm } from 'element-plus';
+  import { FieldType } from '../../types';
 
   const props = defineProps({
     /** 表单规则 */
@@ -27,8 +28,8 @@
     },
     /** 表单队列 */
     groups: {
-      type: Object as any,
-      default: {},
+      type: Object as PropType<FieldType[][]>,
+      default: [],
     },
   });
 

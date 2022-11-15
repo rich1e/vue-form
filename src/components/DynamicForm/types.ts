@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-10 14:52:56
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-15 18:31:58
+ * @LastEditTime: 2022-11-15 19:13:46
  * @FilePath: /vue-form/src/components/DynamicForm/types.ts
  * @Description:
  *
@@ -29,7 +29,7 @@ export type ControlType = 'Input' | 'Switch' | 'Select';
  */
 export type SceneType = 'uniseriate' | 'biserial' | 'group' | 'tab';
 
-/** 表单字段组合 */
+/** 表单tabs数据 */
 export type TabsType = Partial<
   Omit<Record<SceneType, FieldType[]>, 'tab' | 'group'> &
     Pick<Record<SceneType, FieldType[][]>, 'group'>
@@ -55,7 +55,7 @@ export type FieldType = {
   label?: string;
   /** 控件绑定字段，合法性验证 */
   prop: string;
-  /** 控件功能参数 */
+  /** 控件功能参数，与 Element Plus 保持一致 */
   props: ControlPropsType;
   /** 控件选项列表 */
   options?: any[];
@@ -86,6 +86,10 @@ export type ActionsDetail = {
  * Cannot invoke an object which is possibly 'undefined'.ts(2722)
  * @see https://stackoverflow.com/questions/56913963/cannot-invoke-an-object-which-is-possibly-undefined-ts2722
  */
+
+/**
+ * 表单操作类型
+ */
 export type ActionsType = Partial<Record<ActionsEventType, ActionsDetail>>;
 
 /**
@@ -93,13 +97,13 @@ export type ActionsType = Partial<Record<ActionsEventType, ActionsDetail>>;
  * @desc 表单配置
  */
 export type ConfigType = {
-  /** 表单UI类型 */
+  /** UI类型 */
   scene: SceneType;
-  /** 表单字段组合 */
+  /** tabs数据 */
   tabs?: TabsType;
-  /** 表单字段队列 */
+  /** groups数据 */
   groups?: FieldType[][];
-  /** 表单字段项 */
+  /** Biserial和Uniseriate数据 */
   field?: FieldType[];
   /** 表单验证规则 */
   rule?: any;
