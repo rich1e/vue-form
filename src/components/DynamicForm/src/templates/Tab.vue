@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-15 18:57:49
+ * @LastEditTime: 2022-11-16 13:41:57
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Tab.vue
  * @Description:
  *
@@ -12,11 +12,11 @@
    * @see https://github.com/vuejs/rfcs/discussions/273
    * @see https://github.com/vuejs/rfcs/blob/master/active-rfcs/0040-script-setup.md#automatic-name-inference
    */
-  export default { name: 'Tab' };
+  export default { name: 'TabTemplate' };
 </script>
 
 <script setup lang="ts">
-  import type { PropType } from 'vue';
+  import { PropType, provide } from 'vue';
   import { reactive, ref } from 'vue';
   import { ElForm, ElTabs, ElTabPane } from 'element-plus';
 
@@ -24,6 +24,7 @@
   import FormActions from '../components/FormActions.vue';
   import FormGroup from '../components/FormGroup.vue';
   import FormBiserial from '../components/FormBiserial.vue';
+  import FormTabs from '../components/FormTabs.vue';
 
   import type { ConfigType, SceneType } from '../../types';
 
@@ -34,7 +35,7 @@
     },
   });
 
-  console.log('This Tab', props);
+  console.log('This TabTemplate', props);
 
   /**
    * tabs?.uniseriate / tabs?.biserial
@@ -48,36 +49,37 @@
   /** 动态表单字段 */
   const dynamicFormModel: any = reactive({});
 
+  // TODO 当UI为biserial时，需要注入formRef
   const biserialScene: SceneType = 'biserial';
-
-  const tabClickHandler = (pane: any, ev: Event) => {
-    console.log(pane, ev);
-  };
+  provide('FORM_REF', formRef);
 </script>
 
 <template>
-  <!-- TODO ElTabPane slots -->
-  <ElTabs type="border-card" @tab-click="tabClickHandler">
-    <ElTabPane label="Uniseriate">
+  <FormTabs :tabs="tabs">
+    <template #="{ tabPane }">
+      <!-- uniseriate template -->
       <ElForm
         :model="dynamicFormModel"
         ref="formRef"
         :rules="rule"
         label-width="70px"
+        v-if="tabPane?.uniseriate"
       >
-        <!-- 渲染表单字段 -->
         <FormFields
           :scene="scene"
-          :field="tabs?.uniseriate"
+          :field="tabPane?.uniseriate"
           :dynamic-model="dynamicFormModel"
         />
-        <!-- 渲染操作按钮 -->
+
         <FormActions :scene="scene" :actions="actions" />
       </ElForm>
-    </ElTabPane>
 
-    <!-- <ElTabPane label="Biserial">
-      <FormBiserial :field="tabs?.biserial" :rule="rule">
+      <!-- biserial template -->
+      <FormBiserial
+        :field="tabPane?.biserial"
+        :rule="rule"
+        v-if="tabPane?.biserial"
+      >
         <template #="{ field, dynamicModel }">
           <FormFields
             :scene="biserialScene"
@@ -87,14 +89,12 @@
         </template>
 
         <template #actions>
-          <FormActions :scene="scene" :actions="actions" />
+          <FormActions :scene="biserialScene" :actions="actions" />
         </template>
       </FormBiserial>
-    </ElTabPane> -->
 
-    <ElTabPane label="Group">
-      <FormGroup :groups="tabs?.group" :rule="rule">
-        <!-- 渲染表单字段 -->
+      <!-- group template -->
+      <FormGroup :groups="tabPane?.group" :rule="rule" v-if="tabPane?.group">
         <template #="{ rank, dynamicModel }">
           <FormFields
             :scene="scene"
@@ -103,11 +103,10 @@
           />
         </template>
 
-        <!-- 渲染操作按钮 -->
         <template #actions>
           <FormActions :scene="scene" :actions="actions" />
         </template>
       </FormGroup>
-    </ElTabPane>
-  </ElTabs>
+    </template>
+  </FormTabs>
 </template>

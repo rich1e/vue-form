@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-10 14:52:56
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-15 19:13:46
+ * @LastEditTime: 2022-11-16 13:24:59
  * @FilePath: /vue-form/src/components/DynamicForm/types.ts
  * @Description:
  *
@@ -29,11 +29,22 @@ export type ControlType = 'Input' | 'Switch' | 'Select';
  */
 export type SceneType = 'uniseriate' | 'biserial' | 'group' | 'tab';
 
-/** 表单tabs数据 */
-export type TabsType = Partial<
+/** 表单TabPaneType类型 */
+export type TabPaneType = Partial<
   Omit<Record<SceneType, FieldType[]>, 'tab' | 'group'> &
     Pick<Record<SceneType, FieldType[][]>, 'group'>
 >;
+
+/** 表单TabTable类型 */
+export type TabTablesType = {
+  label: string;
+} & TabPaneType;
+
+/** 表单tabs数据 */
+export type TabsType = {
+  tabsType?: string;
+  tabsTable: TabTablesType[];
+};
 
 /** 控件功能参数，任意 key-value 对象 */
 export type ControlPropsType = {

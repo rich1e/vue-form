@@ -2,7 +2,7 @@
  * @Author: rich1e
  * @Date: 2022-11-14 12:37:25
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-15 17:33:42
+ * @LastEditTime: 2022-11-16 13:46:33
 -->
 <script lang="ts">
   export default {
@@ -20,6 +20,8 @@
     ElOption,
   } from 'element-plus';
   import { FieldType, SceneType } from '../../types';
+
+  console.log('This FormFields');
 
   const props = defineProps({
     /** 表单UI类型 */
@@ -53,6 +55,7 @@
 </script>
 
 <template>
+  <!-- Render multiple -->
   <template v-if="getType('biserial')">
     <ElFormItem
       v-for="(item, index) in field"
@@ -82,6 +85,7 @@
     </ElFormItem>
   </template>
 
+  <!-- Render single -->
   <template v-else>
     <ElFormItem :label="item.label" :prop="`${item.prop}`">
       <ElInput

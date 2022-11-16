@@ -1,8 +1,8 @@
 <!--
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:37:02
- * @LastEditors: rich1e
- * @LastEditTime: 2022-11-14 23:39:39
+ * @LastEditors: yuqigong@outlook.com
+ * @LastEditTime: 2022-11-16 13:17:59
  * @FilePath: /vue-form/src/components/DynamicForm/Default.vue
  * @Description:
  *
@@ -15,10 +15,10 @@
   import type { Component, PropType, Ref } from 'vue';
   import { ref } from 'vue';
 
-  import Biserial from './src/templates/Biserial.vue';
-  import Uniseriate from './src/templates/Uniseriate.vue';
-  import Tab from './src/templates/Tab.vue';
-  import Group from './src/templates/Group.vue';
+  import UniseriateTemplate from './src/templates/Uniseriate.vue';
+  import BiserialTemplate from './src/templates/Biserial.vue';
+  import GroupTemplate from './src/templates/Group.vue';
+  import TabTemplate from './src/templates/Tab.vue';
 
   import { ConfigType } from './types';
 
@@ -34,10 +34,10 @@
 
   // TODO 优化列表
   const componentTable: Record<string, Component> = {
-    uniseriate: Uniseriate,
-    biserial: Biserial,
-    group: Group,
-    tab: Tab,
+    uniseriate: UniseriateTemplate,
+    biserial: BiserialTemplate,
+    group: GroupTemplate,
+    tab: TabTemplate,
   };
 
   const componentName: Ref<string> = ref(scene);

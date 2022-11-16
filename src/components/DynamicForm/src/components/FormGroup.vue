@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-15 19:15:53
+ * @LastEditTime: 2022-11-16 13:11:43
  * @FilePath: /vue-form/src/components/DynamicForm/src/components/FormGroup.vue
  * @Description:
  *
@@ -33,7 +33,7 @@
     },
   });
 
-  console.log('This Group', props);
+  console.log('This FormGroup');
 
   const { groups, rule } = props;
 

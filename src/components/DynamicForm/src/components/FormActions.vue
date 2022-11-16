@@ -2,7 +2,7 @@
  * @Author: rich1e
  * @Date: 2022-11-14 12:58:36
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-15 17:34:22
+ * @LastEditTime: 2022-11-16 13:10:52
 -->
 <script lang="ts">
   export default {
@@ -27,6 +27,8 @@
       default: {},
     },
   });
+
+  console.log('This FormActions');
 
   const { scene, actions } = props;
 

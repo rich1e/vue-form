@@ -1,9 +1,9 @@
 <!--
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
- * @LastEditors: rich1e
- * @LastEditTime: 2022-11-14 23:33:37
- * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Uniseriate.vue
+ * @LastEditors: yuqigong@outlook.com
+ * @LastEditTime: 2022-11-16 13:34:48
+ * @FilePath: /vue-form/src/components/DynamicForm/src/components/FormTabs.vue
  * @Description:
  *
 -->
@@ -12,38 +12,40 @@
    * @see https://github.com/vuejs/rfcs/discussions/273
    * @see https://github.com/vuejs/rfcs/blob/master/active-rfcs/0040-script-setup.md#automatic-name-inference
    */
-  export default { name: 'Tab' };
+  export default { name: 'FormTabs' };
 </script>
 
 <script setup lang="ts">
-  import type { PropType } from 'vue';
-  import { reactive, ref } from 'vue';
-  import { ElForm, ElTabs, ElTabPane } from 'element-plus';
-
-  import type { ConfigType, FieldType } from '../../types';
+  import { ElTabs, ElTabPane } from 'element-plus';
+  import { PropType } from 'vue';
+  import { TabsType } from '../../types';
 
   const props = defineProps({
     tabs: {
-      type: Array as any,
-      default: [],
+      type: Object as PropType<TabsType>,
+      default: {},
     },
   });
 
-  console.log('This Tab', props);
+  console.log('This FormTabs', props);
 
   const { tabs } = props;
+  const { tabsTable, tabsType } = tabs;
+
+  console.log('This FormTabs', tabsTable);
+  console.log('This FormTabs', tabsType);
 </script>
 
 <template>
   <!-- TODO ElTabPane slots -->
-  <ElTabs type="border-card">
-    <template v-if="tabs">
+  <ElTabs :type="tabsType">
+    <template v-if="tabsTable">
       <ElTabPane
         :label="tab.label"
-        v-for="(tab, index) in tabs"
-        :key="`${tab}_${index}`"
+        v-for="(tab, index) in tabsTable"
+        :key="`${tab.label}_${index}`"
       >
-        <slot />
+        <slot :tabPane="tab" />
       </ElTabPane>
     </template>
   </ElTabs>

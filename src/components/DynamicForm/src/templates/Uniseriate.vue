@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-15 17:20:14
+ * @LastEditTime: 2022-11-16 13:16:50
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Uniseriate.vue
  * @Description:
  *
@@ -12,7 +12,7 @@
    * @see https://github.com/vuejs/rfcs/discussions/273
    * @see https://github.com/vuejs/rfcs/blob/master/active-rfcs/0040-script-setup.md#automatic-name-inference
    */
-  export default { name: 'Uniseriate' };
+  export default { name: 'UniseriateTemplate' };
 </script>
 
 <script setup lang="ts">
@@ -32,7 +32,7 @@
     },
   });
 
-  console.log('This Uniseriate', props);
+  console.log('This UniseriateTemplate', props);
 
   const { scene, field, actions, rule } = props.config;
 

@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-03 14:10:27
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-15 18:32:50
+ * @LastEditTime: 2022-11-16 13:25:21
  * @FilePath: /vue-form/src/views/Tab.vue
  * @Description:
  *
@@ -64,258 +64,270 @@
   const formConfig: ConfigType = {
     scene: 'tab',
     tabs: {
-      uniseriate: [
+      tabsType: 'border-card',
+      tabsTable: [
         {
-          control: 'Input',
-          label: '姓名',
-          prop: 'username',
-          props: {
-            type: 'text',
-            placeholder: '请输入姓名',
-            modelValue: 'username',
-          },
-          bind: 'x',
-          default: '-',
-        },
-        {
-          control: 'Input',
-          label: '曾用名',
-          prop: 'iiusername',
-          props: {
-            type: 'text',
-            placeholder: '请输入姓名',
-            modelValue: 'iiusername',
-          },
-          bind: 'x',
-          default: '-',
-        },
-        {
-          control: 'Input',
-          label: '年龄',
-          prop: 'age',
-          props: {
-            type: 'text',
-            placeholder: '请输入年龄',
-            modelValue: 'age',
-          },
-          bind: 'x',
-          default: '-',
-        },
-        {
-          control: 'Switch',
-          label: '已婚',
-          prop: 'married',
-          props: {
-            activeText: '是',
-            inactiveText: '否',
-            modelValue: 'married',
-          },
-          bind: 'x',
-          default: '-',
-        },
-        {
-          control: 'Select',
-          label: '出生地',
-          prop: 'birth',
-          props: {
-            placeholder: '请选择出生地',
-            modelValue: 'birth',
-          },
-          options: [
+          label: 'Uniseriate',
+          uniseriate: [
             {
-              value: 'Option1',
-              label: '上海',
+              control: 'Input',
+              label: '姓名',
+              prop: 'username',
+              props: {
+                type: 'text',
+                placeholder: '请输入姓名',
+                modelValue: 'username',
+              },
+              bind: 'x',
+              default: '-',
             },
             {
-              value: 'Option2',
-              label: '北京',
+              control: 'Input',
+              label: '曾用名',
+              prop: 'iiusername',
+              props: {
+                type: 'text',
+                placeholder: '请输入姓名',
+                modelValue: 'iiusername',
+              },
+              bind: 'x',
+              default: '-',
             },
             {
-              value: 'Option3',
-              label: '深圳',
+              control: 'Input',
+              label: '年龄',
+              prop: 'age',
+              props: {
+                type: 'text',
+                placeholder: '请输入年龄',
+                modelValue: 'age',
+              },
+              bind: 'x',
+              default: '-',
             },
             {
-              value: 'Option4',
-              label: '重庆',
+              control: 'Switch',
+              label: '已婚',
+              prop: 'married',
+              props: {
+                activeText: '是',
+                inactiveText: '否',
+                modelValue: 'married',
+              },
+              bind: 'x',
+              default: '-',
             },
             {
-              value: 'Option5',
-              label: '天津',
+              control: 'Select',
+              label: '出生地',
+              prop: 'birth',
+              props: {
+                placeholder: '请选择出生地',
+                modelValue: 'birth',
+              },
+              options: [
+                {
+                  value: 'Option1',
+                  label: '上海',
+                },
+                {
+                  value: 'Option2',
+                  label: '北京',
+                },
+                {
+                  value: 'Option3',
+                  label: '深圳',
+                },
+                {
+                  value: 'Option4',
+                  label: '重庆',
+                },
+                {
+                  value: 'Option5',
+                  label: '天津',
+                },
+              ],
+              bind: 'x',
+              disabled: true,
             },
           ],
-          bind: 'x',
-          disabled: true,
-        },
-      ],
-      biserial: [
-        {
-          control: 'Input',
-          label: '姓名',
-          prop: 'username',
-          props: {
-            type: 'text',
-            placeholder: '请输入姓名',
-            modelValue: 'username',
-          },
-          bind: 'x',
-          default: '-',
         },
         {
-          control: 'Input',
-          label: '曾用名',
-          prop: 'iiusername',
-          props: {
-            type: 'text',
-            placeholder: '请输入姓名',
-            modelValue: 'iiusername',
-          },
-          bind: 'x',
-          default: '-',
-        },
-        {
-          control: 'Input',
-          label: '年龄',
-          prop: 'age',
-          props: {
-            type: 'text',
-            placeholder: '请输入年龄',
-            modelValue: 'age',
-          },
-          bind: 'x',
-          default: '-',
-        },
-        {
-          control: 'Switch',
-          label: '已婚',
-          prop: 'married',
-          props: {
-            activeText: '是',
-            inactiveText: '否',
-            modelValue: 'married',
-          },
-          bind: 'x',
-          default: '-',
-        },
-        {
-          control: 'Select',
-          label: '出生地',
-          prop: 'birth',
-          props: {
-            placeholder: '请选择出生地',
-            modelValue: 'birth',
-          },
-          options: [
+          label: 'Biserial',
+          biserial: [
             {
-              value: 'Option1',
-              label: '上海',
+              control: 'Input',
+              label: '姓名',
+              prop: 'username',
+              props: {
+                type: 'text',
+                placeholder: '请输入姓名',
+                modelValue: 'username',
+              },
+              bind: 'x',
+              default: '-',
             },
             {
-              value: 'Option2',
-              label: '北京',
+              control: 'Input',
+              label: '曾用名',
+              prop: 'iiusername',
+              props: {
+                type: 'text',
+                placeholder: '请输入姓名',
+                modelValue: 'iiusername',
+              },
+              bind: 'x',
+              default: '-',
             },
             {
-              value: 'Option3',
-              label: '深圳',
+              control: 'Input',
+              label: '年龄',
+              prop: 'age',
+              props: {
+                type: 'text',
+                placeholder: '请输入年龄',
+                modelValue: 'age',
+              },
+              bind: 'x',
+              default: '-',
             },
             {
-              value: 'Option4',
-              label: '重庆',
+              control: 'Switch',
+              label: '已婚',
+              prop: 'married',
+              props: {
+                activeText: '是',
+                inactiveText: '否',
+                modelValue: 'married',
+              },
+              bind: 'x',
+              default: '-',
             },
             {
-              value: 'Option5',
-              label: '天津',
+              control: 'Select',
+              label: '出生地',
+              prop: 'birth',
+              props: {
+                placeholder: '请选择出生地',
+                modelValue: 'birth',
+              },
+              options: [
+                {
+                  value: 'Option1',
+                  label: '上海',
+                },
+                {
+                  value: 'Option2',
+                  label: '北京',
+                },
+                {
+                  value: 'Option3',
+                  label: '深圳',
+                },
+                {
+                  value: 'Option4',
+                  label: '重庆',
+                },
+                {
+                  value: 'Option5',
+                  label: '天津',
+                },
+              ],
+              bind: 'x',
+              disabled: true,
             },
           ],
-          bind: 'x',
-          disabled: true,
         },
-      ],
-      group: [
-        [
-          {
-            control: 'Input',
-            label: '姓名',
-            prop: 'username',
-            props: {
-              type: 'text',
-              placeholder: '请输入姓名',
-              modelValue: 'username',
-            },
-            bind: 'x',
-            default: '-',
-          },
-          {
-            control: 'Input',
-            label: '曾用名',
-            prop: 'iiusername',
-            props: {
-              type: 'text',
-              placeholder: '请输入姓名',
-              modelValue: 'iiusername',
-            },
-            bind: 'x',
-            default: '-',
-          },
-        ],
-        [
-          {
-            control: 'Input',
-            label: '年龄',
-            prop: 'age',
-            props: {
-              type: 'text',
-              placeholder: '请输入年龄',
-              modelValue: 'age',
-            },
-            bind: 'x',
-            default: '-',
-          },
-          {
-            control: 'Switch',
-            label: '已婚',
-            prop: 'married',
-            props: {
-              activeText: '是',
-              inactiveText: '否',
-              modelValue: 'married',
-            },
-            bind: 'x',
-            default: '-',
-          },
-          {
-            control: 'Select',
-            label: '出生地',
-            prop: 'birth',
-            props: {
-              placeholder: '请选择出生地',
-              modelValue: 'birth',
-            },
-            options: [
+        {
+          label: 'Group',
+          group: [
+            [
               {
-                value: 'Option1',
-                label: '上海',
+                control: 'Input',
+                label: '姓名',
+                prop: 'username',
+                props: {
+                  type: 'text',
+                  placeholder: '请输入姓名',
+                  modelValue: 'username',
+                },
+                bind: 'x',
+                default: '-',
               },
               {
-                value: 'Option2',
-                label: '北京',
-              },
-              {
-                value: 'Option3',
-                label: '深圳',
-              },
-              {
-                value: 'Option4',
-                label: '重庆',
-              },
-              {
-                value: 'Option5',
-                label: '天津',
+                control: 'Input',
+                label: '曾用名',
+                prop: 'iiusername',
+                props: {
+                  type: 'text',
+                  placeholder: '请输入姓名',
+                  modelValue: 'iiusername',
+                },
+                bind: 'x',
+                default: '-',
               },
             ],
-            bind: 'x',
-            disabled: true,
-          },
-        ],
+            [
+              {
+                control: 'Input',
+                label: '年龄',
+                prop: 'age',
+                props: {
+                  type: 'text',
+                  placeholder: '请输入年龄',
+                  modelValue: 'age',
+                },
+                bind: 'x',
+                default: '-',
+              },
+              {
+                control: 'Switch',
+                label: '已婚',
+                prop: 'married',
+                props: {
+                  activeText: '是',
+                  inactiveText: '否',
+                  modelValue: 'married',
+                },
+                bind: 'x',
+                default: '-',
+              },
+              {
+                control: 'Select',
+                label: '出生地',
+                prop: 'birth',
+                props: {
+                  placeholder: '请选择出生地',
+                  modelValue: 'birth',
+                },
+                options: [
+                  {
+                    value: 'Option1',
+                    label: '上海',
+                  },
+                  {
+                    value: 'Option2',
+                    label: '北京',
+                  },
+                  {
+                    value: 'Option3',
+                    label: '深圳',
+                  },
+                  {
+                    value: 'Option4',
+                    label: '重庆',
+                  },
+                  {
+                    value: 'Option5',
+                    label: '天津',
+                  },
+                ],
+                bind: 'x',
+                disabled: true,
+              },
+            ],
+          ],
+        },
       ],
     },
     rule,

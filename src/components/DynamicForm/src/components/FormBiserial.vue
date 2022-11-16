@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-15 19:18:23
+ * @LastEditTime: 2022-11-15 19:24:51
  * @FilePath: /vue-form/src/components/DynamicForm/src/components/FormBiserial.vue
  * @Description:
  *
@@ -12,7 +12,7 @@
    * @see https://github.com/vuejs/rfcs/discussions/273
    * @see https://github.com/vuejs/rfcs/blob/master/active-rfcs/0040-script-setup.md#automatic-name-inference
    */
-  export default { name: 'Biserial' };
+  export default { name: 'FormBiserial' };
 </script>
 
 <script setup lang="ts">
@@ -33,7 +33,7 @@
     },
   });
 
-  console.log('This Biserial');
+  console.log('This FormBiserial');
 
   const { field, rule } = props;
   const injectRef = inject('FORM_REF');
