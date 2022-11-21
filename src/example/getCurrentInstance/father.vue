@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-18 14:23:17
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-18 18:14:28
+ * @LastEditTime: 2022-11-21 14:26:47
  * @FilePath: /vue-form/src/example/getCurrentInstance/father.vue
  * @Description:
  *
@@ -14,26 +14,31 @@
 </script>
 
 <script setup lang="ts">
-  import { getCurrentInstance, inject, ref } from 'vue';
-  import { ElButton } from 'element-plus';
+  import { ref } from 'vue';
+  import { ElButton, ElDivider } from 'element-plus';
   import Child from '/@/example/getCurrentInstance/child.vue';
+
+  const childName = 'Father';
 
   const refChild = ref<InstanceType<typeof Child> | null>(null);
 
-  const instance = getCurrentInstance()?.appContext.config.globalProperties;
-
-  inject('EMELENT', refChild);
-
   const onClick = () => {
     console.log('Father');
-    console.log(refChild.value);
-    console.log(instance);
+    console.log('refChild', refChild.value);
+    console.log('getComponents for', getComponents());
+  };
+
+  const getComponents = () => {
+    return childName;
   };
 </script>
 
 <template>
   <div>
     <ElButton @click="onClick">Father</ElButton>
+    <ElDivider>Father - Child</ElDivider>
     <Child ref="refChild" />
+    <ElDivider>Father - Component</ElDivider>
+    <component :is="Child" />
   </div>
 </template>
