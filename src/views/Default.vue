@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-07 10:35:55
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-18 17:48:13
+ * @LastEditTime: 2022-11-21 14:55:40
  * @FilePath: /vue-form/src/views/Default.vue
  * @Description:
  *
@@ -37,6 +37,9 @@
       </li>
       <li>
         <RouterLink to="/instance">getCurrentInstance</RouterLink>
+      </li>
+      <li>
+        <RouterLink to="/jsx">Jsx</RouterLink>
       </li>
     </ul>
   </div>

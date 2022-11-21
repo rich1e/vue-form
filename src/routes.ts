@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-07 09:54:23
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-18 17:47:28
+ * @LastEditTime: 2022-11-21 14:54:59
  * @FilePath: /vue-form/src/routes.ts
  * @Description:
  *
@@ -94,6 +94,14 @@ const routes: AppRouteRecord[] = [
   {
     path: '/instance',
     component: () => import('/@/example/getCurrentInstance/index.vue'),
+    meta: {
+      title: '',
+    },
+  },
+
+  {
+    path: '/jsx',
+    component: () => import('/@/example/jsx/index.vue'),
     meta: {
       title: '',
     },
