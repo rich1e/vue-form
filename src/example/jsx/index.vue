@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-21 14:38:54
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-22 16:57:20
+ * @LastEditTime: 2022-11-22 19:42:13
  * @FilePath: /vue-form/src/example/jsx/index.vue
  * @Description:
  *
@@ -10,17 +10,13 @@
 
 <script lang="tsx">
   import { ref, defineComponent } from 'vue';
-  import {
-    ElDivider,
-    ElRadio,
-    ElRadioGroup,
-    ElRadioButton,
-  } from 'element-plus';
+  import { ElDivider, ElCheckbox, ElCheckboxGroup } from 'element-plus';
 
   import InSwitch from '/@/example/jsx/components/Switch';
   import InSelect from '/@/example/jsx/components/Select';
   import InInput from '/@/example/jsx/components/Inputs';
   import InRadio from '/@/example/jsx/components/Radio';
+  import InCheckbox from '/@/example/jsx/components/Checkbox';
 
   export default defineComponent({
     name: 'Jsx',
@@ -28,6 +24,7 @@
       const initSwitchValue = ref(true);
 
       const switchOptions = {
+        // vModel: initSwitchValue.value,
         activeText: 'test',
       };
 
@@ -56,12 +53,26 @@
 
       const initInputValue = ref('');
 
-      const inputOptions = {
+      const textInputOptions = {
         type: 'text',
-        placeholder: '请输入',
+        placeholder: '文本输入框',
         clearable: true,
         onChange: (val: any) => {
-          console.log('input onChange', val);
+          console.log('text onChange', val);
+        },
+        // onChange 是 Element Plus 事件，onchange 是DOM原始事件
+        // onchange: (val: any) => {
+        //   console.log('input onchange', val);
+        // },
+        // showWordLimit: true,
+      };
+
+      const textareaInputOptions = {
+        type: 'textarea',
+        placeholder: '多行文本输入框',
+        clearable: true,
+        onChange: (val: any) => {
+          console.log('textarea onChange', val);
         },
         // onChange 是 Element Plus 事件，onchange 是DOM原始事件
         // onchange: (val: any) => {
@@ -71,7 +82,6 @@
       };
 
       const initRadioValue = ref(3);
-      const initRadioButtonValue = ref(6);
 
       const radioOptions = [
         {
@@ -94,6 +104,65 @@
         },
       };
 
+      const initCheckBoxValue1 = ref(false);
+      const initCheckBoxList = ref(['Options 1', 'Options 2']);
+
+      const checkboxOptions = {
+        vModel: initCheckBoxValue1.value,
+        label: 'Options 1',
+        onChange: (val: any) => {
+          console.log('checkboxOptions onChange', val);
+        },
+      };
+
+      const checkboxMultOptions = [
+        {
+          vModel: initCheckBoxValue1.value,
+          label: 'Options 1',
+          onChange: (val: any) => {
+            console.log('checkboxMultOptions onChange', val);
+          },
+        },
+        {
+          vModel: initCheckBoxValue1.value,
+          label: 'Options 2',
+          onChange: (val: any) => {
+            console.log('checkboxMultOptions onChange', val);
+          },
+        },
+        {
+          vModel: initCheckBoxValue1.value,
+          label: 'Options 3',
+          onChange: (val: any) => {
+            console.log('checkboxMultOptions onChange', val);
+          },
+        },
+      ];
+
+      const checkboxGroupOptions = {
+        modelValue: initCheckBoxList,
+        checkboxs: [
+          {
+            label: 'Options 1',
+            onChange: (val: any) => {
+              console.log('checkboxGroupOptions onChange', val);
+            },
+          },
+          {
+            label: 'Options 2',
+            onChange: (val: any) => {
+              console.log('checkboxMultOptions onChange', val);
+            },
+          },
+          {
+            label: 'Options 3',
+            onChange: (val: any) => {
+              console.log('checkboxMultOptions onChange', val);
+            },
+          },
+        ],
+      };
+
       return () => (
         <>
           <ElDivider>InSwitch</ElDivider>
@@ -105,36 +174,26 @@
             {...selectAttrs}
           />
           <ElDivider>InInput</ElDivider>
-          <InInput v-model={initInputValue.value} {...inputOptions} />
-          <ElDivider>ElRadio</ElDivider>
-          <ElRadioGroup v-model={initRadioValue.value}>
-            {radioOptions.map((radio) => {
-              const { label, title } = radio;
-              return (
-                <ElRadio label={label} {...radioEvent}>
-                  {title}
-                </ElRadio>
-              );
-            })}
-          </ElRadioGroup>
-          <ElDivider>ElRadio Button</ElDivider>
-          <ElRadioGroup v-model={initRadioButtonValue.value}>
-            {radioOptions.map((radio) => {
-              const { label, title } = radio;
-              return (
-                <ElRadioButton label={label} {...radioEvent}>
-                  {title}
-                </ElRadioButton>
-              );
-            })}
-          </ElRadioGroup>
+          <InInput v-model={initInputValue.value} {...textInputOptions} />
+          <InInput v-model={initInputValue.value} {...textareaInputOptions} />
           <ElDivider>InRadio</ElDivider>
+          <InRadio
+            modelValue={initRadioValue.value}
+            options={radioOptions}
+            radioEvent={radioEvent}
+          />
           <InRadio
             modelValue={initRadioValue.value}
             options={radioOptions}
             radioEvent={radioEvent}
             isButtonStyle={true}
           />
+          <ElDivider>InCheckbox</ElDivider>
+          <InCheckbox {...checkboxOptions} />
+          <br />
+          <InCheckbox multiple={checkboxMultOptions} />
+          <br />
+          <InCheckbox group={checkboxGroupOptions} />
         </>
       );
     },
