@@ -2,11 +2,13 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-10 14:52:56
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-16 13:24:59
+ * @LastEditTime: 2022-11-23 16:17:05
  * @FilePath: /vue-form/src/components/DynamicForm/types.ts
  * @Description:
  *
  */
+
+import type { VNode } from 'vue';
 
 /**
  * @see https://www.freecodecamp.org/chinese/news/advanced-typescript-types-cheatsheet/
@@ -18,7 +20,7 @@
  * @property Switch 开关
  * @property Select 选择框
  */
-export type ControlType = 'Input' | 'Switch' | 'Select';
+export type ControlType = 'Input' | 'Switch' | 'Select' | 'Checkbox' | 'Slots';
 
 /**
  * @description 表单UI类型
@@ -48,10 +50,10 @@ export type TabsType = {
 
 /** 控件功能参数，任意 key-value 对象 */
 export type ControlPropsType = {
-  [key: string]: string;
+  [key: string]: any;
 } & {
   /** 控件监听字段，同 prop */
-  modelValue: string;
+  modelValue?: string;
 };
 
 /**
@@ -62,6 +64,8 @@ export type ControlPropsType = {
 export type FieldType = {
   /** 控件类型 */
   control: ControlType;
+  /** TODO 自定义控件 */
+  slots?: (param: any) => VNode;
   /** 控件显示名称 */
   label?: string;
   /** 控件绑定字段，合法性验证 */
@@ -71,7 +75,7 @@ export type FieldType = {
   /** 控件选项列表 */
   options?: any[];
   /** 控件回显字段 */
-  bind: string;
+  bind?: string;
   /** 控件默认值 */
   default?: string;
   /** 控件启用状态 */

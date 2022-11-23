@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-16 13:16:50
+ * @LastEditTime: 2022-11-23 20:27:41
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Uniseriate.vue
  * @Description:
  *
@@ -48,7 +48,7 @@
     :model="dynamicFormModel"
     ref="formRef"
     :rules="rule"
-    label-width="70px"
+    label-width="80px"
   >
     <!-- 渲染表单字段 -->
     <FormFields

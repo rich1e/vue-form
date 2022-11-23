@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-21 14:38:54
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-22 19:42:13
+ * @LastEditTime: 2022-11-23 20:40:36
  * @FilePath: /vue-form/src/example/jsx/index.vue
  * @Description:
  *
@@ -117,21 +117,21 @@
 
       const checkboxMultOptions = [
         {
-          vModel: initCheckBoxValue1.value,
+          // vModel: initCheckBoxValue1.value,
           label: 'Options 1',
           onChange: (val: any) => {
             console.log('checkboxMultOptions onChange', val);
           },
         },
         {
-          vModel: initCheckBoxValue1.value,
+          // vModel: initCheckBoxValue1.value,
           label: 'Options 2',
           onChange: (val: any) => {
             console.log('checkboxMultOptions onChange', val);
           },
         },
         {
-          vModel: initCheckBoxValue1.value,
+          // vModel: initCheckBoxValue1.value,
           label: 'Options 3',
           onChange: (val: any) => {
             console.log('checkboxMultOptions onChange', val);

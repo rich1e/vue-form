@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-03 14:10:27
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-15 09:23:24
+ * @LastEditTime: 2022-11-23 20:54:15
  * @FilePath: /vue-form/src/views/Uniseriate.vue
  * @Description:
  *
@@ -15,6 +15,8 @@
   export default { name: 'UniseriateView' };
 </script>
 <script setup lang="ts">
+  import { ref, h } from 'vue';
+
   import BaseViewVue from '/@/components/Layouts/BaseView.vue';
   import DynamicForm from '/@/components/DynamicForm';
   import {
@@ -24,10 +26,19 @@
   import { ConfigType } from '../components/DynamicForm/types';
   import { pageBack } from '../components/DynamicForm/src/hooks/useActions';
 
+  import InCheckbox from '/@/example/jsx/components/Checkbox';
+
+  const initCheckBoxValue = ref(false);
+  const initCheckBoxValue1 = ref(false);
+
+  const emits = defineEmits(['update:modelValue']);
+
   const rule = {
     username: [{ validator: checkEmpty, trigger: 'blur', required: true }],
     age: [{ validator: checkAge, trigger: 'blur', required: true }],
     birth: [{ validator: checkEmpty, trigger: 'blur', required: true }],
+    recruit: [{ validator: checkEmpty, trigger: 'change', required: true }],
+    skill: [{ validator: checkEmpty, trigger: 'blur', required: true }],
   };
 
   const actions = {
@@ -151,6 +162,54 @@
         ],
         bind: 'x',
         disabled: true,
+      },
+      {
+        control: 'Slots',
+        label: '招聘渠道',
+        prop: 'recruit',
+        slots: function (props: any) {
+          console.log('slots 1#');
+          console.log('slots #', props);
+          // props['recruit'] = value;
+
+          /**
+           * @see https://cn.vuejs.org/api/render-function.html#h
+           */
+          return h(InCheckbox, {
+            multiple: [
+              {
+                // vModel: initCheckBoxValue.value,
+                modelValue: initCheckBoxValue.value,
+                // 'onUpdate:modelValue': (value: any) => {
+                //   initCheckBoxValue.value = value;
+                // },
+                'onUpdate:modelValue': (value: any) => {
+                  console.log('update:modelValue', value);
+                  console.log(props['recruit']);
+                  emits('update:modelValue', value);
+                },
+                label: 'Slots 1',
+                onChange: (val: any) => {
+                  console.log('招聘渠道 #', val);
+                  props['recruit'] = val;
+                  // initCheckBoxValue.value = val;
+                },
+              },
+            ],
+          });
+        },
+        props: {
+          modelValue: 'recruit',
+        },
+      },
+      {
+        control: 'Checkbox',
+        label: '技能',
+        prop: 'skill',
+        props: {
+          modelValue: 'skill',
+          label: 'Vue',
+        },
       },
     ],
     rule,

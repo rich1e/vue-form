@@ -2,7 +2,7 @@
  * @Author: rich1e
  * @Date: 2022-11-14 12:37:25
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-16 13:46:33
+ * @LastEditTime: 2022-11-23 20:31:10
 -->
 <script lang="ts">
   export default {
@@ -11,14 +11,18 @@
 </script>
 
 <script setup lang="ts">
-  import { PropType } from 'vue';
+  import { PropType, VNode, watchEffect } from 'vue';
   import {
     ElFormItem,
     ElInput,
     ElSwitch,
     ElSelect,
     ElOption,
+    ElCheckbox,
   } from 'element-plus';
+
+  import InCheckbox from '/@/example/jsx/components/Checkbox';
+
   import { FieldType, SceneType } from '../../types';
 
   console.log('This FormFields');
@@ -47,11 +51,35 @@
   });
 
   const { scene, field, item, dynamicModel } = props;
+  console.log('field#', field);
+  console.log('dynamicModel#', dynamicModel);
 
   const getType = (sceneType: string) => {
     if (scene === sceneType && field) return false;
     else return true;
   };
+
+  // const setDynamicModel = (fn: any, mode: any): VNode => {
+  //   console.log('setDynamicModel#', fn);
+  //   console.log('setDynamicModel', mode);
+  //   return fn.call(null, mode);
+  // };
+
+  // watchEffect(
+  //   () => {
+  //     console.log('watchEffect#', field);
+
+  //     field.forEach((item) => {
+  //       const { control } = item;
+  //       if (control === 'Slots') {
+  //         item.slots?.call(null, dynamicModel);
+  //       }
+  //     });
+  //   },
+  //   {
+  //     flush: 'post',
+  //   },
+  // );
 </script>
 
 <template>
@@ -72,7 +100,7 @@
         v-model="dynamicModel[`${item.prop}`]"
       />
       <ElSelect
-        v-else="item.control === 'Select'"
+        v-else-if="item.control === 'Select'"
         v-model="dynamicModel[`${item.prop}`]"
       >
         <ElOption
@@ -82,6 +110,20 @@
           :value="opt.value"
         />
       </ElSelect>
+      <!-- <InCheckbox
+        v-else-if="item.control === 'Checkbox'"
+        v-model="dynamicModel[`${item.prop}`]"
+        :label="item.props.label"
+      /> -->
+      <ElCheckbox
+        v-else-if="item.control === 'Checkbox'"
+        v-model="dynamicModel[`${item.prop}`]"
+        :label="item.props.label"
+      />
+      <template v-else="item.control === 'Slots'">
+        <!-- 接收一个 VNode 动态组件 -->
+        <component :is="item.slots" />
+      </template>
     </ElFormItem>
   </template>
 
@@ -97,7 +139,7 @@
         v-model="dynamicModel[`${item.prop}`]"
       />
       <ElSelect
-        v-else="item.control === 'Select'"
+        v-else-if="item.control === 'Select'"
         v-model="dynamicModel[`${item.prop}`]"
       >
         <ElOption
@@ -107,6 +149,12 @@
           :value="opt.value"
         />
       </ElSelect>
+      <template v-else="item.control === 'Slots'">
+        <!-- 接收一个 VNode 动态组件 -->
+        <component :is="item.slots" />
+        <!-- <component :is="() => item.slots?.call(null, 'test')" /> -->
+        <!-- <component :is="setDynamicModel(item.slots, dynamicModel)" /> -->
+      </template>
     </ElFormItem>
   </template>
 
