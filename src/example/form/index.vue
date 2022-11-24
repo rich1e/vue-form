@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-23 18:36:22
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-23 19:56:50
+ * @LastEditTime: 2022-11-24 14:10:55
  * @FilePath: /vue-form/src/example/form/index.vue
  * @Description:
  *
@@ -16,6 +16,11 @@
     label-width="120px"
     class="demo-ruleForm"
   >
+    <ElFormItem label="User name" prop="username">
+      <CustInput v-model="ruleForm.username" type="text" />{{
+        ruleForm.username
+      }}
+    </ElFormItem>
     <ElFormItem label="Password" prop="pass">
       <ElInput v-model="ruleForm.pass" type="password" autocomplete="off" />
     </ElFormItem>
@@ -76,6 +81,8 @@
     ElSelect,
     ElOption,
   } from 'element-plus';
+
+  import CustInput from '/@/example/jsx/components/CustInput/index.vue';
 
   type FormRefType = InstanceType<typeof ElForm>;
 
@@ -169,6 +176,7 @@
   };
 
   const ruleForm = reactive({
+    username: '',
     pass: '',
     region: '',
     checkPass: '',
@@ -198,6 +206,8 @@
     formEl.validate((valid: any) => {
       if (valid) {
         console.log('submit!');
+
+        console.log(ruleForm);
       } else {
         console.log('error submit!');
         return false;

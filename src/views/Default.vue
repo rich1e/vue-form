@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-07 10:35:55
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-23 18:40:32
+ * @LastEditTime: 2022-11-24 09:53:58
  * @FilePath: /vue-form/src/views/Default.vue
  * @Description:
  *
@@ -43,6 +43,9 @@
       </li>
       <li>
         <RouterLink to="/form">Form</RouterLink>
+      </li>
+      <li>
+        <RouterLink to="/jsx-form">JsxForm</RouterLink>
       </li>
     </ul>
   </div>

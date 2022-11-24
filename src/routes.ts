@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-07 09:54:23
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-23 18:36:58
+ * @LastEditTime: 2022-11-24 09:53:32
  * @FilePath: /vue-form/src/routes.ts
  * @Description:
  *
@@ -110,6 +110,14 @@ const routes: AppRouteRecord[] = [
   {
     path: '/form',
     component: () => import('/@/example/form/index.vue'),
+    meta: {
+      title: '',
+    },
+  },
+
+  {
+    path: '/jsx-form',
+    component: () => import('/@/example/jsxForm/index'),
     meta: {
       title: '',
     },
