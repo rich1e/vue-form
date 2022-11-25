@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-24 09:46:15
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-25 17:53:05
+ * @LastEditTime: 2022-11-25 18:31:48
  * @FilePath: /vue-form/src/example/jsxForm/index.tsx
  * @Description:
  *
@@ -29,6 +29,7 @@ import {
   ElCheckbox,
   ElRadioGroup,
   ElRadio,
+  ElInputNumber,
 } from 'element-plus';
 import {
   InInput,
@@ -196,6 +197,7 @@ export default defineComponent({
         married: false,
         city: '',
         referees: [],
+        slots: 1,
       });
 
       const formRules = {
@@ -220,6 +222,10 @@ export default defineComponent({
 
       const onRest = () => {
         formRef.value.resetFields();
+      };
+
+      const onChangeNumber = (value: any) => {
+        console.log(value);
       };
 
       const renderFields = () => {
@@ -294,6 +300,14 @@ export default defineComponent({
               labels: ['colleagues', 'friends', 'teachers'],
             },
           },
+          {
+            type: 'slots',
+            label: 'Slots Test',
+            prop: 'slots',
+            render: () => {
+              return <div>Slots Test</div>;
+            },
+          },
         ];
 
         return formJson.map((item) => {
@@ -361,17 +375,25 @@ export default defineComponent({
             );
           };
 
-          const getComponent = (type: string, props: any) => {
+          const renderSlots = (render: any) => {
+            if (render) {
+              return render();
+            }
+          };
+
+          const getComponent = (type: string, props: any, render?: any) => {
             if (type === 'input') return renderInput(props);
             else if (type === 'switch') return <ElSwitch {...item.props} />;
             else if (type === 'checkbox') return renderCheckbox(props);
             else if (type === 'radio') return renderRadio(props);
             else if (type === 'select') return renderSelect(props);
+            // slots 特殊处理
+            else if (type === 'slots') return renderSlots(render);
           };
 
           return (
             <ElFormItem label={item.label} prop={item.prop}>
-              {getComponent(item.type, item.props)}
+              {getComponent(item.type, item.props, item.render)}
             </ElFormItem>
           );
         });
@@ -440,6 +462,14 @@ export default defineComponent({
                   return <ElCheckbox label={item} />;
                 })}
               </ElCheckboxGroup>
+            </ElFormItem>
+            <ElFormItem label={'Slots Test'} prop={'slots'}>
+              <ElInputNumber
+                v-model={formModel.slots}
+                min={1}
+                max={10}
+                onChange={onChangeNumber}
+              />
             </ElFormItem>
           </>
         );
