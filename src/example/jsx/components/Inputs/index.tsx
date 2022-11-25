@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-21 17:05:16
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-24 17:08:33
+ * @LastEditTime: 2022-11-25 11:11:19
  * @FilePath: /vue-form/src/example/jsx/components/Inputs/index.tsx
  * @Description:
  *
@@ -19,7 +19,7 @@ export default defineComponent({
   //   ...inputProps,
   // },
   setup(_, { attrs }) {
-    console.log('InInput#', attrs);
+    // console.log('InInput#', attrs);
     return () => <ElInput {...attrs} />;
   },
 });

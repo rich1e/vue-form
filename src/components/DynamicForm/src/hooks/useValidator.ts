@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 16:00:31
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-23 16:49:10
+ * @LastEditTime: 2022-11-25 16:30:39
  * @FilePath: /vue-form/src/components/DynamicForm/src/hooks/useValidator.ts
  * @Description:
  *
@@ -27,8 +27,7 @@ export const checkAge = (rule: any, value: any, callback: any) => {
 };
 
 export const checkEmpty = (rule: any, value: any, callback: any) => {
-  console.log('checkEmpty rule#', rule);
-  if (!value || value === '' || value === false) {
+  if (!value || value === '' || value === false || value.length === 0) {
     callback(new Error(`It's Empty!`));
   } else {
     callback();

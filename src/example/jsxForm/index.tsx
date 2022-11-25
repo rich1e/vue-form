@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-24 09:46:15
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-24 19:51:26
+ * @LastEditTime: 2022-11-25 17:53:05
  * @FilePath: /vue-form/src/example/jsxForm/index.tsx
  * @Description:
  *
@@ -14,6 +14,7 @@ import {
   toRefs,
   watch,
   computed,
+  ref,
 } from 'vue';
 import {
   ElForm,
@@ -24,6 +25,10 @@ import {
   ElSwitch,
   ElSelect,
   ElOption,
+  ElCheckboxGroup,
+  ElCheckbox,
+  ElRadioGroup,
+  ElRadio,
 } from 'element-plus';
 import {
   InInput,
@@ -33,18 +38,13 @@ import {
   InSwitch,
   CustInput,
 } from '/@/example/jsx/index';
-import { BuildPropType, PropWrapper } from 'element-plus/es/utils/props';
+import { checkEmpty } from '/@/components/DynamicForm/src/hooks/useValidator';
 
-type tsType = BuildPropType<
-  PropWrapper<string | number | null | undefined>,
-  unknown,
-  unknown
->;
+type FormRefType = InstanceType<typeof ElForm>;
 
 export default defineComponent({
   name: 'JsxForm',
-  // emits: ['update:modelValue', 'input'],
-  setup(_, { emit }) {
+  setup(_) {
     const renderModernForm = () => {
       const formModel = reactive({
         username: '',
@@ -161,7 +161,7 @@ export default defineComponent({
 
                 const contorls2 = computed(() => getContorl(type));
 
-                console.log('contorls', contorls);
+                // console.log('contorls', contorls);
 
                 // return <contorls2.value />;
                 // return <contorls {...props} />;
@@ -187,40 +187,272 @@ export default defineComponent({
     };
 
     const renderPopularForm = () => {
-      const form = reactive({
+      const formRef = ref<InstanceType<typeof ElForm> | null | any>(null);
+
+      const formModel = reactive({
         username: '',
+        gender: '',
         secondname: '',
+        married: false,
+        city: '',
+        referees: [],
       });
 
-      const onSubmit = () => {
-        console.log(form);
+      const formRules = {
+        username: [{ validator: checkEmpty, trigger: 'blur' }],
+        gender: [{ validator: checkEmpty, trigger: 'blur' }],
+        secondname: [{ validator: checkEmpty, trigger: 'blur' }],
+        married: [{ validator: checkEmpty, trigger: 'blur' }],
+        referees: [{ validator: checkEmpty, trigger: 'blur' }],
       };
 
-      const updateModelValue = (value: any) => {
-        // console.log('updateModelValue', value);
-        form.username = value;
+      const onSubmit = () => {
+        formRef.value.validate((valid: any) => {
+          if (valid) {
+            console.log('submit!');
+            console.log(formModel);
+          } else {
+            console.log('error submit!');
+            return false;
+          }
+        });
+      };
+
+      const onRest = () => {
+        formRef.value.resetFields();
+      };
+
+      const renderFields = () => {
+        const formJson = [
+          {
+            type: 'input',
+            label: 'User name',
+            prop: 'username',
+            props: {
+              modelValue: formModel.username,
+              // 当输入框发生变化时，将 value 赋值给 formModel 对象
+              'onUpdate:modelValue': (value: any) =>
+                (formModel.username = value),
+            },
+          },
+          {
+            type: 'input',
+            label: 'Second name',
+            prop: 'secondname',
+            props: {
+              modelValue: formModel.secondname,
+              'onUpdate:modelValue': (value: any) =>
+                (formModel.secondname = value),
+            },
+          },
+          {
+            type: 'radio',
+            label: 'Gender',
+            prop: 'gender',
+            props: {
+              modelValue: formModel.gender,
+              'onUpdate:modelValue': (value: any) => (formModel.gender = value),
+              labels: [
+                { label: 1, title: 'male' },
+                { label: 2, title: 'female' },
+              ],
+            },
+          },
+          {
+            type: 'switch',
+            label: 'Married',
+            prop: 'married',
+            props: {
+              modelValue: formModel.married,
+              'onUpdate:modelValue': (value: any) =>
+                (formModel.married = value),
+              activeText: 'Yes',
+              inactiveText: 'No',
+            },
+          },
+          {
+            type: 'select',
+            label: 'City from',
+            prop: 'city',
+            props: {
+              modelValue: formModel.city,
+              'onUpdate:modelValue': (value: any) => (formModel.city = value),
+              options: [
+                { vlaue: 0, label: 'Beijing' },
+                { vlaue: 1, label: 'Shanghai' },
+              ],
+            },
+          },
+          {
+            type: 'checkbox',
+            label: 'Referees',
+            prop: 'referees',
+            props: {
+              modelValue: formModel.referees,
+              'onUpdate:modelValue': (value: any) =>
+                (formModel.referees = value),
+              labels: ['colleagues', 'friends', 'teachers'],
+            },
+          },
+        ];
+
+        return formJson.map((item) => {
+          /**
+           * @see https://juejin.cn/post/6997796393460957215#heading-7
+           * @param props 输入框属性
+           * @returns
+           */
+          const renderInput = (props: any) => {
+            // props 解构之后，会丢失响应性，通过 ref 补充响应性
+            const { modelValue, ...rest } = props;
+            const modeValueRef = ref(modelValue);
+
+            return (
+              <ElInput
+                {...{
+                  modelValue: modeValueRef.value,
+                  // 当输入框发生变化时，将 value 赋值给绑定变量 props.modelValue
+                  'onUpdate:modelValue': (value: any) =>
+                    (modeValueRef.value = value),
+                }}
+                {...rest}
+              />
+            );
+          };
+
+          const renderCheckbox = (props: any) => {
+            const { labels, ...rest } = props;
+            return (
+              <ElCheckboxGroup {...rest}>
+                {labels.map((item: any) => {
+                  return <ElCheckbox label={item} />;
+                })}
+              </ElCheckboxGroup>
+            );
+          };
+
+          const renderRadio = (props: any) => {
+            const { labels, ...rest } = props;
+
+            return (
+              <ElRadioGroup {...rest}>
+                {labels.map((item: any) => {
+                  return <ElRadio label={item.label}>{item.title}</ElRadio>;
+                })}
+              </ElRadioGroup>
+            );
+          };
+
+          const renderSelect = (props: any) => {
+            const { options, ...rest } = props;
+
+            return (
+              <ElSelect {...rest}>
+                {options.map((item: any) => {
+                  return (
+                    <ElOption
+                      label={item.label}
+                      value={item.vlaue}
+                      key={item.vlaue}
+                    />
+                  );
+                })}
+              </ElSelect>
+            );
+          };
+
+          const getComponent = (type: string, props: any) => {
+            if (type === 'input') return renderInput(props);
+            else if (type === 'switch') return <ElSwitch {...item.props} />;
+            else if (type === 'checkbox') return renderCheckbox(props);
+            else if (type === 'radio') return renderRadio(props);
+            else if (type === 'select') return renderSelect(props);
+          };
+
+          return (
+            <ElFormItem label={item.label} prop={item.prop}>
+              {getComponent(item.type, item.props)}
+            </ElFormItem>
+          );
+        });
+      };
+
+      const renderFieldsByTemplate = () => {
+        return (
+          <>
+            <ElFormItem label={'User name'} prop={'username'}>
+              <ElInput
+                modelValue={formModel.username}
+                onUpdate:modelValue={(value) => (formModel.username = value)}
+              />
+            </ElFormItem>
+            <ElFormItem label={'Second name'} prop={'secondname'}>
+              <ElInput
+                modelValue={formModel.secondname}
+                onUpdate:modelValue={(value) => (formModel.secondname = value)}
+              />
+            </ElFormItem>
+            <ElFormItem label={'Gender'} prop={'gender'}>
+              <ElRadioGroup
+                modelValue={formModel.gender}
+                onUpdate:modelValue={(value) => (formModel.gender = value)}
+              >
+                {[
+                  { label: 1, title: 'male' },
+                  { label: 2, title: 'female' },
+                ].map((item) => {
+                  return <ElRadio label={item.label}>{item.title}</ElRadio>;
+                })}
+              </ElRadioGroup>
+            </ElFormItem>
+            <ElFormItem label={'Married'} prop={'married'}>
+              <ElSwitch
+                v-model={formModel.married}
+                // modelValue={formModel.married}
+                // onUpdate:modelValue={(value: any) => (formModel.married = value)}
+              />
+            </ElFormItem>
+            <ElFormItem label={'City from'} prop={'city'}>
+              <ElSelect v-model={formModel.city}>
+                {[
+                  { vlaue: 0, label: 'Beijing' },
+                  { vlaue: 1, label: 'Shanghai' },
+                ].map((item) => {
+                  return (
+                    <ElOption
+                      label={item.label}
+                      value={item.vlaue}
+                      key={item.vlaue}
+                    />
+                  );
+                })}
+              </ElSelect>
+            </ElFormItem>
+            <ElFormItem label={'Referees'} prop={'referees'}>
+              <ElCheckboxGroup
+                // v-model={formModel.referees}
+                modelValue={formModel.referees}
+                onUpdate:modelValue={(value: any) =>
+                  (formModel.referees = value)
+                }
+              >
+                {['colleagues', 'friends', 'teachers'].map((item: any) => {
+                  return <ElCheckbox label={item} />;
+                })}
+              </ElCheckboxGroup>
+            </ElFormItem>
+          </>
+        );
       };
 
       return (
-        <ElForm>
-          <ElFormItem label={'User name'}>
-            <InInput v-model={form.username} />
-            {/* <InInput
-              modelValue={form.username}
-              onUpdate:modelValue={updateModelValue}
-            /> */}
-            {/* <ElInput
-              modelValue={form.username}
-              onUpdate:modelValue={updateModelValue}
-            /> */}
-          </ElFormItem>
-          <ElFormItem label={'Second name'}>
-            <InInput v-model={form.secondname} />
-          </ElFormItem>
+        <ElForm ref={formRef} model={formModel} rules={formRules}>
+          {/* {renderFieldsByTemplate()} */}
+          {renderFields()}
           <ElFormItem>
             <ElButton onClick={onSubmit}>Submit</ElButton>
             <ElButton>Cancel</ElButton>
-            <ElButton>Rest</ElButton>
+            <ElButton onClick={onRest}>Rest</ElButton>
           </ElFormItem>
         </ElForm>
       );
