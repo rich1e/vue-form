@@ -20,7 +20,14 @@
     },
     "types": ["element-plus/global", "reflect-metadata"],
     "skipLibCheck": true,
-    "noEmit": true
+    "noEmit": true,
+
+    /**
+      * @see https://github.com/mrmckeb/typescript-plugin-css-modules#installation
+      * @see https://www.jianshu.com/p/be1778a76763
+      * @see https://www.cnblogs.com/zhangym118/p/13364894.html
+     */
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]
