@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-24 09:46:15
  * @LastEditors: rich1e
- * @LastEditTime: 2022-11-26 10:44:01
+ * @LastEditTime: 2022-11-26 11:06:46
  * @FilePath: /vue-form/src/example/jsxForm/index.tsx
  * @Description:
  *
@@ -48,47 +48,47 @@ type FormRefType = InstanceType<typeof ElForm>;
 export default defineComponent({
   name: 'JsxForm',
   setup(_) {
-    const formRef = ref<InstanceType<typeof ElForm> | null | any>(null);
-
-    const formModel = reactive({
-      username: '',
-      gender: '',
-      secondname: '',
-      married: false,
-      city: '',
-      referees: [],
-      slots: 1,
-    });
-
-    const formRules = {
-      username: [{ validator: checkEmpty, trigger: 'blur' }],
-      gender: [{ validator: checkEmpty, trigger: 'blur' }],
-      secondname: [{ validator: checkEmpty, trigger: 'blur' }],
-      married: [{ validator: checkEmpty, trigger: 'blur' }],
-      referees: [{ validator: checkEmpty, trigger: 'blur' }],
-    };
-
-    const onSubmit = () => {
-      formRef.value.validate((valid: any) => {
-        if (valid) {
-          console.log('submit!');
-          console.log(formModel);
-        } else {
-          console.log('error submit!');
-          return false;
-        }
-      });
-    };
-
-    const onRest = () => {
-      formRef.value.resetFields();
-    };
-
-    const onChangeNumber = (value: any) => {
-      console.log(value);
-    };
-
     const renderPopularForm = () => {
+      const formRef = ref<InstanceType<typeof ElForm> | null | any>(null);
+
+      const formModel = reactive({
+        username: '',
+        gender: '',
+        secondname: '',
+        married: false,
+        city: '',
+        referees: [],
+        slots: 1,
+      });
+
+      const formRules = {
+        username: [{ validator: checkEmpty, trigger: 'blur' }],
+        gender: [{ validator: checkEmpty, trigger: 'blur' }],
+        secondname: [{ validator: checkEmpty, trigger: 'blur' }],
+        married: [{ validator: checkEmpty, trigger: 'blur' }],
+        referees: [{ validator: checkEmpty, trigger: 'blur' }],
+      };
+
+      const onSubmit = () => {
+        formRef.value.validate((valid: any) => {
+          if (valid) {
+            console.log('submit!');
+            console.log(formModel);
+          } else {
+            console.log('error submit!');
+            return false;
+          }
+        });
+      };
+
+      const onRest = () => {
+        formRef.value.resetFields();
+      };
+
+      const onChangeNumber = (value: any) => {
+        console.log(value);
+      };
+
       const renderFieldsByTemplate = () => {
         return (
           <>
@@ -178,6 +178,59 @@ export default defineComponent({
     };
 
     const renderModernForm = () => {
+      const formRef = ref<InstanceType<typeof ElForm> | null | any>(null);
+
+      const formModel = reactive({
+        username: '',
+        gender: '',
+        secondname: '',
+        married: false,
+        city: '',
+        referees: [],
+        num: 1,
+      });
+
+      const formRules = {
+        username: [{ validator: checkEmpty, trigger: 'blur' }],
+        gender: [{ validator: checkEmpty, trigger: 'blur' }],
+        secondname: [{ validator: checkEmpty, trigger: 'blur' }],
+        married: [{ validator: checkEmpty, trigger: 'blur' }],
+        referees: [{ validator: checkEmpty, trigger: 'blur' }],
+        num: [
+          {
+            validator: (rule: any, value: any, callback: any) => {
+              console.log(value);
+              if (value < 5) {
+                callback(new Error(`It's Num must than 5`));
+              } else {
+                callback();
+              }
+            },
+            trigger: 'blur',
+          },
+        ],
+      };
+
+      const onSubmit = () => {
+        formRef.value.validate((valid: any) => {
+          if (valid) {
+            console.log('submit!');
+            console.log(formModel);
+          } else {
+            console.log('error submit!');
+            return false;
+          }
+        });
+      };
+
+      const onRest = () => {
+        formRef.value.resetFields();
+      };
+
+      const onChangeNumber = (value: any) => {
+        console.log(value);
+      };
+
       const renderFields = () => {
         const formJson = [
           {
@@ -253,9 +306,16 @@ export default defineComponent({
           {
             type: 'slots',
             label: 'Slots Test',
-            prop: 'slots',
+            prop: 'num',
             render: () => {
-              return <div>Slots Test</div>;
+              return (
+                <ElInputNumber
+                  v-model={formModel.num}
+                  min={1}
+                  max={10}
+                  onChange={onChangeNumber}
+                />
+              );
             },
           },
         ];
