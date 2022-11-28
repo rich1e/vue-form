@@ -2,22 +2,16 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-21 17:05:16
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-24 17:08:33
- * @FilePath: /vue-form/src/example/jsx/components/Inputs/index.tsx
+ * @LastEditTime: 2022-11-28 15:58:45
+ * @FilePath: /vue-form/src/example/dynamicComponents/components/input.tsx
  * @Description:
  *
  */
 import { defineComponent } from 'vue';
-import { ElInput, inputProps } from 'element-plus';
+import { ElInput } from 'element-plus';
 
 export default defineComponent({
-  name: 'InInput',
-  /**
-   * @see https://github.com/element-plus/element-plus/discussions/8394
-   */
-  // props: {
-  //   ...inputProps,
-  // },
+  name: 'DyInput',
   setup(_, { attrs }) {
     console.log('InInput#', attrs);
     return () => <ElInput {...attrs} />;

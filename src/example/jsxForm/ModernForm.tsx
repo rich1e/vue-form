@@ -1,17 +1,4 @@
-import {
-  ElButton,
-  ElCheckbox,
-  ElCheckboxGroup,
-  ElForm,
-  ElFormItem,
-  ElInput,
-  ElInputNumber,
-  ElOption,
-  ElRadio,
-  ElRadioGroup,
-  ElSelect,
-  ElSwitch,
-} from 'element-plus';
+import { ElButton, ElForm, ElFormItem, ElInputNumber } from 'element-plus';
 import { reactive, ref, defineComponent } from 'vue';
 
 import {
@@ -91,25 +78,30 @@ export default defineComponent({
         },
       },
       {
+        type: 'input',
+        label: 'Second name',
+        prop: 'secondname',
+        props: {
+          modelValue: formModel.secondname,
+          'onUpdate:modelValue': (value: any) => (formModel.secondname = value),
+        },
+      },
+      {
         type: 'radio',
         label: 'Gender',
         prop: 'gender',
         props: {
           modelValue: formModel.gender,
-          'onUpdate:modelValue': (value: any) => {
-            debugger;
-            console.log('radio', value);
-            formModel.gender = value;
-          },
+          'onUpdate:modelValue': (value: any) => (formModel.gender = value),
           labels: [
-            { label: 1, title: 'male' },
+            { label: 1, title: 'male2' },
             { label: 2, title: 'female' },
           ],
         },
       },
     ];
 
-    const renderFields = (options?: any) => {
+    const renderFields = function (options?: any) {
       const defaults = [
         {
           type: 'input',
@@ -144,59 +136,59 @@ export default defineComponent({
             ],
           },
         },
-        {
-          type: 'switch',
-          label: 'Married',
-          prop: 'married',
-          props: {
-            modelValue: formModel.married,
-            'onUpdate:modelValue': (value: any) => (formModel.married = value),
-            activeText: 'Yes',
-            inactiveText: 'No',
-          },
-        },
-        {
-          type: 'select',
-          label: 'City from',
-          prop: 'city',
-          props: {
-            modelValue: formModel.city,
-            'onUpdate:modelValue': (value: any) => (formModel.city = value),
-            options: [
-              { vlaue: 0, label: 'Beijing' },
-              { vlaue: 1, label: 'Shanghai' },
-            ],
-          },
-        },
-        {
-          type: 'checkbox',
-          label: 'Referees',
-          prop: 'referees',
-          props: {
-            modelValue: formModel.referees,
-            'onUpdate:modelValue': (value: any) => (formModel.referees = value),
-            labels: ['colleagues', 'friends', 'teachers'],
-          },
-        },
-        {
-          type: 'slots',
-          label: 'Slots Test',
-          prop: 'num',
-          render: () => {
-            const onChangeNumber = (value: any) => {
-              console.log(value);
-            };
+        // {
+        //   type: 'switch',
+        //   label: 'Married',
+        //   prop: 'married',
+        //   props: {
+        //     modelValue: formModel.married,
+        //     'onUpdate:modelValue': (value: any) => (formModel.married = value),
+        //     activeText: 'Yes',
+        //     inactiveText: 'No',
+        //   },
+        // },
+        // {
+        //   type: 'select',
+        //   label: 'City from',
+        //   prop: 'city',
+        //   props: {
+        //     modelValue: formModel.city,
+        //     'onUpdate:modelValue': (value: any) => (formModel.city = value),
+        //     options: [
+        //       { vlaue: 0, label: 'Beijing' },
+        //       { vlaue: 1, label: 'Shanghai' },
+        //     ],
+        //   },
+        // },
+        // {
+        //   type: 'checkbox',
+        //   label: 'Referees',
+        //   prop: 'referees',
+        //   props: {
+        //     modelValue: formModel.referees,
+        //     'onUpdate:modelValue': (value: any) => (formModel.referees = value),
+        //     labels: ['colleagues', 'friends', 'teachers'],
+        //   },
+        // },
+        // {
+        //   type: 'slots',
+        //   label: 'Slots Test',
+        //   prop: 'num',
+        //   render: () => {
+        //     const onChangeNumber = (value: any) => {
+        //       console.log(value);
+        //     };
 
-            return (
-              <ElInputNumber
-                v-model={formModel.num}
-                min={1}
-                max={10}
-                onChange={onChangeNumber}
-              />
-            );
-          },
-        },
+        //     return (
+        //       <ElInputNumber
+        //         v-model={formModel.num}
+        //         min={1}
+        //         max={10}
+        //         onChange={onChangeNumber}
+        //       />
+        //     );
+        //   },
+        // },
       ];
 
       const fields = options ?? defaults;
@@ -222,6 +214,7 @@ export default defineComponent({
 
     return () => (
       <ElForm ref={formRef} model={formModel} rules={formRules}>
+        {/* {renderFields(formFields)} */}
         {renderFields()}
         <ElFormItem>
           <ElButton onClick={formActions.onSubmit}>Submit</ElButton>

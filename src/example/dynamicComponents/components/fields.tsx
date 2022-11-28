@@ -2,8 +2,8 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-28 13:40:12
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-28 15:14:35
- * @FilePath: /vue-form/src/example/jsxForm/components/fields.tsx
+ * @LastEditTime: 2022-11-28 15:51:08
+ * @FilePath: /vue-form/src/example/dynamicComponents/components/fields.tsx
  * @Description:
  *
  */
@@ -35,7 +35,10 @@ export const renderInput = (props: any) => {
       {...{
         modelValue: modeValueRef.value,
         // 当输入框发生变化时，将 value 赋值给绑定变量 props.modelValue
-        'onUpdate:modelValue': (value: any) => (modeValueRef.value = value),
+        'onUpdate:modelValue': (value: any) => {
+          console.log(value);
+          modeValueRef.value = value;
+        },
       }}
       {...rest}
     />
@@ -59,41 +62,11 @@ export const renderCheckbox = (props: any) => {
 
 export const renderRadio = (props: any) => {
   const { labels, ...rest } = props;
-  // const { labels, modelValue, ...rest } = props;
-  // const modeValueRef = ref(modelValue);
-  // const radioRef = ref(false);
 
   return (
-    <ElRadioGroup
-      // {...{
-      //   modelValue: modeValueRef.value,
-      //   // 当输入框发生变化时，将 value 赋值给绑定变量 props.modelValue
-      //   'onUpdate:modelValue': (value: any) => {
-      //     console.log('renderRadio1', value);
-      //     modeValueRef.value = value;
-      //     radioRef.value = value;
-      //   },
-      // }}
-      // v-model={modeValueRef.value}
-      {...rest}
-    >
+    <ElRadioGroup {...rest}>
       {labels.map((item: any) => {
-        return (
-          <ElRadio
-            // {...{
-            //   modelValue: radioRef.value,
-            //   // 当输入框发生变化时，将 value 赋值给绑定变量 props.modelValue
-            //   'onUpdate:modelValue': (value: any) => {
-            //     console.log('renderRadio2', value);
-            //     console.log('renderRadio2', value === item.label);
-            //     radioRef.value = value === item.label;
-            //   },
-            // }}
-            label={item.label}
-          >
-            {item.title}
-          </ElRadio>
-        );
+        return <ElRadio label={item.label}>{item.title}</ElRadio>;
       })}
     </ElRadioGroup>
   );

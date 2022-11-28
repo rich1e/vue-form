@@ -2,14 +2,24 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-24 19:55:11
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-24 20:59:13
+ * @LastEditTime: 2022-11-28 17:39:38
  * @FilePath: /vue-form/src/example/dynamicComponents/index.tsx
  * @Description:
  *
  */
-import { computed, defineComponent, reactive } from 'vue';
-import { ElButton, ElDivider, ElForm, ElFormItem } from 'element-plus';
-import { components } from './components';
+import { computed, defineComponent, reactive, ref } from 'vue';
+import { ElButton, ElDivider, ElForm, ElFormItem, ElInput } from 'element-plus';
+
+import {
+  renderCheckbox,
+  renderInput,
+  renderRadio,
+  renderSelect,
+  renderSlots,
+  renderSwitch,
+} from './components/fields';
+
+import DyInput from './components/input';
 
 export default defineComponent({
   name: '',
@@ -21,25 +31,25 @@ export default defineComponent({
         test3: true,
       });
 
+      const inputVal1 = ref('');
+
       const formJson = [
         {
-          type: 'InInput',
+          type: 'input',
           label: 'test1',
-        },
-        {
-          type: 'InInput',
-          label: 'test2',
-        },
-        {
-          type: 'InSwitch',
-          label: 'test3',
-          value: formModel.test3,
           props: {
-            modelValue: formModel.test3,
-            'onUpdate:modelValue': ($event: any) => {
-              console.log('test3', $event);
-              formModel.test3 = $event;
+            modelValue: inputVal1.value,
+            'onUpdate:modelValue': (value: any) => {
+              console.log(value);
+              inputVal1.value = value;
             },
+          },
+        },
+        {
+          type: 'input',
+          label: 'test2',
+          props: {
+            modelValue: formModel.test2,
           },
         },
       ];
@@ -49,23 +59,51 @@ export default defineComponent({
       };
 
       const renderFields = (item: any) => {
-        // console.log(item);
+        const { props } = item;
+
         const getComponent = (type: string) => {
+          type tplotOptions = {
+            [key: string]: any;
+          };
+
+          const components: tplotOptions = {
+            input: DyInput,
+          };
+
           return components[type];
         };
 
         const DyComponent = computed(() => getComponent(item.type as string));
         // console.log(DyComponent);
 
-        // return <DyComponent.value v-model={item.value} />;
-        return <DyComponent.value />;
+        const { modelValue, ...rest } = props;
+        const modelValueRef = ref(modelValue);
+
+        return (
+          <DyComponent.value
+            // v-model={modelValue}
+            // {...{
+            //   'onUpdate:modelValue': (value: any) => {
+            //     console.log(value);
+            //     modelValueRef.value = value;
+            //   },
+            // }}
+            // {...rest}
+            {...props}
+          />
+        );
+        // return <DyComponent.value {...props} />;
       };
 
       return (
         <ElForm>
           {formJson.map((item) => {
             return (
-              <ElFormItem label={item.label}>{renderFields(item)}</ElFormItem>
+              <ElFormItem label={item.label}>
+                {renderFields(item)}
+                {/* <DyInput v-model={formModel.test1} /> */}
+                {/* {renderInput(item.props)} */}
+              </ElFormItem>
             );
           })}
 
@@ -81,7 +119,6 @@ export default defineComponent({
     const render = () => {
       return (
         <>
-          <h1>dynamicComponents</h1>
           <ElDivider>Dynamic Components</ElDivider>
           {renderDynamicComponents()}
         </>
