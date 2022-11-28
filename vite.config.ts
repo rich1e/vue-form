@@ -1,8 +1,8 @@
 /*
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-03 14:10:27
- * @LastEditors: gongyuqi@max-optics.com
- * @LastEditTime: 2022-11-11 16:50:31
+ * @LastEditors: yuqigong@outlook.com
+ * @LastEditTime: 2022-11-28 10:04:08
  * @FilePath: /vue-form/vite.config.ts
  * @Description:
  *
@@ -65,6 +65,13 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         dts: false,
         resolvers: [ElementPlusResolver()],
       }),
+
+      /**
+       * 网上有推断是 vite 的插件会引起 debugger 位置不对
+       * @see https://github.com/vitejs/vite/issues/6228
+       * @see https://segmentfault.com/q/1010000041920767
+       * @see https://github.com/vbenjs/vue-vben-admin/issues/1716
+       */
       Components({
         dts: false,
         resolvers: [ElementPlusResolver()],
@@ -73,6 +80,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
          */
         directoryAsNamespace: true,
       }),
+
       ElementPlus(),
     ],
 
