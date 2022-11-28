@@ -2,12 +2,12 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-24 19:55:11
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-28 17:39:38
+ * @LastEditTime: 2022-11-28 21:00:01
  * @FilePath: /vue-form/src/example/dynamicComponents/index.tsx
  * @Description:
  *
  */
-import { computed, defineComponent, reactive, ref } from 'vue';
+import { computed, defineComponent, reactive, ref, h } from 'vue';
 import { ElButton, ElDivider, ElForm, ElFormItem, ElInput } from 'element-plus';
 
 import {
@@ -30,29 +30,6 @@ export default defineComponent({
         test2: '',
         test3: true,
       });
-
-      const inputVal1 = ref('');
-
-      const formJson = [
-        {
-          type: 'input',
-          label: 'test1',
-          props: {
-            modelValue: inputVal1.value,
-            'onUpdate:modelValue': (value: any) => {
-              console.log(value);
-              inputVal1.value = value;
-            },
-          },
-        },
-        {
-          type: 'input',
-          label: 'test2',
-          props: {
-            modelValue: formModel.test2,
-          },
-        },
-      ];
 
       const onSubmit = () => {
         console.log(formModel);
@@ -95,18 +72,20 @@ export default defineComponent({
         // return <DyComponent.value {...props} />;
       };
 
+      const renderElinput = () => {
+        return h(ElInput, {
+          modelValue: formModel.test1,
+          'onUpdate:modelValue': (value) => {
+            // console.log(value);
+            formModel.test1 = value;
+          },
+          placeholder: 'test',
+        });
+      };
+
       return (
         <ElForm>
-          {formJson.map((item) => {
-            return (
-              <ElFormItem label={item.label}>
-                {renderFields(item)}
-                {/* <DyInput v-model={formModel.test1} /> */}
-                {/* {renderInput(item.props)} */}
-              </ElFormItem>
-            );
-          })}
-
+          <ElFormItem>{renderElinput()}</ElFormItem>
           <ElFormItem>
             <ElButton onClick={onSubmit}>Submit</ElButton>
             <ElButton>Cancel</ElButton>
