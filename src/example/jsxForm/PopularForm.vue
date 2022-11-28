@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-28 13:22:22
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-28 13:34:49
+ * @LastEditTime: 2022-11-28 18:54:37
  * @FilePath: /vue-form/src/example/jsxForm/PopularForm.vue
  * @Description:
  *
@@ -28,32 +28,48 @@
 
   export default defineComponent({
     name: 'PopularForm',
-    setup() {
-      const formRef = ref<InstanceType<typeof ElForm> | null | any>(null);
+    props: {
+      formRef: {
+        type: Object as any,
+        default: {},
+      },
+      formModel: {
+        type: Object as any,
+        default: {},
+      },
+      formRules: {
+        type: Object as any,
+        default: {},
+      },
+    },
+    setup(_) {
+      // const formRef = ref<InstanceType<typeof ElForm> | null | any>(null);
 
-      const formModel = reactive({
-        username: '',
-        gender: '',
-        secondname: '',
-        married: false,
-        city: '',
-        referees: [],
-        slots: 1,
-      });
+      const { formModel, formRules, formRef } = _;
 
-      const formRules = {
-        username: [{ validator: checkEmpty, trigger: 'blur' }],
-        gender: [{ validator: checkEmpty, trigger: 'blur' }],
-        secondname: [{ validator: checkEmpty, trigger: 'blur' }],
-        married: [{ validator: checkEmpty, trigger: 'blur' }],
-        referees: [{ validator: checkEmpty, trigger: 'blur' }],
-      };
+      // const formModel = reactive({
+      //   username: '',
+      //   gender: '',
+      //   secondname: '',
+      //   married: false,
+      //   city: '',
+      //   referees: [],
+      //   slots: 1,
+      // });
+
+      // const formRules = {
+      //   username: [{ validator: checkEmpty, trigger: 'blur' }],
+      //   gender: [{ validator: checkEmpty, trigger: 'blur' }],
+      //   secondname: [{ validator: checkEmpty, trigger: 'blur' }],
+      //   married: [{ validator: checkEmpty, trigger: 'blur' }],
+      //   referees: [{ validator: checkEmpty, trigger: 'blur' }],
+      // };
 
       const onSubmit = () => {
         formRef.value.validate((valid: any) => {
           if (valid) {
             console.log('submit!');
-            console.log(formModel);
+            console.table(formModel);
           } else {
             console.log('error submit!');
             return false;
