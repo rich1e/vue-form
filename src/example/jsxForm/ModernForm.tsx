@@ -136,59 +136,59 @@ export default defineComponent({
             ],
           },
         },
-        // {
-        //   type: 'switch',
-        //   label: 'Married',
-        //   prop: 'married',
-        //   props: {
-        //     modelValue: formModel.married,
-        //     'onUpdate:modelValue': (value: any) => (formModel.married = value),
-        //     activeText: 'Yes',
-        //     inactiveText: 'No',
-        //   },
-        // },
-        // {
-        //   type: 'select',
-        //   label: 'City from',
-        //   prop: 'city',
-        //   props: {
-        //     modelValue: formModel.city,
-        //     'onUpdate:modelValue': (value: any) => (formModel.city = value),
-        //     options: [
-        //       { vlaue: 0, label: 'Beijing' },
-        //       { vlaue: 1, label: 'Shanghai' },
-        //     ],
-        //   },
-        // },
-        // {
-        //   type: 'checkbox',
-        //   label: 'Referees',
-        //   prop: 'referees',
-        //   props: {
-        //     modelValue: formModel.referees,
-        //     'onUpdate:modelValue': (value: any) => (formModel.referees = value),
-        //     labels: ['colleagues', 'friends', 'teachers'],
-        //   },
-        // },
-        // {
-        //   type: 'slots',
-        //   label: 'Slots Test',
-        //   prop: 'num',
-        //   render: () => {
-        //     const onChangeNumber = (value: any) => {
-        //       console.log(value);
-        //     };
+        {
+          type: 'switch',
+          label: 'Married',
+          prop: 'married',
+          props: {
+            modelValue: formModel.married,
+            'onUpdate:modelValue': (value: any) => (formModel.married = value),
+            activeText: 'Yes',
+            inactiveText: 'No',
+          },
+        },
+        {
+          type: 'select',
+          label: 'City from',
+          prop: 'city',
+          props: {
+            modelValue: formModel.city,
+            'onUpdate:modelValue': (value: any) => (formModel.city = value),
+            options: [
+              { vlaue: 0, label: 'Beijing' },
+              { vlaue: 1, label: 'Shanghai' },
+            ],
+          },
+        },
+        {
+          type: 'checkbox',
+          label: 'Referees',
+          prop: 'referees',
+          props: {
+            modelValue: formModel.referees,
+            'onUpdate:modelValue': (value: any) => (formModel.referees = value),
+            labels: ['colleagues', 'friends', 'teachers'],
+          },
+        },
+        {
+          type: 'slots',
+          label: 'Slots Test',
+          prop: 'num',
+          render: () => {
+            const onChangeNumber = (value: any) => {
+              console.log(value);
+            };
 
-        //     return (
-        //       <ElInputNumber
-        //         v-model={formModel.num}
-        //         min={1}
-        //         max={10}
-        //         onChange={onChangeNumber}
-        //       />
-        //     );
-        //   },
-        // },
+            return (
+              <ElInputNumber
+                v-model={formModel.num}
+                min={1}
+                max={10}
+                onChange={onChangeNumber}
+              />
+            );
+          },
+        },
       ];
 
       const fields = options ?? defaults;

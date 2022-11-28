@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-28 13:22:22
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-28 18:54:37
+ * @LastEditTime: 2022-11-28 20:10:37
  * @FilePath: /vue-form/src/example/jsxForm/PopularForm.vue
  * @Description:
  *
@@ -41,11 +41,15 @@
         type: Object as any,
         default: {},
       },
+      formFields: {
+        type: Array as any,
+        default: [],
+      },
     },
     setup(_) {
       // const formRef = ref<InstanceType<typeof ElForm> | null | any>(null);
 
-      const { formModel, formRules, formRef } = _;
+      const { formModel, formRules, formRef, formFields } = _;
 
       // const formModel = reactive({
       //   username: '',
@@ -83,6 +87,17 @@
 
       const onChangeNumber = (value: any) => {
         console.log('onChangeNumber', value);
+      };
+
+      const renderFields = (item: any) => {
+        return (
+          <ElFormItem label={item.label} prop={item.prop}>
+            <ElInput
+              modelValue={item.inputVal}
+              onUpdate:modelValue={(value) => (item.inputVal = value)}
+            />
+          </ElFormItem>
+        );
       };
 
       const renderFieldsByTemplate = () => {
@@ -163,6 +178,9 @@
 
       return () => (
         <ElForm ref={formRef} model={formModel} rules={formRules}>
+          {/* {formFields.map((item: any) => {
+            return renderFields(item);
+          })} */}
           {renderFieldsByTemplate()}
           <ElFormItem>
             <ElButton onClick={onSubmit}>Submit</ElButton>

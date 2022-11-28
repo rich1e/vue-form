@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-24 09:46:15
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-28 18:54:58
+ * @LastEditTime: 2022-11-28 19:26:46
  * @FilePath: /vue-form/src/example/jsxForm/index.tsx
  * @Description:
  *
@@ -40,6 +40,27 @@ export default defineComponent({
         referees: [{ validator: checkEmpty, trigger: 'blur' }],
       };
 
+      const json1 = [
+        {
+          inputType: 'input',
+          label: 'User name',
+          prop: 'username',
+          inputVal: model1.username,
+        },
+        {
+          inputType: 'radio',
+          label: 'Gender',
+          prop: 'gender',
+          inputVal: model1.gender,
+        },
+        {
+          inputType: 'input',
+          label: 'Second name',
+          prop: 'secondname',
+          inputVal: model1.secondname,
+        },
+      ];
+
       return (
         <>
           <h1>jsxForm</h1>
@@ -50,6 +71,7 @@ export default defineComponent({
                 formRef={formRef}
                 formModel={model1}
                 formRules={rules1}
+                formFields={json1}
               />
             </div>
 
