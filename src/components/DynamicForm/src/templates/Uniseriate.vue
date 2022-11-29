@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-29 14:29:56
+ * @LastEditTime: 2022-11-29 14:50:40
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Uniseriate.vue
  * @Description:
  *
@@ -55,6 +55,7 @@
   >
     <!-- 渲染表单字段 -->
     <FormFields :scene="scene" :field="field" :dynamic-model="dynamicFormModel">
+      <!-- 渲染自定义表单字段 -->
       <template #customFields="{ formModel }">
         <slot name="uniseriate" :slotModel="formModel" />
       </template>

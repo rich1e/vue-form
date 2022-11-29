@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-16 13:16:05
+ * @LastEditTime: 2022-11-29 14:56:58
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Biserial.vue
  * @Description:
  *
@@ -32,7 +32,10 @@
     },
   });
 
-  console.log('This BiserialTemplate', props);
+  console.debug('This BiserialTemplate');
+  console.groupCollapsed('Biserial Props');
+  console.table(props);
+  console.groupEnd();
 
   const { scene, field, actions, rule } = props.config;
 
@@ -45,7 +48,12 @@
 <template>
   <FormBiserial :field="field" :rule="rule">
     <template #="{ field, dynamicModel }">
-      <FormFields :scene="scene" :item="field" :dynamic-model="dynamicModel" />
+      <FormFields :scene="scene" :item="field" :dynamic-model="dynamicModel">
+        <!-- 渲染自定义表单字段 -->
+        <template #customFields="{ formModel }">
+          <slot name="biserial" :slotModel="formModel" />
+        </template>
+      </FormFields>
     </template>
 
     <template #actions>

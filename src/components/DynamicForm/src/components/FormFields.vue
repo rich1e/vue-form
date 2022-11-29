@@ -2,7 +2,7 @@
  * @Author: rich1e
  * @Date: 2022-11-14 12:37:25
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-29 14:26:29
+ * @LastEditTime: 2022-11-29 15:00:39
 -->
 <script lang="ts">
   export default {
@@ -22,6 +22,7 @@
   } from 'element-plus';
 
   import { FieldType, SceneType } from '../../types';
+  import { it } from 'node:test';
 
   const props = defineProps({
     /** 表单UI类型 */
@@ -48,20 +49,20 @@
 
   const { scene, field, item, dynamicModel } = props;
 
-  console.debug('This FormFields');
-  console.groupCollapsed('field');
-  console.table(field);
-  console.groupEnd();
-
-  const getType = (sceneType: string) => {
+  const isNotBiserial = (sceneType: string) => {
     if (scene === sceneType && field) return false;
     else return true;
   };
+
+  console.debug('This FormFields');
+  console.groupCollapsed('field');
+  isNotBiserial('biserial') ? console.table(field) : console.table(item);
+  console.groupEnd();
 </script>
 
 <template>
   <!-- Render multiple -->
-  <template v-if="getType('biserial')">
+  <template v-if="isNotBiserial('biserial')">
     <ElFormItem
       v-for="(item, index) in field"
       :key="`${item.prop}_${index}`"
@@ -124,12 +125,13 @@
           :value="opt.value"
         />
       </ElSelect>
-      <template v-else="item.control === 'Slots'">
-        <!-- 接收一个 VNode 动态组件 -->
-        <component :is="item.slots" />
-        <!-- <component :is="() => item.slots?.call(null, 'test')" /> -->
-        <!-- <component :is="setDynamicModel(item.slots, dynamicModel)" /> -->
-      </template>
+
+      <!-- 自定义组件 Slot -->
+      <slot
+        v-else-if="item.control === 'Slots'"
+        name="customFields"
+        :formModel="dynamicModel"
+      />
     </ElFormItem>
   </template>
 

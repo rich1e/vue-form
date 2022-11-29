@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-15 19:24:51
+ * @LastEditTime: 2022-11-29 14:57:37
  * @FilePath: /vue-form/src/components/DynamicForm/src/components/FormBiserial.vue
  * @Description:
  *
@@ -33,7 +33,7 @@
     },
   });
 
-  console.log('This FormBiserial');
+  console.debug('This FormBiserial');
 
   const { field, rule } = props;
   const injectRef = inject('FORM_REF');

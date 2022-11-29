@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-29 14:30:40
+ * @LastEditTime: 2022-11-29 14:51:05
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Group.vue
  * @Description:
  *
@@ -42,6 +42,7 @@
   <FormGroup :groups="groups" :rule="rule">
     <template #="{ rank, dynamicModel }">
       <FormFields :scene="scene" :field="rank" :dynamic-model="dynamicModel">
+        <!-- 渲染自定义表单字段 -->
         <template #customFields="{ formModel }">
           <slot name="group" :slotModel="formModel" />
         </template>
