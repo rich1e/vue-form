@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-16 13:11:43
+ * @LastEditTime: 2022-11-29 14:42:56
  * @FilePath: /vue-form/src/components/DynamicForm/src/components/FormGroup.vue
  * @Description:
  *
@@ -33,7 +33,7 @@
     },
   });
 
-  console.log('This FormGroup');
+  console.debug('This FormGroup');
 
   const { groups, rule } = props;
 
@@ -52,6 +52,7 @@
     :rules="rule"
     label-width="70px"
   >
+    <!-- TODO Field 循环调用 -->
     <div
       class="cust-group"
       v-for="(rank, idx) in groups"

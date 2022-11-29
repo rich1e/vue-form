@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-03 14:10:27
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-15 17:52:26
+ * @LastEditTime: 2022-11-29 14:45:12
  * @FilePath: /vue-form/src/views/Group.vue
  * @Description:
  *
@@ -21,6 +21,8 @@
     username: [{ validator: checkEmpty, trigger: 'blur', required: true }],
     age: [{ validator: checkAge, trigger: 'blur', required: true }],
     birth: [{ validator: checkEmpty, trigger: 'blur', required: true }],
+    /** 自定义组件规则 */
+    slots: [{ validator: checkEmpty, trigger: 'blur', required: true }],
   };
 
   const actions = {
@@ -30,9 +32,10 @@
         if (!formEl) return;
         formEl.validate((valid: any) => {
           if (valid) {
-            console.log('submit for view!');
+            console.table(formEl.model);
+            console.debug('submit for view!');
           } else {
-            console.log('error submit!');
+            console.debug('error submit!');
             return false;
           }
         });
@@ -41,20 +44,20 @@
     onCancel: {
       btnText: '取消',
       handler: () => {
-        console.log('onCancel');
+        console.debug('onCancel');
       },
     },
     onBack: {
       btnText: '返回',
       handler: () => {
-        console.log('onBack');
+        console.debug('onBack');
         pageBack();
       },
     },
     onRest: {
       btnText: '重置',
       handler: (formEl: any) => {
-        console.log('onRest for view');
+        console.debug('onRest for view');
         if (!formEl) return;
         formEl.resetFields();
       },
@@ -88,6 +91,11 @@
           },
           bind: 'x',
           default: '-',
+        },
+        {
+          control: 'Slots',
+          label: '自定义',
+          prop: 'slots',
         },
       ],
       [
@@ -159,7 +167,11 @@
   <BaseViewVue>
     <template #header> Group </template>
     <template #main>
-      <DynamicForm :config="formConfig" />
+      <DynamicForm :config="formConfig">
+        <template #customSlots="{ fieldModel }">
+          <ElInput v-model="fieldModel[`slots`]" />
+        </template>
+      </DynamicForm>
     </template>
   </BaseViewVue>
 </template>

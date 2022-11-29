@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-16 13:15:35
+ * @LastEditTime: 2022-11-29 14:30:40
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Group.vue
  * @Description:
  *
@@ -30,7 +30,10 @@
     },
   });
 
-  console.log('This GroupTemplate', props);
+  console.debug('This GroupTemplate');
+  console.groupCollapsed('Group Props');
+  console.table(props);
+  console.groupEnd();
 
   const { scene, groups, actions, rule } = props.config;
 </script>
@@ -38,7 +41,11 @@
 <template>
   <FormGroup :groups="groups" :rule="rule">
     <template #="{ rank, dynamicModel }">
-      <FormFields :scene="scene" :field="rank" :dynamic-model="dynamicModel" />
+      <FormFields :scene="scene" :field="rank" :dynamic-model="dynamicModel">
+        <template #customFields="{ formModel }">
+          <slot name="group" :slotModel="formModel" />
+        </template>
+      </FormFields>
     </template>
 
     <template #actions>
