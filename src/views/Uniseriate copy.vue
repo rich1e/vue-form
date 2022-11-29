@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-03 14:10:27
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-29 14:45:34
+ * @LastEditTime: 2022-11-29 09:46:23
  * @FilePath: /vue-form/src/views/Uniseriate.vue
  * @Description:
  *
@@ -15,6 +15,8 @@
   export default { name: 'UniseriateView' };
 </script>
 <script setup lang="ts">
+  import { ref, h } from 'vue';
+
   import BaseViewVue from '/@/components/Layouts/BaseView.vue';
   import DynamicForm from '/@/components/DynamicForm';
   import {
@@ -24,14 +26,21 @@
   import { ConfigType } from '../components/DynamicForm/types';
   import { pageBack } from '../components/DynamicForm/src/hooks/useActions';
 
+  import InCheckbox from '/@/example/jsx/components/Checkbox';
+
+  const initCheckBoxValue = ref(false);
+  const initCheckBoxValue1 = ref(false);
+
+  const initInputValue = ref('');
+
+  const emits = defineEmits(['update:modelValue']);
+
   const rule = {
     username: [{ validator: checkEmpty, trigger: 'blur', required: true }],
     age: [{ validator: checkAge, trigger: 'blur', required: true }],
     birth: [{ validator: checkEmpty, trigger: 'blur', required: true }],
     recruit: [{ validator: checkEmpty, trigger: 'change', required: true }],
     skill: [{ validator: checkEmpty, trigger: 'blur', required: true }],
-    /** 自定义组件规则 */
-    slots: [{ validator: checkEmpty, trigger: 'blur', required: true }],
   };
 
   const actions = {
@@ -41,10 +50,9 @@
         if (!formEl) return;
         formEl.validate((valid: any) => {
           if (valid) {
-            console.table(formEl.model);
-            console.debug('submit for view!');
+            console.log('submit for view!');
           } else {
-            console.debug('error submit!');
+            console.log('error submit!');
             return false;
           }
         });
@@ -53,20 +61,20 @@
     onCancel: {
       btnText: '取消',
       handler: () => {
-        console.debug('onCancel');
+        console.log('onCancel');
       },
     },
     onBack: {
       btnText: '返回',
       handler: () => {
-        console.debug('onBack');
+        console.log('onBack');
         pageBack();
       },
     },
     onRest: {
       btnText: '重置',
       handler: (formEl: any) => {
-        console.debug('onRest for view');
+        console.log('onRest for view');
         if (!formEl) return;
         formEl.resetFields();
       },
@@ -157,11 +165,45 @@
         bind: 'x',
         disabled: true,
       },
-      {
-        control: 'Slots',
-        label: '自定义',
-        prop: 'slots',
-      },
+      // {
+      //   control: 'Slots',
+      //   label: '招聘渠道',
+      //   prop: 'recruit',
+      //   slots: function (props: any) {
+      //     console.log('slots 1#');
+      //     console.log('slots #', props);
+      //     // props['recruit'] = value;
+
+      //     /**
+      //      * @see https://cn.vuejs.org/api/render-function.html#h
+      //      */
+      //     return h(InCheckbox, {
+      //       multiple: [
+      //         {
+      //           // vModel: initCheckBoxValue.value,
+      //           modelValue: initCheckBoxValue.value,
+      //           // 'onUpdate:modelValue': (value: any) => {
+      //           //   initCheckBoxValue.value = value;
+      //           // },
+      //           'onUpdate:modelValue': (value: any) => {
+      //             console.log('update:modelValue', value);
+      //             console.log(props['recruit']);
+      //             emits('update:modelValue', value);
+      //           },
+      //           label: 'Slots 1',
+      //           onChange: (val: any) => {
+      //             console.log('招聘渠道 #', val);
+      //             props['recruit'] = val;
+      //             // initCheckBoxValue.value = val;
+      //           },
+      //         },
+      //       ],
+      //     });
+      //   },
+      //   props: {
+      //     modelValue: 'recruit',
+      //   },
+      // },
       {
         control: 'Checkbox',
         label: '技能',
@@ -174,6 +216,7 @@
     ],
     rule,
     actions,
+    slots: () => {},
   };
 </script>
 
@@ -182,8 +225,8 @@
     <template #header> Uniseriate </template>
     <template #main>
       <DynamicForm :config="formConfig">
-        <template #customSlots="{ fieldModel }">
-          <ElInput v-model="fieldModel[`slots`]" />
+        <template #uniseriate>
+          <ElInput v-model="initInputValue" />
         </template>
       </DynamicForm>
     </template>

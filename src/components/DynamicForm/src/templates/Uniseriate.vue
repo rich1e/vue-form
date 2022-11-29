@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-23 20:27:41
+ * @LastEditTime: 2022-11-29 14:29:56
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Uniseriate.vue
  * @Description:
  *
@@ -32,7 +32,10 @@
     },
   });
 
-  console.log('This UniseriateTemplate', props);
+  console.debug('This UniseriateTemplate');
+  console.groupCollapsed('Uniseriate Props');
+  console.table(props);
+  console.groupEnd();
 
   const { scene, field, actions, rule } = props.config;
 
@@ -51,11 +54,12 @@
     label-width="80px"
   >
     <!-- 渲染表单字段 -->
-    <FormFields
-      :scene="scene"
-      :field="field"
-      :dynamic-model="dynamicFormModel"
-    />
+    <FormFields :scene="scene" :field="field" :dynamic-model="dynamicFormModel">
+      <template #customFields="{ formModel }">
+        <slot name="uniseriate" :slotModel="formModel" />
+      </template>
+    </FormFields>
+
     <!-- 渲染操作按钮 -->
     <FormActions :scene="scene" :actions="actions" />
   </ElForm>

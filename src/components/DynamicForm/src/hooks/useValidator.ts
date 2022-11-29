@@ -2,14 +2,12 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 16:00:31
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-25 16:30:39
+ * @LastEditTime: 2022-11-29 11:11:35
  * @FilePath: /vue-form/src/components/DynamicForm/src/hooks/useValidator.ts
  * @Description:
  *
  */
 export const checkAge = (rule: any, value: any, callback: any) => {
-  // debugger;
-  console.log('checkAge rule#', rule);
   if (!value) {
     return callback(new Error('Please input the age for hooks'));
   }

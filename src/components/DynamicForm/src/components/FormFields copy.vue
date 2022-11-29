@@ -2,7 +2,7 @@
  * @Author: rich1e
  * @Date: 2022-11-14 12:37:25
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-29 14:26:29
+ * @LastEditTime: 2022-11-29 13:45:23
 -->
 <script lang="ts">
   export default {
@@ -11,7 +11,7 @@
 </script>
 
 <script setup lang="ts">
-  import { PropType } from 'vue';
+  import { PropType, VNode, watchEffect } from 'vue';
   import {
     ElFormItem,
     ElInput,
@@ -21,7 +21,11 @@
     ElCheckbox,
   } from 'element-plus';
 
+  import InCheckbox from '/@/example/jsx/components/Checkbox';
+
   import { FieldType, SceneType } from '../../types';
+
+  console.log('This FormFields');
 
   const props = defineProps({
     /** 表单UI类型 */
@@ -47,16 +51,35 @@
   });
 
   const { scene, field, item, dynamicModel } = props;
-
-  console.debug('This FormFields');
-  console.groupCollapsed('field');
   console.table(field);
-  console.groupEnd();
+  console.log('dynamicModel#', dynamicModel);
 
   const getType = (sceneType: string) => {
     if (scene === sceneType && field) return false;
     else return true;
   };
+
+  // const setDynamicModel = (fn: any, mode: any): VNode => {
+  //   console.log('setDynamicModel#', fn);
+  //   console.log('setDynamicModel', mode);
+  //   return fn.call(null, mode);
+  // };
+
+  // watchEffect(
+  //   () => {
+  //     console.log('watchEffect#', field);
+
+  //     field.forEach((item) => {
+  //       const { control } = item;
+  //       if (control === 'Slots') {
+  //         item.slots?.call(null, dynamicModel);
+  //       }
+  //     });
+  //   },
+  //   {
+  //     flush: 'post',
+  //   },
+  // );
 </script>
 
 <template>
@@ -92,14 +115,12 @@
         v-model="dynamicModel[`${item.prop}`]"
         :label="item?.props?.label"
       />
-
-      <!-- 自定义组件 Slot -->
-      <slot
-        v-else-if="item.control === 'Slots'"
-        name="customFields"
-        :formModel="dynamicModel"
-      />
+      <!-- <template v-else="item.control === 'Slots'"> -->
+      <!-- 接收一个 VNode 动态组件 -->
+      <!-- <component :is="item.slots" /> -->
+      <!-- </template> -->
     </ElFormItem>
+    <slot name="customFields" />
   </template>
 
   <!-- Render single -->

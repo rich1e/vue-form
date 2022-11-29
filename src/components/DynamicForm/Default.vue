@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:37:02
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-16 13:17:59
+ * @LastEditTime: 2022-11-29 14:00:39
  * @FilePath: /vue-form/src/components/DynamicForm/Default.vue
  * @Description:
  *
@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
   import type { Component, PropType, Ref } from 'vue';
-  import { ref } from 'vue';
+  import { computed, ref } from 'vue';
 
   import UniseriateTemplate from './src/templates/Uniseriate.vue';
   import BiserialTemplate from './src/templates/Biserial.vue';
@@ -41,10 +41,18 @@
   };
 
   const componentName: Ref<string> = ref(scene);
+
+  const dynamicSlot = computed(() => scene);
 </script>
 
 <template>
   <div :style="{ textAlign: 'left' }">
-    <component :is="componentTable[componentName]" :config="config" />
+    <!-- <component :is="componentTable[componentName]" :config="config" /> -->
+    <component :is="componentTable[componentName]" :config="config">
+      <!-- <template #uniseriate="{ slotModel }"> -->
+      <template #[dynamicSlot]="{ slotModel }">
+        <slot name="customSlots" :fieldModel="slotModel" />
+      </template>
+    </component>
   </div>
 </template>
