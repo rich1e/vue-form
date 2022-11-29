@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-16 13:34:48
+ * @LastEditTime: 2022-11-29 15:48:21
  * @FilePath: /vue-form/src/components/DynamicForm/src/components/FormTabs.vue
  * @Description:
  *
@@ -27,13 +27,23 @@
     },
   });
 
-  console.log('This FormTabs', props);
-
   const { tabs } = props;
   const { tabsTable, tabsType } = tabs;
 
-  console.log('This FormTabs', tabsTable);
-  console.log('This FormTabs', tabsType);
+  console.debug('This FormTabs');
+  console.groupCollapsed('Tab Props');
+  console.table(props);
+  console.groupEnd();
+
+  console.debug('This FormTabs');
+  console.groupCollapsed('Tab tabsTable');
+  console.table(tabsTable);
+  console.groupEnd();
+
+  console.debug('This FormTabs');
+  console.groupCollapsed('Tab tabsType');
+  console.table(tabsType);
+  console.groupEnd();
 </script>
 
 <template>

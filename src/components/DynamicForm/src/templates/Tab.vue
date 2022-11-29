@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-16 13:41:57
+ * @LastEditTime: 2022-11-29 15:53:10
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Tab.vue
  * @Description:
  *
@@ -18,7 +18,7 @@
 <script setup lang="ts">
   import { PropType, provide } from 'vue';
   import { reactive, ref } from 'vue';
-  import { ElForm, ElTabs, ElTabPane } from 'element-plus';
+  import { ElForm } from 'element-plus';
 
   import FormFields from '../components/FormFields.vue';
   import FormActions from '../components/FormActions.vue';
@@ -35,7 +35,10 @@
     },
   });
 
-  console.log('This TabTemplate', props);
+  console.debug('This TabTemplate');
+  console.groupCollapsed('Tab Props');
+  console.table(props);
+  console.groupEnd();
 
   /**
    * tabs?.uniseriate / tabs?.biserial
@@ -69,7 +72,12 @@
           :scene="scene"
           :field="tabPane?.uniseriate"
           :dynamic-model="dynamicFormModel"
-        />
+        >
+          <!-- 渲染自定义表单字段 -->
+          <template #customFields="{ formModel }">
+            <slot name="tab" :slotModel="formModel" />
+          </template>
+        </FormFields>
 
         <FormActions :scene="scene" :actions="actions" />
       </ElForm>
@@ -85,7 +93,13 @@
             :scene="biserialScene"
             :item="field"
             :dynamic-model="dynamicModel"
-          />
+          >
+            <!-- 渲染自定义表单字段 -->
+            <template #customFields="{ formModel }">
+              <!-- TODO tab 组件中 slot 区分 -->
+              <slot name="tab" :slotModel="formModel" />
+            </template>
+          </FormFields>
         </template>
 
         <template #actions>
@@ -100,7 +114,12 @@
             :scene="scene"
             :field="rank"
             :dynamic-model="dynamicModel"
-          />
+          >
+            <!-- 渲染自定义表单字段 -->
+            <template #customFields="{ formModel }">
+              <slot name="tab" :slotModel="formModel" />
+            </template>
+          </FormFields>
         </template>
 
         <template #actions>
