@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-29 15:53:10
+ * @LastEditTime: 2022-11-29 16:20:37
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Tab.vue
  * @Description:
  *
@@ -65,7 +65,7 @@
         :model="dynamicFormModel"
         ref="formRef"
         :rules="rule"
-        label-width="70px"
+        label-width="80px"
         v-if="tabPane?.uniseriate"
       >
         <FormFields

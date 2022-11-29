@@ -47,7 +47,7 @@
     :model="dynamicFormModel"
     ref="injectRef"
     :rules="rule"
-    label-width="70px"
+    label-width="80px"
   >
     <!-- TODO ElRow 默认会添加 margin 值，手动设置后可以覆盖默认行为 -->
     <ElRow

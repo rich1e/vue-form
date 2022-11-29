@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-03 14:10:27
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-29 15:51:26
+ * @LastEditTime: 2022-11-29 16:18:24
  * @FilePath: /vue-form/src/views/Tab.vue
  * @Description:
  *
@@ -155,7 +155,7 @@
             },
             {
               control: 'Slots',
-              label: '自定义',
+              label: '自定义1',
               prop: 'slots',
             },
           ],
@@ -246,7 +246,7 @@
             },
             {
               control: 'Slots',
-              label: '自定义',
+              label: '自定义2',
               prop: 'slots',
             },
           ],
@@ -281,7 +281,7 @@
               },
               {
                 control: 'Slots',
-                label: '自定义',
+                label: '自定义3',
                 prop: 'slots',
               },
             ],

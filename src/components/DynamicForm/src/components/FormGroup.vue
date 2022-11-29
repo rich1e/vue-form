@@ -45,12 +45,12 @@
 </script>
 
 <template>
-  <!-- TODO label-width="70px" -->
+  <!-- TODO label-width="80px" -->
   <ElForm
     :model="dynamicFormModel"
     ref="formRef"
     :rules="rule"
-    label-width="70px"
+    label-width="80px"
   >
     <!-- TODO Field 循环调用 -->
     <div
