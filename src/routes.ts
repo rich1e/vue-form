@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-07 09:54:23
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-24 20:21:18
+ * @LastEditTime: 2022-11-29 20:36:32
  * @FilePath: /vue-form/src/routes.ts
  * @Description:
  *
@@ -126,6 +126,14 @@ const routes: AppRouteRecord[] = [
   {
     path: '/dynamic-components',
     component: () => import('/@/example/dynamicComponents/index'),
+    meta: {
+      title: '',
+    },
+  },
+
+  {
+    path: '/slots',
+    component: () => import('/@/example/slots/index.vue'),
     meta: {
       title: '',
     },

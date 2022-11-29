@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-07 10:35:55
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-24 20:22:02
+ * @LastEditTime: 2022-11-29 20:37:05
  * @FilePath: /vue-form/src/views/Default.vue
  * @Description:
  *
@@ -49,6 +49,9 @@
       </li>
       <li>
         <RouterLink to="/dynamic-components">Dynamic Components</RouterLink>
+      </li>
+      <li>
+        <RouterLink to="/slots">Slots</RouterLink>
       </li>
     </ul>
   </div>
