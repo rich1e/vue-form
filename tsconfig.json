@@ -11,6 +11,11 @@
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
 
+    /**
+     * @see https://blog.csdn.net/weixin_40013817/article/details/127201009
+     * @see https://github.com/typescript-eslint/typescript-eslint/issues/4268
+    */
+    // "importsNotUsedAsValues": "error",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
 

@@ -1,8 +1,8 @@
 /*
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-03 16:46:53
- * @LastEditors: gongyuqi@max-optics.com
- * @LastEditTime: 2022-11-08 20:47:27
+ * @LastEditors: yuqigong@outlook.com
+ * @LastEditTime: 2022-11-30 11:27:46
  * @FilePath: /vue-form/.eslintrc.cjs
  * @Description:
  */
@@ -30,5 +30,8 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['vue'],
-  rules: {},
+  rules: {
+    // https://stackoverflow.com/questions/71080256/is-there-a-way-to-automatically-fix-import-type-errors-on-typescript-when-usin
+    '@typescript-eslint/consistent-type-imports': 'error',
+  },
 };
