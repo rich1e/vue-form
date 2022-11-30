@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-29 14:57:37
+ * @LastEditTime: 2022-11-30 14:10:17
  * @FilePath: /vue-form/src/components/DynamicForm/src/components/FormBiserial.vue
  * @Description:
  *
@@ -16,9 +16,9 @@
 </script>
 
 <script setup lang="ts">
+  import { ElCol, ElForm, ElRow } from 'element-plus';
   import { inject, PropType, reactive } from 'vue';
-  import { ElRow, ElCol, ElForm } from 'element-plus';
-  import { FieldType } from '../../types';
+  import type { FieldType } from '../../types';
 
   const props = defineProps({
     /** 表单规则 */

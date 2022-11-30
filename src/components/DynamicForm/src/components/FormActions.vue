@@ -2,7 +2,7 @@
  * @Author: rich1e
  * @Date: 2022-11-14 12:58:36
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-29 14:23:18
+ * @LastEditTime: 2022-11-30 15:49:49
 -->
 <script lang="ts">
   export default {
@@ -11,9 +11,10 @@
 </script>
 
 <script setup lang="ts">
-  import { getCurrentInstance, PropType, inject } from 'vue';
   import { ElButton, ElFormItem } from 'element-plus';
-  import { ActionsType, SceneType } from '../../types';
+  import type { PropType } from 'vue';
+  import { getCurrentInstance, inject } from 'vue';
+  import type { ActionsType, SceneType } from '../../types';
 
   const props = defineProps({
     /** 表单UI类型 */
