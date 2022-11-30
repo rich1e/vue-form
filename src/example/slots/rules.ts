@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-29 20:48:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-29 20:50:19
+ * @LastEditTime: 2022-11-30 17:27:01
  * @FilePath: /vue-form/src/example/slots/rules.ts
  * @Description:
  *
@@ -24,33 +24,9 @@ export const checkAge = (rule: any, value: any, callback: any) => {
   }, 1000);
 };
 
-export const checkRegion = (rule: any, value: any, callback: any) => {
-  if (value === '') {
-    callback(new Error('Instant delivery is not select'));
-  } else {
-    callback();
-  }
-};
-
-export const checkDelivery = (rule: any, value: any, callback: any) => {
-  if (value === false) {
-    callback(new Error('Instant delivery is not select'));
-  } else {
-    callback();
-  }
-};
-
-export const checkResource = (rule: any, value: any, callback: any) => {
-  if (value === '') {
-    callback(new Error('Please select activity resource'));
-  } else {
-    callback();
-  }
-};
-
-export const checkType = (rule: any, value: any, callback: any) => {
-  if (value.length === 0) {
-    callback(new Error('Please select at least one activity type'));
+export const checkEmpty = (rule: any, value: any, callback: any) => {
+  if (!value || value === '' || value === false || value.length === 0) {
+    callback(new Error(`It's Empty!`));
   } else {
     callback();
   }

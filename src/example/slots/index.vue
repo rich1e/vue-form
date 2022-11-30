@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-23 18:36:22
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-29 21:01:07
+ * @LastEditTime: 2022-11-30 17:27:12
  * @FilePath: /vue-form/src/example/slots/index.vue
  * @Description:
  *
@@ -17,81 +17,14 @@
     label-width="120px"
     :style="{ textAlign: 'left' }"
   >
-    <ElFormItem
-      v-for="(item, index) in formJson"
-      :key="`${item.prop}_${index}`"
-      :label="item.label"
-      :prop="`${item.prop}`"
-    >
-      <ElInput
-        v-if="item.control === 'Input'"
-        v-model.number="ruleForm[`${item.prop}`]"
-      />
-      <ElSwitch
-        v-else-if="item.control === 'Switch'"
-        v-model="ruleForm[`${item.prop}`]"
-      />
-      <!-- <ElSelect
-        v-else-if="item.control === 'Select'"
-        v-model="ruleForm[`${item.prop}`]"
-      >
-        <ElOption
-          v-for="opt in item.options"
-          :key="opt.value"
-          :label="opt.label"
-          :value="opt.value"
-        />
-      </ElSelect>
-      <ElCheckbox
-        v-else-if="item.control === 'Checkbox'"
-        v-model="ruleForm[`${item.prop}`]"
-        :label="item?.props?.label"
-      /> -->
-
-      <!-- 自定义组件 Slot -->
-      <slot
-        v-else-if="item.control === 'Slots'"
-        name="customFields"
-        :formModel="ruleForm"
-      />
-    </ElFormItem>
-
-    <!-- <ElFormItem label="Password" prop="pass">
-      <ElInput v-model="ruleForm.pass" type="password" autocomplete="off" />
-    </ElFormItem>
-    <ElFormItem label="Confirm" prop="checkPass">
-      <ElInput
-        v-model="ruleForm.checkPass"
-        type="password"
-        autocomplete="off"
-      />
-    </ElFormItem>
-    <ElFormItem label="Activity type" prop="type">
-      <ElCheckboxGroup v-model="ruleForm.type">
-        <ElCheckbox label="Online activities" name="type" />
-        <ElCheckbox label="Promotion activities" name="type" />
-        <ElCheckbox label="Offline activities" name="type" />
-        <ElCheckbox label="Simple brand exposure" name="type" />
-      </ElCheckboxGroup>
-    </ElFormItem>
-    <ElFormItem label="Activity zone" prop="region">
-      <ElSelect v-model="ruleForm.region" placeholder="Activity zone">
-        <ElOption label="Zone one" value="shanghai" />
-        <ElOption label="Zone two" value="beijing" />
-      </ElSelect>
-    </ElFormItem>
-    <ElFormItem label="Age" prop="age">
-      <ElInput v-model.number="ruleForm.age" />
-    </ElFormItem>
-    <ElFormItem label="Instant delivery" prop="delivery">
-      <ElSwitch v-model="ruleForm.delivery" />
-    </ElFormItem>
-    <ElFormItem label="Resources" prop="resource">
-      <ElRadioGroup v-model="ruleForm.resource">
-        <ElRadio label="Sponsorship" />
-        <ElRadio label="Venue" />
-      </ElRadioGroup>
-    </ElFormItem> -->
+    <FormFields :dynamic-model="ruleForm" :field="formJson">
+      <template #slots="{ formModel }">
+        <ElInput v-model="formModel[`slots`]" />
+      </template>
+      <template #slots1="{ formModel }">
+        <ElInput v-model="formModel[`slots1`]" />
+      </template>
+    </FormFields>
 
     <ElFormItem>
       <ElButton type="primary" @click="submitForm(ruleFormRef)">
@@ -103,49 +36,24 @@
 </template>
 
 <script lang="ts" setup>
+  import { ElButton, ElForm, ElFormItem, ElInput } from 'element-plus';
   import { reactive, ref } from 'vue';
-  import {
-    ElForm,
-    ElFormItem,
-    ElButton,
-    ElInput,
-    ElRadio,
-    ElRadioGroup,
-    ElCheckbox,
-    ElCheckboxGroup,
-    ElSwitch,
-    ElSelect,
-    ElOption,
-  } from 'element-plus';
-  import {
-    checkAge,
-    checkDelivery,
-    checkRegion,
-    checkResource,
-    checkType,
-  } from './rules';
+  import { checkAge, checkEmpty } from './rules';
+
+  import FormFields from './fields.vue';
+  import { FieldType } from '/@/components/DynamicForm/types';
 
   type FormRefType = InstanceType<typeof ElForm>;
 
   const ruleFormRef = ref<InstanceType<typeof ElForm> | null | any>(null);
 
-  // const dynamicFormModel: any = reactive({});
-  // username: '',
-  // pass: '',
-  // region: '',
-  // checkPass: '',
-  // age: '',
-  // delivery: false,
-  // resource: '',
-  // type: [],
   const ruleForm: any = reactive({});
 
   const rules = reactive({
-    region: [{ validator: checkRegion, trigger: 'change' }],
     age: [{ validator: checkAge, trigger: 'blur' }],
-    delivery: [{ validator: checkDelivery, trigger: 'change' }],
-    resource: [{ validator: checkResource, trigger: 'change' }],
-    type: [{ validator: checkType, trigger: 'blur' }],
+    married: [{ validator: checkEmpty, trigger: 'blur' }],
+    slots: [{ validator: checkEmpty, trigger: 'blur' }],
+    slots1: [{ validator: checkEmpty, trigger: 'blur' }],
   });
 
   const formJson = [
@@ -173,7 +81,17 @@
       bind: 'x',
       default: '-',
     },
-  ];
+    {
+      control: 'Slots',
+      label: '自定义1',
+      prop: 'slots',
+    },
+    {
+      control: 'Slots',
+      label: '自定义2',
+      prop: 'slots1',
+    },
+  ] as FieldType[];
 
   const submitForm = (formEl: FormRefType | undefined) => {
     if (!formEl) return;
