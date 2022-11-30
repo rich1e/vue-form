@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-23 18:36:22
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-30 17:27:12
+ * @LastEditTime: 2022-11-30 17:38:32
  * @FilePath: /vue-form/src/example/slots/index.vue
  * @Description:
  *
@@ -37,17 +37,20 @@
 
 <script lang="ts" setup>
   import { ElButton, ElForm, ElFormItem, ElInput } from 'element-plus';
-  import { reactive, ref } from 'vue';
+  import { provide, reactive, ref } from 'vue';
   import { checkAge, checkEmpty } from './rules';
 
   import FormFields from './fields.vue';
   import { FieldType } from '/@/components/DynamicForm/types';
+  import { formInjectionKey } from './keys';
 
   type FormRefType = InstanceType<typeof ElForm>;
 
   const ruleFormRef = ref<InstanceType<typeof ElForm> | null | any>(null);
 
   const ruleForm: any = reactive({});
+
+  provide(formInjectionKey, ruleForm);
 
   const rules = reactive({
     age: [{ validator: checkAge, trigger: 'blur' }],
