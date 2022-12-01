@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-01 16:18:29
+ * @LastEditTime: 2022-12-01 16:33:39
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Uniseriate.vue
  * @Description:
  *
@@ -24,7 +24,7 @@
   import FormActions from '../components/FormActions.vue';
 
   import type { ConfigType } from '../../types';
-  import useRenderFields from '../hooks/useRenderFields';
+  import useDynamicSlots from '../hooks/useDynamicSlots';
 
   const props = defineProps({
     config: {
@@ -46,7 +46,7 @@
   /** 动态表单字段 */
   const dynamicFormModel: any = reactive({});
 
-  const { slots } = useRenderFields({ field });
+  const { slots } = useDynamicSlots({ field });
 </script>
 
 <template>

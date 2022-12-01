@@ -2,8 +2,8 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-12-01 16:01:05
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-01 16:17:59
- * @FilePath: /vue-form/src/components/DynamicForm/src/hooks/useRenderFields.ts
+ * @LastEditTime: 2022-12-01 16:36:04
+ * @FilePath: /vue-form/src/components/DynamicForm/src/hooks/useDynamicSlots.ts
  * @Description:
  *
  */
@@ -19,7 +19,12 @@ interface UseRenderFields {
   slots: Ref<string[]>;
 }
 
-const useRenderFields = (props: Props): UseRenderFields => {
+/**
+ * 动态计算slots
+ * @param props
+ * @returns
+ */
+const useDynamicSlots = (props: Props): UseRenderFields => {
   const { field } = props;
 
   const slots = ref<string[]>([]);
@@ -32,7 +37,6 @@ const useRenderFields = (props: Props): UseRenderFields => {
 
   onMounted(() => {
     slots.value = getSlots(field);
-    console.table(slots.value);
   });
 
   return {
@@ -40,4 +44,4 @@ const useRenderFields = (props: Props): UseRenderFields => {
   };
 };
 
-export default useRenderFields;
+export default useDynamicSlots;

@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:37:02
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-01 16:21:41
+ * @LastEditTime: 2022-12-01 16:35:16
  * @FilePath: /vue-form/src/components/DynamicForm/Default.vue
  * @Description:
  *
@@ -13,8 +13,8 @@
 
 <script setup lang="ts">
   import type { Component, PropType, Ref } from 'vue';
-  import { computed, ref, onMounted } from 'vue';
-  import useRenderFields from './src/hooks/useRenderFields';
+  import { ref } from 'vue';
+  import useDynamicSlots from './src/hooks/useDynamicSlots';
 
   import BiserialTemplate from './src/templates/Biserial.vue';
   import GroupTemplate from './src/templates/Group.vue';
@@ -33,7 +33,7 @@
   const { config } = props;
   const { scene } = config;
 
-  const { slots } = useRenderFields({ field: props.config.field });
+  const { slots } = useDynamicSlots({ field: props.config.field });
 
   // TODO 优化列表
   const componentTable: Record<string, Component> = {
@@ -45,10 +45,8 @@
 
   const componentName: Ref<string> = ref(scene);
 
-  const dynamicSlot = computed(() => scene);
-
   console.groupCollapsed('DynamicSlot Name');
-  console.table(dynamicSlot.value);
+  console.table(componentName);
   console.groupEnd();
 </script>
 
