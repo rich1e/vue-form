@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:37:02
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-01 15:29:29
+ * @LastEditTime: 2022-12-01 16:21:41
  * @FilePath: /vue-form/src/components/DynamicForm/Default.vue
  * @Description:
  *
@@ -14,6 +14,7 @@
 <script setup lang="ts">
   import type { Component, PropType, Ref } from 'vue';
   import { computed, ref, onMounted } from 'vue';
+  import useRenderFields from './src/hooks/useRenderFields';
 
   import BiserialTemplate from './src/templates/Biserial.vue';
   import GroupTemplate from './src/templates/Group.vue';
@@ -32,18 +33,7 @@
   const { config } = props;
   const { scene } = config;
 
-  const slots = ref<string[]>([]);
-
-  const getSlots = (field: any) => {
-    return field
-      ?.filter((item: any) => item.control === 'Slots')
-      .map((item: any) => item.prop);
-  };
-
-  onMounted(() => {
-    slots.value = getSlots(props.config.field);
-    console.table(slots.value);
-  });
+  const { slots } = useRenderFields({ field: props.config.field });
 
   // TODO 优化列表
   const componentTable: Record<string, Component> = {
@@ -64,11 +54,6 @@
 
 <template>
   <div>
-    <!-- <component :is="componentTable[componentName]" :config="config">
-      <template #[dynamicSlot]="{ slotModel }">
-        <slot name="customSlots" :fieldModel="slotModel" />
-      </template>
-    </component> -->
     <component :is="componentTable[componentName]" :config="config">
       <template
         #[item]="{ slotModel }"
@@ -78,14 +63,5 @@
         <slot :name="item" :fieldModel="slotModel" />
       </template>
     </component>
-    <!-- <UniseriateTemplate :config="config">
-      <template
-        #[item]="{ slotModel }"
-        v-for="(item, idx) in slots"
-        :key="`${item}_${idx}`"
-      >
-        <slot :name="item" :fieldModel="slotModel" />
-      </template>
-    </UniseriateTemplate> -->
   </div>
 </template>

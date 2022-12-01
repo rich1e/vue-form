@@ -2,7 +2,7 @@
  * @Author: rich1e
  * @Date: 2022-11-14 12:37:25
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-01 15:39:55
+ * @LastEditTime: 2022-12-01 16:22:10
 -->
 <script lang="ts">
   export default {
@@ -22,7 +22,6 @@
   } from 'element-plus';
 
   import { FieldType, SceneType } from '../../types';
-  import { it } from 'node:test';
 
   const props = defineProps({
     /** 表单UI类型 */

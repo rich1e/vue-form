@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-01 15:19:13
+ * @LastEditTime: 2022-12-01 16:18:29
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Uniseriate.vue
  * @Description:
  *
@@ -17,13 +17,14 @@
 
 <script setup lang="ts">
   import type { PropType } from 'vue';
-  import { reactive, ref, onMounted } from 'vue';
+  import { reactive, ref } from 'vue';
   import { ElForm } from 'element-plus';
 
   import FormFields from '../components/FormFields.vue';
   import FormActions from '../components/FormActions.vue';
 
   import type { ConfigType } from '../../types';
+  import useRenderFields from '../hooks/useRenderFields';
 
   const props = defineProps({
     config: {
@@ -45,18 +46,7 @@
   /** 动态表单字段 */
   const dynamicFormModel: any = reactive({});
 
-  const slots = ref<string[]>([]);
-
-  const getSlots = (field: any) => {
-    return field
-      ?.filter((item: any) => item.control === 'Slots')
-      .map((item: any) => item.prop);
-  };
-
-  onMounted(() => {
-    slots.value = getSlots(props.config.field);
-    console.table(slots.value);
-  });
+  const { slots } = useRenderFields({ field });
 </script>
 
 <template>
@@ -67,8 +57,9 @@
     label-width="80px"
   >
     <!-- 渲染表单字段 -->
+
+    <!-- 渲染自定义表单字段 -->
     <FormFields :scene="scene" :field="field" :dynamic-model="dynamicFormModel">
-      <!-- 渲染自定义表单字段 -->
       <template
         #[item]="{ formModel }"
         v-for="(item, idx) in slots"
