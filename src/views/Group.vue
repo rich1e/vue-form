@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-03 14:10:27
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-29 14:45:12
+ * @LastEditTime: 2022-12-01 17:35:30
  * @FilePath: /vue-form/src/views/Group.vue
  * @Description:
  *
@@ -20,9 +20,9 @@
   const rule = {
     username: [{ validator: checkEmpty, trigger: 'blur', required: true }],
     age: [{ validator: checkAge, trigger: 'blur', required: true }],
-    birth: [{ validator: checkEmpty, trigger: 'blur', required: true }],
+    birth: [{ validator: checkEmpty, trigger: 'change', required: true }],
     /** 自定义组件规则 */
-    slots: [{ validator: checkEmpty, trigger: 'blur', required: true }],
+    slots1: [{ validator: checkEmpty, trigger: 'blur', required: true }],
   };
 
   const actions = {
@@ -94,8 +94,13 @@
         },
         {
           control: 'Slots',
-          label: '自定义',
-          prop: 'slots',
+          label: '自定义1',
+          prop: 'slots1',
+        },
+        {
+          control: 'Slots',
+          label: '自定义2',
+          prop: 'slots2',
         },
       ],
       [
@@ -122,6 +127,11 @@
           },
           bind: 'x',
           default: '-',
+        },
+        {
+          control: 'Slots',
+          label: '自定义3',
+          prop: 'slots3',
         },
         {
           control: 'Select',
@@ -168,8 +178,14 @@
     <template #header> Group </template>
     <template #main>
       <DynamicForm :config="formConfig">
-        <template #customSlots="{ fieldModel }">
-          <ElInput v-model="fieldModel[`slots`]" />
+        <template #slots1="{ fieldModel }">
+          <ElInput v-model="fieldModel[`slots1`]" />
+        </template>
+        <template #slots2="{ fieldModel }">
+          <ElInput v-model="fieldModel[`slots2`]" />
+        </template>
+        <template #slots3="{ fieldModel }">
+          <ElInput v-model="fieldModel[`slots3`]" />
         </template>
       </DynamicForm>
     </template>

@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-29 14:51:05
+ * @LastEditTime: 2022-12-01 17:33:45
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Group.vue
  * @Description:
  *
@@ -21,7 +21,9 @@
   import FormGroup from '../components/FormGroup.vue';
   import FormFields from '../components/FormFields.vue';
   import FormActions from '../components/FormActions.vue';
+
   import type { ConfigType } from '../../types';
+  import useDynamicSlots from '../hooks/useDynamicSlots';
 
   const props = defineProps({
     config: {
@@ -36,6 +38,8 @@
   console.groupEnd();
 
   const { scene, groups, actions, rule } = props.config;
+
+  const { slots } = useDynamicSlots({ groups });
 </script>
 
 <template>
@@ -43,8 +47,12 @@
     <template #="{ rank, dynamicModel }">
       <FormFields :scene="scene" :field="rank" :dynamic-model="dynamicModel">
         <!-- 渲染自定义表单字段 -->
-        <template #customFields="{ formModel }">
-          <slot name="group" :slotModel="formModel" />
+        <template
+          #[item]="{ formModel }"
+          v-for="(item, idx) in slots"
+          :key="`${item}_${idx}`"
+        >
+          <slot :name="item" :slotModel="formModel" />
         </template>
       </FormFields>
     </template>

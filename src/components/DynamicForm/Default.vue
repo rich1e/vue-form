@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:37:02
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-01 16:35:16
+ * @LastEditTime: 2022-12-01 17:34:12
  * @FilePath: /vue-form/src/components/DynamicForm/Default.vue
  * @Description:
  *
@@ -14,7 +14,6 @@
 <script setup lang="ts">
   import type { Component, PropType, Ref } from 'vue';
   import { ref } from 'vue';
-  import useDynamicSlots from './src/hooks/useDynamicSlots';
 
   import BiserialTemplate from './src/templates/Biserial.vue';
   import GroupTemplate from './src/templates/Group.vue';
@@ -22,6 +21,7 @@
   import UniseriateTemplate from './src/templates/Uniseriate.vue';
 
   import { ConfigType } from './types';
+  import useDynamicSlots from './src/hooks/useDynamicSlots';
 
   const props = defineProps({
     config: {
@@ -33,7 +33,10 @@
   const { config } = props;
   const { scene } = config;
 
-  const { slots } = useDynamicSlots({ field: props.config.field });
+  const { slots } = useDynamicSlots({
+    field: props.config.field,
+    groups: props.config.groups,
+  });
 
   // TODO 优化列表
   const componentTable: Record<string, Component> = {
