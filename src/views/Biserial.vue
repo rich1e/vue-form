@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-03 14:10:27
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-29 14:55:19
+ * @LastEditTime: 2022-12-01 16:25:16
  * @FilePath: /vue-form/src/views/Biserial.vue
  * @Description:
  *
@@ -20,8 +20,9 @@
   const rule = {
     username: [{ validator: checkEmpty, trigger: 'blur', required: true }],
     age: [{ validator: checkAge, trigger: 'blur', required: true }],
-    birth: [{ validator: checkEmpty, trigger: 'blur', required: true }],
-    slots: [{ validator: checkEmpty, trigger: 'blur', required: true }],
+    birth: [{ validator: checkEmpty, trigger: 'change', required: true }],
+    slots1: [{ validator: checkEmpty, trigger: 'blur', required: true }],
+    slots2: [{ validator: checkEmpty, trigger: 'blur', required: true }],
   };
 
   const actions = {
@@ -149,8 +150,13 @@
       },
       {
         control: 'Slots',
-        label: '自定义',
-        prop: 'slots',
+        label: '自定义1',
+        prop: 'slots1',
+      },
+      {
+        control: 'Slots',
+        label: '自定义2',
+        prop: 'slots2',
       },
     ],
     rule,
@@ -163,8 +169,11 @@
     <template #header> Biserial </template>
     <template #main>
       <DynamicForm :config="formConfig">
-        <template #customSlots="{ fieldModel }">
-          <ElInput v-model="fieldModel[`slots`]" />
+        <template #slots1="{ fieldModel }">
+          <ElInput v-model="fieldModel[`slots1`]" />
+        </template>
+        <template #slots2="{ fieldModel }">
+          <ElInput v-model="fieldModel[`slots2`]" />
         </template>
       </DynamicForm>
     </template>

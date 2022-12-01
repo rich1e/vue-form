@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-29 14:56:58
+ * @LastEditTime: 2022-12-01 16:23:13
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Biserial.vue
  * @Description:
  *
@@ -24,6 +24,7 @@
   import FormBiserial from '../components/FormBiserial.vue';
 
   import type { ConfigType } from '../../types';
+  import useRenderFields from '../hooks/useRenderFields';
 
   const props = defineProps({
     config: {
@@ -39,6 +40,8 @@
 
   const { scene, field, actions, rule } = props.config;
 
+  const { slots } = useRenderFields({ field });
+
   /** 表单引用 */
   const formRef = ref<InstanceType<typeof ElForm> | null | any>(null);
 
@@ -50,8 +53,15 @@
     <template #="{ field, dynamicModel }">
       <FormFields :scene="scene" :item="field" :dynamic-model="dynamicModel">
         <!-- 渲染自定义表单字段 -->
-        <template #customFields="{ formModel }">
+        <!-- <template #customFields="{ formModel }">
           <slot name="biserial" :slotModel="formModel" />
+        </template> -->
+        <template
+          #[item]="{ formModel }"
+          v-for="(item, idx) in slots"
+          :key="`${item}_${idx}`"
+        >
+          <slot :name="item" :slotModel="formModel" />
         </template>
       </FormFields>
     </template>
