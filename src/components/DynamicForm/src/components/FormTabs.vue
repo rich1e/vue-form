@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-29 15:48:21
+ * @LastEditTime: 2022-12-01 18:34:07
  * @FilePath: /vue-form/src/components/DynamicForm/src/components/FormTabs.vue
  * @Description:
  *
@@ -30,6 +30,15 @@
   const { tabs } = props;
   const { tabsTable, tabsType } = tabs;
 
+  type TabPaneType = InstanceType<typeof ElTabPane>;
+
+  const tabClickHandler = (pane: any, ev: Event) => {
+    console.log(pane);
+    const { label } = pane.props;
+    console.log(label);
+    console.log(ev);
+  };
+
   console.debug('This FormTabs');
   console.groupCollapsed('Tab Props');
   console.table(props);
@@ -48,7 +57,7 @@
 
 <template>
   <!-- TODO ElTabPane slots -->
-  <ElTabs :type="tabsType">
+  <ElTabs :type="tabsType" @tab-click="tabClickHandler">
     <template v-if="tabsTable">
       <ElTabPane
         :label="tab.label"

@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-03 14:10:27
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-29 16:18:24
+ * @LastEditTime: 2022-12-01 17:42:16
  * @FilePath: /vue-form/src/views/Tab.vue
  * @Description:
  *
@@ -22,7 +22,7 @@
     age: [{ validator: checkAge, trigger: 'blur', required: true }],
     birth: [{ validator: checkEmpty, trigger: 'blur', required: true }],
     /** 自定义组件规则 */
-    slots: [{ validator: checkEmpty, trigger: 'blur', required: true }],
+    slots1: [{ validator: checkEmpty, trigger: 'blur', required: true }],
   };
 
   const actions = {
@@ -156,7 +156,7 @@
             {
               control: 'Slots',
               label: '自定义1',
-              prop: 'slots',
+              prop: 'slots1',
             },
           ],
         },
@@ -247,7 +247,7 @@
             {
               control: 'Slots',
               label: '自定义2',
-              prop: 'slots',
+              prop: 'slots2',
             },
           ],
         },
@@ -282,7 +282,7 @@
               {
                 control: 'Slots',
                 label: '自定义3',
-                prop: 'slots',
+                prop: 'slots3',
               },
             ],
             [
@@ -359,8 +359,8 @@
     <template #main>
       <DynamicForm :config="formConfig">
         <!-- TODO tab 有多个表单组合，当前的自定义插件在每个表单都有唯一的实例。但是，每个表单的自定义插件都是同一个。 -->
-        <template #customSlots="{ fieldModel }">
-          <ElInput v-model="fieldModel[`slots`]" />
+        <template #slots1="{ fieldModel }">
+          <ElInput v-model="fieldModel[`slots1`]" />
         </template>
       </DynamicForm>
     </template>

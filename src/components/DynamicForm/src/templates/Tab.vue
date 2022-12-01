@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-29 16:20:37
+ * @LastEditTime: 2022-12-01 17:46:02
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Tab.vue
  * @Description:
  *
@@ -27,6 +27,7 @@
   import FormTabs from '../components/FormTabs.vue';
 
   import type { ConfigType, SceneType } from '../../types';
+  import useDynamicSlots from '../hooks/useDynamicSlots';
 
   const props = defineProps({
     config: {
@@ -52,6 +53,8 @@
   /** 动态表单字段 */
   const dynamicFormModel: any = reactive({});
 
+  const { slots } = useDynamicSlots({ tabs });
+
   // TODO 当UI为biserial时，需要注入formRef
   const biserialScene: SceneType = 'biserial';
   provide('FORM_REF', formRef);
@@ -74,8 +77,15 @@
           :dynamic-model="dynamicFormModel"
         >
           <!-- 渲染自定义表单字段 -->
-          <template #customFields="{ formModel }">
+          <!-- <template #customFields="{ formModel }">
             <slot name="tab" :slotModel="formModel" />
+          </template> -->
+          <template
+            #[item]="{ formModel }"
+            v-for="(item, idx) in slots"
+            :key="`${item}_${idx}`"
+          >
+            <slot :name="item" :slotModel="formModel" />
           </template>
         </FormFields>
 
