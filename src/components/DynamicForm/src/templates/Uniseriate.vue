@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-29 14:50:40
+ * @LastEditTime: 2022-12-01 15:19:13
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Uniseriate.vue
  * @Description:
  *
@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
   import type { PropType } from 'vue';
-  import { reactive, ref } from 'vue';
+  import { reactive, ref, onMounted } from 'vue';
   import { ElForm } from 'element-plus';
 
   import FormFields from '../components/FormFields.vue';
@@ -44,6 +44,19 @@
 
   /** 动态表单字段 */
   const dynamicFormModel: any = reactive({});
+
+  const slots = ref<string[]>([]);
+
+  const getSlots = (field: any) => {
+    return field
+      ?.filter((item: any) => item.control === 'Slots')
+      .map((item: any) => item.prop);
+  };
+
+  onMounted(() => {
+    slots.value = getSlots(props.config.field);
+    console.table(slots.value);
+  });
 </script>
 
 <template>
@@ -56,8 +69,12 @@
     <!-- 渲染表单字段 -->
     <FormFields :scene="scene" :field="field" :dynamic-model="dynamicFormModel">
       <!-- 渲染自定义表单字段 -->
-      <template #customFields="{ formModel }">
-        <slot name="uniseriate" :slotModel="formModel" />
+      <template
+        #[item]="{ formModel }"
+        v-for="(item, idx) in slots"
+        :key="`${item}_${idx}`"
+      >
+        <slot :name="item" :slotModel="formModel" />
       </template>
     </FormFields>
 

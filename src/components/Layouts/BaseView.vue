@@ -1,8 +1,8 @@
 <!--
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-03 14:10:27
- * @LastEditors: gongyuqi@max-optics.com
- * @LastEditTime: 2022-11-07 18:49:35
+ * @LastEditors: yuqigong@outlook.com
+ * @LastEditTime: 2022-12-01 15:10:05
  * @FilePath: /vue-form/src/components/Layouts/BaseView.vue
  * @Description:
  *
@@ -43,6 +43,7 @@
     flex: 1;
     // height: 100%;
     overflow-y: scroll;
+    text-align: left;
 
     // https://developer.mozilla.org/zh-CN/docs/Web/CSS/::-webkit-scrollbar
     &::-webkit-scrollbar {

@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-03 14:10:27
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-29 14:45:34
+ * @LastEditTime: 2022-12-01 15:36:10
  * @FilePath: /vue-form/src/views/Uniseriate.vue
  * @Description:
  *
@@ -17,6 +17,8 @@
 <script setup lang="ts">
   import BaseViewVue from '/@/components/Layouts/BaseView.vue';
   import DynamicForm from '/@/components/DynamicForm';
+  import UniseriateTemplate from '/@/components/DynamicForm/src/templates/Uniseriate.vue';
+
   import {
     checkAge,
     checkEmpty,
@@ -31,7 +33,8 @@
     recruit: [{ validator: checkEmpty, trigger: 'change', required: true }],
     skill: [{ validator: checkEmpty, trigger: 'blur', required: true }],
     /** 自定义组件规则 */
-    slots: [{ validator: checkEmpty, trigger: 'blur', required: true }],
+    slots1: [{ validator: checkEmpty, trigger: 'blur', required: true }],
+    slots3: [{ validator: checkEmpty, trigger: 'blur', required: true }],
   };
 
   const actions = {
@@ -159,8 +162,18 @@
       },
       {
         control: 'Slots',
-        label: '自定义',
-        prop: 'slots',
+        label: '自定义1',
+        prop: 'slots1',
+      },
+      {
+        control: 'Slots',
+        label: '自定义2',
+        prop: 'slots2',
+      },
+      {
+        control: 'Slots',
+        label: '自定义3',
+        prop: 'slots3',
       },
       {
         control: 'Checkbox',
@@ -182,10 +195,25 @@
     <template #header> Uniseriate </template>
     <template #main>
       <DynamicForm :config="formConfig">
-        <template #customSlots="{ fieldModel }">
-          <ElInput v-model="fieldModel[`slots`]" />
+        <template #slots1="{ fieldModel }">
+          <ElInput v-model="fieldModel[`slots1`]" />
+        </template>
+        <template #slots2="{ fieldModel }">
+          <ElInput v-model="fieldModel[`slots2`]" />
+        </template>
+        <template #slots3="{ fieldModel }">
+          <ElInput v-model="fieldModel[`slots3`]" />
         </template>
       </DynamicForm>
+
+      <!-- <UniseriateTemplate :config="formConfig">
+        <template #slots1="{ slotModel }">
+          <ElInput v-model="slotModel[`slots1`]" />
+        </template>
+        <template #slots2="{ slotModel }">
+          <ElInput v-model="slotModel[`slots2`]" />
+        </template>
+      </UniseriateTemplate> -->
     </template>
   </BaseViewVue>
 </template>

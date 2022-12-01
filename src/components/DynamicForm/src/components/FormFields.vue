@@ -2,7 +2,7 @@
  * @Author: rich1e
  * @Date: 2022-11-14 12:37:25
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-29 15:00:39
+ * @LastEditTime: 2022-12-01 15:39:55
 -->
 <script lang="ts">
   export default {
@@ -56,6 +56,7 @@
 
   console.debug('This FormFields');
   console.groupCollapsed('field');
+  // TODO isNotBiserial 优化
   isNotBiserial('biserial') ? console.table(field) : console.table(item);
   console.groupEnd();
 </script>
@@ -97,7 +98,7 @@
       <!-- 自定义组件 Slot -->
       <slot
         v-else-if="item.control === 'Slots'"
-        name="customFields"
+        :name="item.prop"
         :formModel="dynamicModel"
       />
     </ElFormItem>
@@ -129,7 +130,7 @@
       <!-- 自定义组件 Slot -->
       <slot
         v-else-if="item.control === 'Slots'"
-        name="customFields"
+        :name="item.prop"
         :formModel="dynamicModel"
       />
     </ElFormItem>
