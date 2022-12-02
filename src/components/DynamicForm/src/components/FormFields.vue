@@ -2,7 +2,7 @@
  * @Author: rich1e
  * @Date: 2022-11-14 12:37:25
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-01 16:22:10
+ * @LastEditTime: 2022-12-02 17:49:17
 -->
 <script lang="ts">
   export default {
@@ -11,7 +11,8 @@
 </script>
 
 <script setup lang="ts">
-  import { PropType } from 'vue';
+  import type { PropType, ComputedRef } from 'vue';
+  import { computed } from 'vue';
   import {
     ElFormItem,
     ElInput,
@@ -48,21 +49,14 @@
 
   const { scene, field, item, dynamicModel } = props;
 
-  const isNotBiserial = (sceneType: string) => {
-    if (scene === sceneType && field) return false;
-    else return true;
-  };
-
-  console.debug('This FormFields');
-  console.groupCollapsed('field');
-  // TODO isNotBiserial 优化
-  isNotBiserial('biserial') ? console.table(field) : console.table(item);
-  console.groupEnd();
+  const isNotBiserial: ComputedRef = computed(() => {
+    return scene !== 'biserial' && field;
+  });
 </script>
 
 <template>
   <!-- Render multiple -->
-  <template v-if="isNotBiserial('biserial')">
+  <template v-if="isNotBiserial">
     <ElFormItem
       v-for="(item, index) in field"
       :key="`${item.prop}_${index}`"
