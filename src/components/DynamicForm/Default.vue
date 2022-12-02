@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:37:02
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-02 17:33:52
+ * @LastEditTime: 2022-12-02 18:12:54
  * @FilePath: /vue-form/src/components/DynamicForm/Default.vue
  * @Description:
  *
@@ -12,8 +12,8 @@
 </script>
 
 <script setup lang="ts">
-  import type { Component, PropType, Ref } from 'vue';
-  import { ref, provide, reactive, watch, onMounted } from 'vue';
+  import type { PropType } from 'vue';
+  import { ref, provide, reactive, watch, onMounted, computed } from 'vue';
 
   import BiserialTemplate from './src/templates/BiserialTemplate.vue';
   import GroupTemplate from './src/templates/GroupTemplate.vue';
@@ -38,16 +38,26 @@
   const { scene } = config;
 
   const formData: any = reactive({});
-
-  provide(formInjectionKey, formData);
-
   const slotsComputed = ref<string[]>([]);
+
+  const setComponent = computed(() => {
+    const table = {
+      uniseriate: UniseriateTemplate,
+      biserial: BiserialTemplate,
+      group: GroupTemplate,
+      tab: TabTemplate,
+    };
+
+    return table[scene];
+  });
 
   const { slots } = useDynamicSlots({
     field: props.config.field,
     groups: props.config.groups,
     tabs: props.config.tabs,
   });
+
+  provide(formInjectionKey, formData);
 
   onMounted(() => {
     slotsComputed.value = slots.value;
@@ -61,25 +71,11 @@
       slotsComputed.value = filterGroups(newVal[type]);
     }
   });
-
-  // TODO 优化列表
-  const componentTable: Record<string, Component> = {
-    uniseriate: UniseriateTemplate,
-    biserial: BiserialTemplate,
-    group: GroupTemplate,
-    tab: TabTemplate,
-  };
-
-  const componentName: Ref<string> = ref(scene);
-
-  console.groupCollapsed('DynamicSlot Name');
-  console.table(componentName);
-  console.groupEnd();
 </script>
 
 <template>
   <div>
-    <component :is="componentTable[componentName]" :config="config">
+    <component :is="setComponent" :config="config">
       <template
         #[item]="{ slotModel }"
         v-for="(item, idx) in slotsComputed"
