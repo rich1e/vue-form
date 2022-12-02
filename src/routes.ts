@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-07 09:54:23
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-29 20:36:32
+ * @LastEditTime: 2022-12-02 11:09:24
  * @FilePath: /vue-form/src/routes.ts
  * @Description:
  *
@@ -78,14 +78,6 @@ const routes: AppRouteRecord[] = [
   {
     path: '/http',
     component: () => import('/@/views/Http.vue'),
-    meta: {
-      title: '',
-    },
-  },
-
-  {
-    path: '/components',
-    component: () => import('./views/Components.vue'),
     meta: {
       title: '',
     },
