@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-12-01 16:01:05
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-01 18:14:55
+ * @LastEditTime: 2022-12-02 11:17:10
  * @FilePath: /vue-form/src/components/DynamicForm/src/hooks/useDynamicSlots.ts
  * @Description:
  *
@@ -39,7 +39,6 @@ const useDynamicSlots = (props: Props): UseRenderFields => {
   };
 
   const filterGroups = (groups: any) => {
-    console.table(groups);
     return groups
       ?.flat()
       ?.filter((item: any) => item.control === 'Slots')
@@ -59,7 +58,6 @@ const useDynamicSlots = (props: Props): UseRenderFields => {
   };
 
   onMounted(() => {
-    console.table(getSlots(props));
     slots.value = getSlots(props);
   });
 

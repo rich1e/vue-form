@@ -2,8 +2,8 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-01 17:46:02
- * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Tab.vue
+ * @LastEditTime: 2022-12-02 11:16:04
+ * @FilePath: /vue-form/src/components/DynamicForm/src/templates/TabTemplate.vue
  * @Description:
  *
 -->
@@ -16,7 +16,8 @@
 </script>
 
 <script setup lang="ts">
-  import { PropType, provide } from 'vue';
+  import type { PropType } from 'vue';
+  import { provide } from 'vue';
   import { reactive, ref } from 'vue';
   import { ElForm } from 'element-plus';
 

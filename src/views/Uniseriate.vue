@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-03 14:10:27
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-01 15:36:10
+ * @LastEditTime: 2022-12-02 11:13:35
  * @FilePath: /vue-form/src/views/Uniseriate.vue
  * @Description:
  *
@@ -17,7 +17,6 @@
 <script setup lang="ts">
   import BaseViewVue from '/@/components/Layouts/BaseView.vue';
   import DynamicForm from '/@/components/DynamicForm';
-  import UniseriateTemplate from '/@/components/DynamicForm/src/templates/Uniseriate.vue';
 
   import {
     checkAge,
@@ -205,15 +204,6 @@
           <ElInput v-model="fieldModel[`slots3`]" />
         </template>
       </DynamicForm>
-
-      <!-- <UniseriateTemplate :config="formConfig">
-        <template #slots1="{ slotModel }">
-          <ElInput v-model="slotModel[`slots1`]" />
-        </template>
-        <template #slots2="{ slotModel }">
-          <ElInput v-model="slotModel[`slots2`]" />
-        </template>
-      </UniseriateTemplate> -->
     </template>
   </BaseViewVue>
 </template>

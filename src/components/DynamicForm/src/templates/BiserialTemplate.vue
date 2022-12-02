@@ -2,8 +2,8 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-01 16:33:53
- * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Biserial.vue
+ * @LastEditTime: 2022-12-02 11:15:32
+ * @FilePath: /vue-form/src/components/DynamicForm/src/templates/BiserialTemplate.vue
  * @Description:
  *
 -->
@@ -16,7 +16,8 @@
 </script>
 
 <script setup lang="ts">
-  import { PropType, ref, provide } from 'vue';
+  import type { PropType } from 'vue';
+  import { ref, provide } from 'vue';
   import { ElForm } from 'element-plus';
 
   import FormFields from '../components/FormFields.vue';
