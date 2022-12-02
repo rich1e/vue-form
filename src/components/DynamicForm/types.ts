@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-10 14:52:56
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-29 13:50:10
+ * @LastEditTime: 2022-12-02 15:04:56
  * @FilePath: /vue-form/src/components/DynamicForm/types.ts
  * @Description:
  *
@@ -42,6 +42,7 @@ export type TabPaneType = Partial<
 /** 表单TabTable类型 */
 export type TabTablesType = {
   label: string;
+  type: SceneType;
 } & TabPaneType;
 
 /** 表单tabs数据 */

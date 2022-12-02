@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-02 11:16:04
+ * @LastEditTime: 2022-12-02 17:35:36
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/TabTemplate.vue
  * @Description:
  *
@@ -17,8 +17,8 @@
 
 <script setup lang="ts">
   import type { PropType } from 'vue';
-  import { provide } from 'vue';
-  import { reactive, ref } from 'vue';
+  import { reactive, ref, provide, onMounted, watch, inject } from 'vue';
+
   import { ElForm } from 'element-plus';
 
   import FormFields from '../components/FormFields.vue';
@@ -28,7 +28,11 @@
   import FormTabs from '../components/FormTabs.vue';
 
   import type { ConfigType, SceneType } from '../../types';
-  import useDynamicSlots from '../hooks/useDynamicSlots';
+  import useDynamicSlots, {
+    filterField,
+    filterGroups,
+  } from '../hooks/useDynamicSlots';
+  import { formInjectionKey } from '../../keys';
 
   const props = defineProps({
     config: {
@@ -54,7 +58,24 @@
   /** 动态表单字段 */
   const dynamicFormModel: any = reactive({});
 
+  const formData: any = inject(formInjectionKey);
+
   const { slots } = useDynamicSlots({ tabs });
+
+  const slotsComputed = ref<string[]>([]);
+
+  onMounted(() => {
+    slotsComputed.value = slots.value;
+  });
+
+  watch(formData, (newVal: any) => {
+    const { type } = newVal;
+    if (type === 'biserial' || type === 'uniseriate') {
+      slotsComputed.value = filterField(newVal[type]);
+    } else if (type === 'group') {
+      slotsComputed.value = filterGroups(newVal[type]);
+    }
+  });
 
   // TODO 当UI为biserial时，需要注入formRef
   const biserialScene: SceneType = 'biserial';
@@ -77,13 +98,9 @@
           :field="tabPane?.uniseriate"
           :dynamic-model="dynamicFormModel"
         >
-          <!-- 渲染自定义表单字段 -->
-          <!-- <template #customFields="{ formModel }">
-            <slot name="tab" :slotModel="formModel" />
-          </template> -->
           <template
             #[item]="{ formModel }"
-            v-for="(item, idx) in slots"
+            v-for="(item, idx) in slotsComputed"
             :key="`${item}_${idx}`"
           >
             <slot :name="item" :slotModel="formModel" />
@@ -105,10 +122,12 @@
             :item="field"
             :dynamic-model="dynamicModel"
           >
-            <!-- 渲染自定义表单字段 -->
-            <template #customFields="{ formModel }">
-              <!-- TODO tab 组件中 slot 区分 -->
-              <slot name="tab" :slotModel="formModel" />
+            <template
+              #[item]="{ formModel }"
+              v-for="(item, idx) in slotsComputed"
+              :key="`${item}_${idx}`"
+            >
+              <slot :name="item" :slotModel="formModel" />
             </template>
           </FormFields>
         </template>
@@ -126,9 +145,12 @@
             :field="rank"
             :dynamic-model="dynamicModel"
           >
-            <!-- 渲染自定义表单字段 -->
-            <template #customFields="{ formModel }">
-              <slot name="tab" :slotModel="formModel" />
+            <template
+              #[item]="{ formModel }"
+              v-for="(item, idx) in slotsComputed"
+              :key="`${item}_${idx}`"
+            >
+              <slot :name="item" :slotModel="formModel" />
             </template>
           </FormFields>
         </template>

@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-12-01 16:01:05
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-02 11:17:10
+ * @LastEditTime: 2022-12-02 17:36:13
  * @FilePath: /vue-form/src/components/DynamicForm/src/hooks/useDynamicSlots.ts
  * @Description:
  *
@@ -24,6 +24,42 @@ interface UseRenderFields {
   slots: Ref<string[]>;
 }
 
+export const filterField = (field: any) => {
+  return field
+    ?.filter((item: any) => item.control === 'Slots')
+    .map((item: any) => item.prop);
+};
+
+export const filterGroups = (groups: any) => {
+  return groups
+    ?.flat()
+    ?.filter((item: any) => item.control === 'Slots')
+    .map((item: any) => item.prop);
+};
+
+const filterTabs = (tabs: TabsType) => {
+  let types = '';
+
+  // 找到有数据的直接返回，停止后续遍历
+  const fisrt: any = tabs.tabsTable.find((item: any) => {
+    const { type } = item;
+    if (item[type]) {
+      types = type;
+      return true;
+    }
+  });
+
+  return fisrt[types].map((item: any) => item.prop);
+};
+
+const getSlots = (param: GetSlotsParamType) => {
+  const { field, groups, tabs } = param;
+
+  if (field) return filterField(field);
+  if (groups) return filterGroups(groups);
+  if (tabs) return filterTabs(tabs);
+};
+
 /**
  * 动态计算 slots
  * @param props
@@ -31,31 +67,6 @@ interface UseRenderFields {
  */
 const useDynamicSlots = (props: Props): UseRenderFields => {
   const slots = ref<string[]>([]);
-
-  const filterField = (field: any) => {
-    return field
-      ?.filter((item: any) => item.control === 'Slots')
-      .map((item: any) => item.prop);
-  };
-
-  const filterGroups = (groups: any) => {
-    return groups
-      ?.flat()
-      ?.filter((item: any) => item.control === 'Slots')
-      .map((item: any) => item.prop);
-  };
-
-  const filterTabs = (tabs: TabsType) => {
-    return tabs.tabsTable;
-  };
-
-  const getSlots = (param: GetSlotsParamType) => {
-    const { field, groups, tabs } = param;
-
-    if (field) return filterField(field);
-    if (groups) return filterGroups(groups);
-    if (tabs) return filterTabs(tabs);
-  };
 
   onMounted(() => {
     slots.value = getSlots(props);

@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-03 14:10:27
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-01 17:42:16
+ * @LastEditTime: 2022-12-02 17:32:22
  * @FilePath: /vue-form/src/views/Tab.vue
  * @Description:
  *
@@ -20,7 +20,7 @@
   const rule = {
     username: [{ validator: checkEmpty, trigger: 'blur', required: true }],
     age: [{ validator: checkAge, trigger: 'blur', required: true }],
-    birth: [{ validator: checkEmpty, trigger: 'blur', required: true }],
+    birth: [{ validator: checkEmpty, trigger: 'change', required: true }],
     /** 自定义组件规则 */
     slots1: [{ validator: checkEmpty, trigger: 'blur', required: true }],
   };
@@ -71,6 +71,7 @@
       tabsTable: [
         {
           label: 'Uniseriate',
+          type: 'uniseriate',
           uniseriate: [
             {
               control: 'Input',
@@ -158,10 +159,16 @@
               label: '自定义1',
               prop: 'slots1',
             },
+            {
+              control: 'Slots',
+              label: '自定义2',
+              prop: 'slots2',
+            },
           ],
         },
         {
           label: 'Biserial',
+          type: 'biserial',
           biserial: [
             {
               control: 'Input',
@@ -246,13 +253,14 @@
             },
             {
               control: 'Slots',
-              label: '自定义2',
-              prop: 'slots2',
+              label: '自定义3',
+              prop: 'slots3',
             },
           ],
         },
         {
           label: 'Group',
+          type: 'group',
           group: [
             [
               {
@@ -281,8 +289,13 @@
               },
               {
                 control: 'Slots',
-                label: '自定义3',
-                prop: 'slots3',
+                label: '自定义2',
+                prop: 'slots2',
+              },
+              {
+                control: 'Slots',
+                label: '自定义4',
+                prop: 'slots4',
               },
             ],
             [
@@ -361,6 +374,15 @@
         <!-- TODO tab 有多个表单组合，当前的自定义插件在每个表单都有唯一的实例。但是，每个表单的自定义插件都是同一个。 -->
         <template #slots1="{ fieldModel }">
           <ElInput v-model="fieldModel[`slots1`]" />
+        </template>
+        <template #slots2="{ fieldModel }">
+          <ElInput v-model="fieldModel[`slots2`]" />
+        </template>
+        <template #slots3="{ fieldModel }">
+          <ElInput v-model="fieldModel[`slots3`]" />
+        </template>
+        <template #slots4="{ fieldModel }">
+          <ElInput v-model="fieldModel[`slots4`]" />
         </template>
       </DynamicForm>
     </template>

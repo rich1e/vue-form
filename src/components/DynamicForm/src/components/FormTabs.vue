@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-01 18:34:07
+ * @LastEditTime: 2022-12-02 17:36:37
  * @FilePath: /vue-form/src/components/DynamicForm/src/components/FormTabs.vue
  * @Description:
  *
@@ -17,7 +17,8 @@
 
 <script setup lang="ts">
   import { ElTabs, ElTabPane } from 'element-plus';
-  import { PropType } from 'vue';
+  import { PropType, inject } from 'vue';
+  import { formInjectionKey } from '../../keys';
   import { TabsType } from '../../types';
 
   const props = defineProps({
@@ -30,29 +31,15 @@
   const { tabs } = props;
   const { tabsTable, tabsType } = tabs;
 
-  type TabPaneType = InstanceType<typeof ElTabPane>;
+  const formData: any = inject(formInjectionKey);
 
-  const tabClickHandler = (pane: any, ev: Event) => {
-    console.log(pane);
-    const { label } = pane.props;
-    console.log(label);
-    console.log(ev);
+  const tabClickHandler = (pane: any) => {
+    const { index } = pane;
+    const currentTab: any = tabsTable[index];
+    const { type } = currentTab;
+
+    Object.assign(formData, { type, [type]: currentTab[type] });
   };
-
-  console.debug('This FormTabs');
-  console.groupCollapsed('Tab Props');
-  console.table(props);
-  console.groupEnd();
-
-  console.debug('This FormTabs');
-  console.groupCollapsed('Tab tabsTable');
-  console.table(tabsTable);
-  console.groupEnd();
-
-  console.debug('This FormTabs');
-  console.groupCollapsed('Tab tabsType');
-  console.table(tabsType);
-  console.groupEnd();
 </script>
 
 <template>
