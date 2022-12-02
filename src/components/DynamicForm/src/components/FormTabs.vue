@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-02 17:36:37
+ * @LastEditTime: 2022-12-02 17:57:51
  * @FilePath: /vue-form/src/components/DynamicForm/src/components/FormTabs.vue
  * @Description:
  *
@@ -16,8 +16,10 @@
 </script>
 
 <script setup lang="ts">
+  import type { PropType } from 'vue';
+  import { inject } from 'vue';
   import { ElTabs, ElTabPane } from 'element-plus';
-  import { PropType, inject } from 'vue';
+
   import { formInjectionKey } from '../../keys';
   import { TabsType } from '../../types';
 
@@ -33,8 +35,13 @@
 
   const formData: any = inject(formInjectionKey);
 
+  /**
+   * 当 tab 切换时，更新 formData 数据
+   * @param pane
+   */
   const tabClickHandler = (pane: any) => {
     const { index } = pane;
+    // TODO currentTab 类型
     const currentTab: any = tabsTable[index];
     const { type } = currentTab;
 

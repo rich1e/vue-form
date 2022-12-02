@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:37:02
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-02 18:12:54
+ * @LastEditTime: 2022-12-02 18:43:32
  * @FilePath: /vue-form/src/components/DynamicForm/Default.vue
  * @Description:
  *
@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
   import type { PropType } from 'vue';
-  import { ref, provide, reactive, watch, onMounted, computed } from 'vue';
+  import { provide, reactive, watch, computed } from 'vue';
 
   import BiserialTemplate from './src/templates/BiserialTemplate.vue';
   import GroupTemplate from './src/templates/GroupTemplate.vue';
@@ -21,10 +21,7 @@
   import UniseriateTemplate from './src/templates/UniseriateTemplate.vue';
 
   import { ConfigType } from './types';
-  import useDynamicSlots, {
-    filterField,
-    filterGroups,
-  } from './src/hooks/useDynamicSlots';
+  import useDynamicSlots, { watchSlots } from './src/hooks/useDynamicSlots';
   import { formInjectionKey } from './keys';
 
   const props = defineProps({
@@ -35,10 +32,10 @@
   });
 
   const { config } = props;
-  const { scene } = config;
+  const { scene, field, groups, tabs } = config;
 
   const formData: any = reactive({});
-  const slotsComputed = ref<string[]>([]);
+  provide(formInjectionKey, formData);
 
   const setComponent = computed(() => {
     const table = {
@@ -51,26 +48,9 @@
     return table[scene];
   });
 
-  const { slots } = useDynamicSlots({
-    field: props.config.field,
-    groups: props.config.groups,
-    tabs: props.config.tabs,
-  });
+  const { slots } = useDynamicSlots({ field, groups, tabs, store: formData });
 
-  provide(formInjectionKey, formData);
-
-  onMounted(() => {
-    slotsComputed.value = slots.value;
-  });
-
-  watch(formData, (newVal: any) => {
-    const { type } = newVal;
-    if (type === 'biserial' || type === 'uniseriate') {
-      slotsComputed.value = filterField(newVal[type]);
-    } else if (type === 'group') {
-      slotsComputed.value = filterGroups(newVal[type]);
-    }
-  });
+  watchSlots(formData, slots);
 </script>
 
 <template>
@@ -78,7 +58,7 @@
     <component :is="setComponent" :config="config">
       <template
         #[item]="{ slotModel }"
-        v-for="(item, idx) in slotsComputed"
+        v-for="(item, idx) in slots"
         :key="`${item}_${idx}`"
       >
         <slot :name="item" :fieldModel="slotModel" />

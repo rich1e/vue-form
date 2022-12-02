@@ -2,13 +2,14 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-12-01 16:01:05
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-02 17:36:13
+ * @LastEditTime: 2022-12-02 18:43:39
  * @FilePath: /vue-form/src/components/DynamicForm/src/hooks/useDynamicSlots.ts
  * @Description:
  *
  */
 import type { Ref } from 'vue';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch, reactive, provide } from 'vue';
+import { formInjectionKey } from '../../keys';
 
 import type { FieldType, TabsType } from '../../types';
 
@@ -16,6 +17,7 @@ interface Props {
   field?: FieldType[];
   groups?: FieldType[][];
   tabs?: TabsType;
+  store?: any;
 }
 
 interface GetSlotsParamType extends Props {}
@@ -60,6 +62,17 @@ const getSlots = (param: GetSlotsParamType) => {
   if (tabs) return filterTabs(tabs);
 };
 
+export const watchSlots = (store: any, slots: any) => {
+  watch(store, (newVal: any) => {
+    const { type } = newVal;
+    if (type === 'biserial' || type === 'uniseriate') {
+      slots.value = filterField(newVal[type]);
+    } else if (type === 'group') {
+      slots.value = filterGroups(newVal[type]);
+    }
+  });
+};
+
 /**
  * 动态计算 slots
  * @param props
@@ -67,10 +80,16 @@ const getSlots = (param: GetSlotsParamType) => {
  */
 const useDynamicSlots = (props: Props): UseRenderFields => {
   const slots = ref<string[]>([]);
+  const { field, groups, tabs } = props;
+
+  // const formData: any = reactive({});
+  // provide(formInjectionKey, formData);
 
   onMounted(() => {
-    slots.value = getSlots(props);
+    slots.value = getSlots({ field, groups, tabs });
   });
+
+  // watchSlots(formData, slots);
 
   return {
     slots,
