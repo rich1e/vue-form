@@ -1,15 +1,14 @@
 /*
  * @Author: yuqigong@outlook.com
  * @Date: 2022-12-01 16:01:05
- * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-02 18:43:39
+ * @LastEditors: rich1e
+ * @LastEditTime: 2022-12-04 17:34:09
  * @FilePath: /vue-form/src/components/DynamicForm/src/hooks/useDynamicSlots.ts
  * @Description:
  *
  */
 import type { Ref } from 'vue';
-import { onMounted, ref, watch, reactive, provide } from 'vue';
-import { formInjectionKey } from '../../keys';
+import { onMounted, ref, watch } from 'vue';
 
 import type { FieldType, TabsType } from '../../types';
 
@@ -17,7 +16,6 @@ interface Props {
   field?: FieldType[];
   groups?: FieldType[][];
   tabs?: TabsType;
-  store?: any;
 }
 
 interface GetSlotsParamType extends Props {}
@@ -82,14 +80,9 @@ const useDynamicSlots = (props: Props): UseRenderFields => {
   const slots = ref<string[]>([]);
   const { field, groups, tabs } = props;
 
-  // const formData: any = reactive({});
-  // provide(formInjectionKey, formData);
-
   onMounted(() => {
     slots.value = getSlots({ field, groups, tabs });
   });
-
-  // watchSlots(formData, slots);
 
   return {
     slots,

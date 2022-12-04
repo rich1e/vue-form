@@ -1,8 +1,8 @@
 <!--
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
- * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-02 17:35:36
+ * @LastEditors: rich1e
+ * @LastEditTime: 2022-12-04 17:59:12
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/TabTemplate.vue
  * @Description:
  *
@@ -17,8 +17,7 @@
 
 <script setup lang="ts">
   import type { PropType } from 'vue';
-  import { reactive, ref, provide, onMounted, watch, inject } from 'vue';
-
+  import { reactive, ref, provide, inject } from 'vue';
   import { ElForm } from 'element-plus';
 
   import FormFields from '../components/FormFields.vue';
@@ -28,10 +27,8 @@
   import FormTabs from '../components/FormTabs.vue';
 
   import type { ConfigType, SceneType } from '../../types';
-  import useDynamicSlots, {
-    filterField,
-    filterGroups,
-  } from '../hooks/useDynamicSlots';
+  import useDynamicSlots, { watchSlots } from '../hooks/useDynamicSlots';
+
   import { formInjectionKey } from '../../keys';
 
   const props = defineProps({
@@ -40,11 +37,6 @@
       default: {},
     },
   });
-
-  console.debug('This TabTemplate');
-  console.groupCollapsed('Tab Props');
-  console.table(props);
-  console.groupEnd();
 
   /**
    * tabs?.uniseriate / tabs?.biserial
@@ -62,20 +54,7 @@
 
   const { slots } = useDynamicSlots({ tabs });
 
-  const slotsComputed = ref<string[]>([]);
-
-  onMounted(() => {
-    slotsComputed.value = slots.value;
-  });
-
-  watch(formData, (newVal: any) => {
-    const { type } = newVal;
-    if (type === 'biserial' || type === 'uniseriate') {
-      slotsComputed.value = filterField(newVal[type]);
-    } else if (type === 'group') {
-      slotsComputed.value = filterGroups(newVal[type]);
-    }
-  });
+  watchSlots(formData, slots);
 
   // TODO 当UI为biserial时，需要注入formRef
   const biserialScene: SceneType = 'biserial';
@@ -100,7 +79,7 @@
         >
           <template
             #[item]="{ formModel }"
-            v-for="(item, idx) in slotsComputed"
+            v-for="(item, idx) in slots"
             :key="`${item}_${idx}`"
           >
             <slot :name="item" :slotModel="formModel" />
@@ -124,7 +103,7 @@
           >
             <template
               #[item]="{ formModel }"
-              v-for="(item, idx) in slotsComputed"
+              v-for="(item, idx) in slots"
               :key="`${item}_${idx}`"
             >
               <slot :name="item" :slotModel="formModel" />
@@ -147,7 +126,7 @@
           >
             <template
               #[item]="{ formModel }"
-              v-for="(item, idx) in slotsComputed"
+              v-for="(item, idx) in slots"
               :key="`${item}_${idx}`"
             >
               <slot :name="item" :slotModel="formModel" />

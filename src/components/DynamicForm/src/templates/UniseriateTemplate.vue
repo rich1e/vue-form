@@ -1,8 +1,8 @@
 <!--
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
- * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-01 16:33:39
+ * @LastEditors: rich1e
+ * @LastEditTime: 2022-12-04 17:33:05
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Uniseriate.vue
  * @Description:
  *
@@ -33,11 +33,6 @@
     },
   });
 
-  console.debug('This UniseriateTemplate');
-  console.groupCollapsed('Uniseriate Props');
-  console.table(props);
-  console.groupEnd();
-
   const { scene, field, actions, rule } = props.config;
 
   /** 表单引用 */
@@ -57,9 +52,8 @@
     label-width="80px"
   >
     <!-- 渲染表单字段 -->
-
-    <!-- 渲染自定义表单字段 -->
     <FormFields :scene="scene" :field="field" :dynamic-model="dynamicFormModel">
+      <!-- 渲染自定义表单字段 -->
       <template
         #[item]="{ formModel }"
         v-for="(item, idx) in slots"

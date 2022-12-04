@@ -1,8 +1,8 @@
 <!--
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
- * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-02 11:15:32
+ * @LastEditors: rich1e
+ * @LastEditTime: 2022-12-04 17:36:20
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/BiserialTemplate.vue
  * @Description:
  *
@@ -33,11 +33,6 @@
       default: {},
     },
   });
-
-  console.debug('This BiserialTemplate');
-  console.groupCollapsed('Biserial Props');
-  console.table(props);
-  console.groupEnd();
 
   const { scene, field, actions, rule } = props.config;
 

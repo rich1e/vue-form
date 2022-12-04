@@ -1,8 +1,8 @@
 <!--
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
- * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-29 14:42:56
+ * @LastEditors: rich1e
+ * @LastEditTime: 2022-12-04 17:39:41
  * @FilePath: /vue-form/src/components/DynamicForm/src/components/FormGroup.vue
  * @Description:
  *
@@ -16,8 +16,10 @@
 </script>
 
 <script setup lang="ts">
-  import { PropType, reactive, ref } from 'vue';
+  import type { PropType } from 'vue';
+  import { reactive, ref } from 'vue';
   import { ElForm } from 'element-plus';
+
   import { FieldType } from '../../types';
 
   const props = defineProps({
@@ -32,8 +34,6 @@
       default: [],
     },
   });
-
-  console.debug('This FormGroup');
 
   const { groups, rule } = props;
 

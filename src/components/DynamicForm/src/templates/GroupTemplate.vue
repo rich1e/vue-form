@@ -1,8 +1,8 @@
 <!--
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
- * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-01 17:33:45
+ * @LastEditors: rich1e
+ * @LastEditTime: 2022-12-04 17:38:35
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Group.vue
  * @Description:
  *
@@ -31,11 +31,6 @@
       default: {},
     },
   });
-
-  console.debug('This GroupTemplate');
-  console.groupCollapsed('Group Props');
-  console.table(props);
-  console.groupEnd();
 
   const { scene, groups, actions, rule } = props.config;
 

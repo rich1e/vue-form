@@ -1,8 +1,8 @@
 <!--
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
- * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-30 14:10:17
+ * @LastEditors: rich1e
+ * @LastEditTime: 2022-12-04 17:37:34
  * @FilePath: /vue-form/src/components/DynamicForm/src/components/FormBiserial.vue
  * @Description:
  *
@@ -16,8 +16,10 @@
 </script>
 
 <script setup lang="ts">
+  import type { PropType } from 'vue';
+  import { inject, reactive } from 'vue';
   import { ElCol, ElForm, ElRow } from 'element-plus';
-  import { inject, PropType, reactive } from 'vue';
+
   import type { FieldType } from '../../types';
 
   const props = defineProps({
@@ -32,8 +34,6 @@
       default: {},
     },
   });
-
-  console.debug('This FormBiserial');
 
   const { field, rule } = props;
   const injectRef = inject('FORM_REF');
