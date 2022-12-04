@@ -1,8 +1,8 @@
 <!--
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
- * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-02 17:57:51
+ * @LastEditors: rich1e
+ * @LastEditTime: 2022-12-04 18:41:58
  * @FilePath: /vue-form/src/components/DynamicForm/src/components/FormTabs.vue
  * @Description:
  *
@@ -21,7 +21,7 @@
   import { ElTabs, ElTabPane } from 'element-plus';
 
   import { formInjectionKey } from '../../keys';
-  import { TabsType } from '../../types';
+  import { TabPanesType, TabsType } from '../../types';
 
   const props = defineProps({
     tabs: {
@@ -31,7 +31,7 @@
   });
 
   const { tabs } = props;
-  const { tabsTable, tabsType } = tabs;
+  const { tabType, tabPanes } = tabs;
 
   const formData: any = inject(formInjectionKey);
 
@@ -41,22 +41,27 @@
    */
   const tabClickHandler = (pane: any) => {
     const { index } = pane;
-    // TODO currentTab 类型
-    const currentTab: any = tabsTable[index];
-    const { type } = currentTab;
+    const currentTab: TabPanesType = tabPanes[index];
+    const { paneType } = currentTab;
 
-    Object.assign(formData, { type, [type]: currentTab[type] });
+    Object.assign(formData, {
+      paneType,
+      /**
+       * @see https://blog.csdn.net/weixin_38629529/article/details/127131932
+       */
+      [paneType]: currentTab[paneType as keyof TabPanesType],
+    });
+    console.table(formData);
   };
 </script>
 
 <template>
-  <!-- TODO ElTabPane slots -->
-  <ElTabs :type="tabsType" @tab-click="tabClickHandler">
-    <template v-if="tabsTable">
+  <ElTabs :type="tabType" @tab-click="tabClickHandler">
+    <template v-if="tabPanes">
       <ElTabPane
-        :label="tab.label"
-        v-for="(tab, index) in tabsTable"
-        :key="`${tab.label}_${index}`"
+        :label="tab.title"
+        v-for="(tab, index) in tabPanes"
+        :key="`${tab.title}_${index}`"
       >
         <slot :tabPane="tab" />
       </ElTabPane>

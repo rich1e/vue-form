@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-12-01 16:01:05
  * @LastEditors: rich1e
- * @LastEditTime: 2022-12-04 17:34:09
+ * @LastEditTime: 2022-12-04 18:20:01
  * @FilePath: /vue-form/src/components/DynamicForm/src/hooks/useDynamicSlots.ts
  * @Description:
  *
@@ -41,10 +41,10 @@ const filterTabs = (tabs: TabsType) => {
   let types = '';
 
   // 找到有数据的直接返回，停止后续遍历
-  const fisrt: any = tabs.tabsTable.find((item: any) => {
-    const { type } = item;
-    if (item[type]) {
-      types = type;
+  const fisrt: any = tabs.tabPanes.find((item: any) => {
+    const { paneType } = item;
+    if (item[paneType]) {
+      types = paneType;
       return true;
     }
   });
@@ -62,11 +62,11 @@ const getSlots = (param: GetSlotsParamType) => {
 
 export const watchSlots = (store: any, slots: any) => {
   watch(store, (newVal: any) => {
-    const { type } = newVal;
-    if (type === 'biserial' || type === 'uniseriate') {
-      slots.value = filterField(newVal[type]);
-    } else if (type === 'group') {
-      slots.value = filterGroups(newVal[type]);
+    const { paneType } = newVal;
+    if (paneType === 'biserial' || paneType === 'uniseriate') {
+      slots.value = filterField(newVal[paneType]);
+    } else if (paneType === 'group') {
+      slots.value = filterGroups(newVal[paneType]);
     }
   });
 };

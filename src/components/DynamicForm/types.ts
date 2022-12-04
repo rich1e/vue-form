@@ -1,8 +1,8 @@
 /*
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-10 14:52:56
- * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-02 15:04:56
+ * @LastEditors: rich1e
+ * @LastEditTime: 2022-12-04 18:37:43
  * @FilePath: /vue-form/src/components/DynamicForm/types.ts
  * @Description:
  *
@@ -40,15 +40,15 @@ export type TabPaneType = Partial<
 >;
 
 /** 表单TabTable类型 */
-export type TabTablesType = {
-  label: string;
-  type: SceneType;
+export type TabPanesType = {
+  paneType: SceneType;
+  title: string;
 } & TabPaneType;
 
 /** 表单tabs数据 */
 export type TabsType = {
-  tabsType?: string;
-  tabsTable: TabTablesType[];
+  tabType?: string;
+  tabPanes: TabPanesType[];
 };
 
 /** 控件功能参数，任意 key-value 对象 */
