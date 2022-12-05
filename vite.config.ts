@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-03 14:10:27
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-28 10:04:08
+ * @LastEditTime: 2022-12-05 16:12:36
  * @FilePath: /vue-form/vite.config.ts
  * @Description:
  *
@@ -83,6 +83,25 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
 
       ElementPlus(),
     ],
+
+    build: {
+      lib: {
+        entry: './src/index.ts',
+        name: 'DynamicForm',
+        fileName: 'dynamic-form',
+      },
+      rollupOptions: {
+        // @see https://cn.vitejs.dev/guide/build.html#library-mode
+        // 确保外部化处理那些你不想打包进库的依赖
+        external: ['vue'],
+        output: {
+          // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
+          globals: {
+            vue: 'Vue',
+          },
+        },
+      },
+    },
 
     resolve: {
       alias: [

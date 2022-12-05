@@ -1,9 +1,17 @@
 {
-  "name": "vue-form",
+  "name": "@mg/dynamic-form",
   "author": "rich1e",
-  "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "files": ["dist"],
+  "main": "./dist/dynamic-form.umd.cjs",
+  "module": "./dist/dynamic-form.js",
+  "exports": {
+    ".": {
+      "import": "./dist/dynamic-form.js",
+      "require": "./dist/dynamic-form.umd.cjs"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "dev:mock": "vite --mode development",
