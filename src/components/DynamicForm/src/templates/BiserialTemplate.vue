@@ -1,8 +1,8 @@
 <!--
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
- * @LastEditors: rich1e
- * @LastEditTime: 2022-12-04 17:36:20
+ * @LastEditors: yuqigong@outlook.com
+ * @LastEditTime: 2022-12-05 10:07:00
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/BiserialTemplate.vue
  * @Description:
  *
@@ -36,10 +36,11 @@
 
   const { scene, field, actions, rule } = props.config;
 
-  const { slots } = useDynamicSlots({ field });
-
-  /** 表单引用 */
+  // 表单引用
   const formRef = ref<InstanceType<typeof ElForm> | null | any>(null);
+
+  // 获取动态 slots
+  const { slots } = useDynamicSlots({ field });
 
   provide('FORM_REF', formRef);
 </script>
@@ -48,6 +49,7 @@
   <FormBiserial :field="field" :rule="rule">
     <template #="{ field, dynamicModel }">
       <FormFields :scene="scene" :item="field" :dynamic-model="dynamicModel">
+        <!-- 渲染自定义表单字段 -->
         <template
           #[item]="{ formModel }"
           v-for="(item, idx) in slots"
@@ -58,6 +60,7 @@
       </FormFields>
     </template>
 
+    <!-- 渲染操作按钮 -->
     <template #actions>
       <FormActions :scene="scene" :actions="actions" />
     </template>

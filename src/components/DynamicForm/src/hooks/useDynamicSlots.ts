@@ -1,8 +1,8 @@
 /*
  * @Author: yuqigong@outlook.com
  * @Date: 2022-12-01 16:01:05
- * @LastEditors: rich1e
- * @LastEditTime: 2022-12-04 18:20:01
+ * @LastEditors: yuqigong@outlook.com
+ * @LastEditTime: 2022-12-05 09:58:56
  * @FilePath: /vue-form/src/components/DynamicForm/src/hooks/useDynamicSlots.ts
  * @Description:
  *
@@ -10,7 +10,7 @@
 import type { Ref } from 'vue';
 import { onMounted, ref, watch } from 'vue';
 
-import type { FieldType, TabsType } from '../../types';
+import type { DynamicFieldsType, FieldType, TabsType } from '../../types';
 
 interface Props {
   field?: FieldType[];
@@ -59,9 +59,16 @@ const getSlots = (param: GetSlotsParamType) => {
   if (groups) return filterGroups(groups);
   if (tabs) return filterTabs(tabs);
 };
-
-export const watchSlots = (store: any, slots: any) => {
-  watch(store, (newVal: any) => {
+/**
+ * 监听 fields 变化，并动态更新 slots
+ * @param dynamicFields 动态 fields
+ * @param slots slots 数组
+ */
+export const watchSlots = (
+  dynamicFields: DynamicFieldsType,
+  slots: Ref<string[]>,
+) => {
+  watch(dynamicFields, (newVal: any) => {
     const { paneType } = newVal;
     if (paneType === 'biserial' || paneType === 'uniseriate') {
       slots.value = filterField(newVal[paneType]);

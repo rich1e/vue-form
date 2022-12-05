@@ -1,8 +1,8 @@
 <!--
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:37:02
- * @LastEditors: rich1e
- * @LastEditTime: 2022-12-04 17:43:41
+ * @LastEditors: yuqigong@outlook.com
+ * @LastEditTime: 2022-12-05 10:05:44
  * @FilePath: /vue-form/src/components/DynamicForm/Default.vue
  * @Description:
  *
@@ -20,7 +20,7 @@
   import TabTemplate from './src/templates/TabTemplate.vue';
   import UniseriateTemplate from './src/templates/UniseriateTemplate.vue';
 
-  import { ConfigType } from './types';
+  import { ConfigType, DynamicFieldsType } from './types';
   import useDynamicSlots, { watchSlots } from './src/hooks/useDynamicSlots';
   import { formInjectionKey } from './keys';
 
@@ -34,8 +34,8 @@
   const { config } = props;
   const { scene, field, groups, tabs } = config;
 
-  const formData: any = reactive({});
-  provide(formInjectionKey, formData);
+  const fieldsData: DynamicFieldsType = reactive({});
+  provide(formInjectionKey, fieldsData);
 
   const setComponent = computed(() => {
     const table = {
@@ -48,9 +48,9 @@
     return table[scene];
   });
 
+  // 获取动态 slots
   const { slots } = useDynamicSlots({ field, groups, tabs });
-
-  watchSlots(formData, slots);
+  watchSlots(fieldsData, slots);
 </script>
 
 <template>

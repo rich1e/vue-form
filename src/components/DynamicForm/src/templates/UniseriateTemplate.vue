@@ -1,9 +1,9 @@
 <!--
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
- * @LastEditors: rich1e
- * @LastEditTime: 2022-12-04 17:33:05
- * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Uniseriate.vue
+ * @LastEditors: yuqigong@outlook.com
+ * @LastEditTime: 2022-12-05 10:06:36
+ * @FilePath: /vue-form/src/components/DynamicForm/src/templates/UniseriateTemplate.vue
  * @Description:
  *
 -->
@@ -35,12 +35,13 @@
 
   const { scene, field, actions, rule } = props.config;
 
-  /** 表单引用 */
+  // 表单引用
   const formRef = ref<InstanceType<typeof ElForm> | null | any>(null);
 
-  /** 动态表单字段 */
+  // 动态表单字段
   const dynamicFormModel: any = reactive({});
 
+  // 获取动态 slots
   const { slots } = useDynamicSlots({ field });
 </script>
 

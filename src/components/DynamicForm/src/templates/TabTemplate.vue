@@ -1,8 +1,8 @@
 <!--
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
- * @LastEditors: rich1e
- * @LastEditTime: 2022-12-04 17:59:12
+ * @LastEditors: yuqigong@outlook.com
+ * @LastEditTime: 2022-12-05 10:08:19
  * @FilePath: /vue-form/src/components/DynamicForm/src/templates/TabTemplate.vue
  * @Description:
  *
@@ -26,7 +26,7 @@
   import FormBiserial from '../components/FormBiserial.vue';
   import FormTabs from '../components/FormTabs.vue';
 
-  import type { ConfigType, SceneType } from '../../types';
+  import type { ConfigType, DynamicFieldsType, SceneType } from '../../types';
   import useDynamicSlots, { watchSlots } from '../hooks/useDynamicSlots';
 
   import { formInjectionKey } from '../../keys';
@@ -44,16 +44,16 @@
    */
   const { scene, tabs, actions, rule } = props.config;
 
-  /** 表单引用 */
+  // 表单引用
   const formRef = ref<InstanceType<typeof ElForm> | null | any>(null);
 
-  /** 动态表单字段 */
+  // TODO tab 动态表单字段
   const dynamicFormModel: any = reactive({});
 
-  const formData: any = inject(formInjectionKey);
+  const formData: DynamicFieldsType = inject(formInjectionKey)!;
 
+  // 获取动态 slots
   const { slots } = useDynamicSlots({ tabs });
-
   watchSlots(formData, slots);
 
   // TODO 当UI为biserial时，需要注入formRef

@@ -1,8 +1,8 @@
 /*
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-10 14:52:56
- * @LastEditors: rich1e
- * @LastEditTime: 2022-12-04 18:37:43
+ * @LastEditors: yuqigong@outlook.com
+ * @LastEditTime: 2022-12-05 09:55:19
  * @FilePath: /vue-form/src/components/DynamicForm/types.ts
  * @Description:
  *
@@ -25,7 +25,7 @@ import type { VNode } from 'vue';
 export type ControlType = 'Input' | 'Switch' | 'Select' | 'Checkbox' | 'Slots';
 
 /**
- * @description 表单UI类型
+ * 表单UI类型
  * @property uniseriate 单列
  * @property biserial 双列
  * @property group 分组
@@ -41,13 +41,20 @@ export type TabPaneType = Partial<
 
 /** 表单TabTable类型 */
 export type TabPanesType = {
+  /** Tab Pane 样式类型 */
   paneType: SceneType;
+  /** Tab Pane 标题 */
   title: string;
 } & TabPaneType;
 
+/** 动态Fields */
+export type DynamicFieldsType = Omit<TabPanesType, 'title'> | {};
+
 /** 表单tabs数据 */
 export type TabsType = {
+  /** Tab 风格类型 */
   tabType?: string;
+  /** Tab Pane 集合 */
   tabPanes: TabPanesType[];
 };
 
@@ -60,8 +67,8 @@ export type ControlPropsType = {
 };
 
 /**
+ * 表单字段对象
  * @type {object}
- * @desc 表单字段对象
  * @property {ControlType} control 控件类型
  */
 export type FieldType = {
@@ -89,6 +96,10 @@ export type FieldType = {
 
 /**
  * 表单事件类型
+ * @property onSubmit 表单提交事件函数
+ * @property onBack 表单返回事件函数
+ * @property onCancel 表单取消事件函数
+ * @property onRest 表单重置事件函数
  */
 export type ActionsEventType = 'onSubmit' | 'onBack' | 'onCancel' | 'onRest';
 

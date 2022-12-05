@@ -1,9 +1,9 @@
 <!--
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:39:28
- * @LastEditors: rich1e
- * @LastEditTime: 2022-12-04 17:38:35
- * @FilePath: /vue-form/src/components/DynamicForm/src/templates/Group.vue
+ * @LastEditors: yuqigong@outlook.com
+ * @LastEditTime: 2022-12-05 10:09:11
+ * @FilePath: /vue-form/src/components/DynamicForm/src/templates/GroupTemplate.vue
  * @Description:
  *
 -->
@@ -34,6 +34,7 @@
 
   const { scene, groups, actions, rule } = props.config;
 
+  // 获取动态 slots
   const { slots } = useDynamicSlots({ groups });
 </script>
 
@@ -52,6 +53,7 @@
       </FormFields>
     </template>
 
+    <!-- 渲染操作按钮 -->
     <template #actions>
       <FormActions :scene="scene" :actions="actions" />
     </template>
