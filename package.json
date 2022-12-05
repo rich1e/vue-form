@@ -1,7 +1,7 @@
 {
   "name": "@mg/dynamic-form",
-  "author": "rich1e",
-  "version": "1.0.0",
+  "author": "gongyuqi@max-optics.com",
+  "version": "1.0.1",
   "type": "module",
   "files": ["dist"],
   "main": "./dist/dynamic-form.umd.cjs",
