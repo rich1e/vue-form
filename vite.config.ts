@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-03 14:10:27
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-05 16:12:36
+ * @LastEditTime: 2022-12-06 14:11:05
  * @FilePath: /vue-form/vite.config.ts
  * @Description:
  *
@@ -26,6 +26,8 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
  * @see https://github.com/element-plus/unplugin-element-plus/blob/main/README.zh-CN.md
  */
 import ElementPlus from 'unplugin-element-plus/vite';
+
+import dts from 'vite-plugin-dts';
 
 // https://vitejs.dev/config/
 export default ({ command, mode }: ConfigEnv): UserConfigExport => {
@@ -82,6 +84,11 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       }),
 
       ElementPlus(),
+
+      dts({
+        insertTypesEntry: true,
+        staticImport: true,
+      }),
     ],
 
     build: {
@@ -89,6 +96,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         entry: './src/index.ts',
         name: 'DynamicForm',
         fileName: 'dynamic-form',
+        formats: ['es'],
       },
       rollupOptions: {
         // @see https://cn.vitejs.dev/guide/build.html#library-mode

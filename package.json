@@ -1,9 +1,11 @@
 {
   "name": "@mg/dynamic-form",
-  "author": "gongyuqi@max-optics.com",
+  "author": "rich1e",
   "version": "1.0.1",
   "type": "module",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "./dist/dynamic-form.umd.cjs",
   "module": "./dist/dynamic-form.js",
   "exports": {
@@ -48,6 +50,7 @@
     "unplugin-element-plus": "^0.4.1",
     "unplugin-vue-components": "^0.22.9",
     "vite": "^3.2.0",
+    "vite-plugin-dts": "^1.7.1",
     "vite-plugin-mock": "^2.9.6",
     "vue-tsc": "^1.0.10"
   }

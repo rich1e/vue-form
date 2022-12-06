@@ -11,6 +11,8 @@
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
 
+    // "preserveSymlinks": true,
+
     /**
      * @see https://blog.csdn.net/weixin_40013817/article/details/127201009
      * @see https://github.com/typescript-eslint/typescript-eslint/issues/4268
@@ -19,9 +21,12 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
 
+    "preserveSymlinks": true,
+
     "baseUrl": ".",
     "paths": {
-      "/@/*": ["src/*"]
+      "/@/*": ["src/*"],
+      "element-plus": ["node_modules/element-plus"]
     },
     "types": ["element-plus/global", "reflect-metadata"],
     "skipLibCheck": true,
