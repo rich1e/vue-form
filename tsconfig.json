@@ -11,17 +11,13 @@
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
 
-    // "preserveSymlinks": true,
-
     /**
      * @see https://blog.csdn.net/weixin_40013817/article/details/127201009
      * @see https://github.com/typescript-eslint/typescript-eslint/issues/4268
-    */
+     */
     // "importsNotUsedAsValues": "error",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-
-    "preserveSymlinks": true,
 
     "baseUrl": ".",
     "paths": {
@@ -33,9 +29,9 @@
     "noEmit": true,
 
     /**
-      * @see https://github.com/mrmckeb/typescript-plugin-css-modules#installation
-      * @see https://www.jianshu.com/p/be1778a76763
-      * @see https://www.cnblogs.com/zhangym118/p/13364894.html
+     * @see https://github.com/mrmckeb/typescript-plugin-css-modules#installation
+     * @see https://www.jianshu.com/p/be1778a76763
+     * @see https://www.cnblogs.com/zhangym118/p/13364894.html
      */
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },

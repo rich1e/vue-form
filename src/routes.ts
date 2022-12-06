@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-07 09:54:23
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-02 11:09:24
+ * @LastEditTime: 2022-12-06 15:22:17
  * @FilePath: /vue-form/src/routes.ts
  * @Description:
  *
@@ -29,7 +29,7 @@ export type AppRouteRecord = RouteRecordRaw & {
 const routes: AppRouteRecord[] = [
   {
     path: '/',
-    component: () => import('/@/views/Default.vue'),
+    component: () => import('./views/Default.vue'),
     meta: {
       title: '',
     },
@@ -53,7 +53,7 @@ const routes: AppRouteRecord[] = [
 
   {
     path: '/group',
-    component: () => import('/@/views/Group.vue'),
+    component: () => import('./views/Group.vue'),
     meta: {
       title: '',
     },
@@ -61,7 +61,7 @@ const routes: AppRouteRecord[] = [
 
   {
     path: '/tab',
-    component: () => import('/@/views/Tab.vue'),
+    component: () => import('./views/Tab.vue'),
     meta: {
       title: '',
     },
@@ -69,7 +69,7 @@ const routes: AppRouteRecord[] = [
 
   {
     path: '/flex',
-    component: () => import('/@/views/Flex.vue'),
+    component: () => import('./views/Flex.vue'),
     meta: {
       title: '',
     },
@@ -77,7 +77,7 @@ const routes: AppRouteRecord[] = [
 
   {
     path: '/http',
-    component: () => import('/@/views/Http.vue'),
+    component: () => import('./views/Http.vue'),
     meta: {
       title: '',
     },
@@ -135,7 +135,7 @@ const routes: AppRouteRecord[] = [
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
-    component: () => import('/@/views/NotFound.vue'),
+    component: () => import('./views/NotFound.vue'),
     meta: {
       title: '404',
     },
