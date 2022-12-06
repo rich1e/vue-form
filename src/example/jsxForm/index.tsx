@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-24 09:46:15
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-28 19:26:46
+ * @LastEditTime: 2022-12-06 15:42:45
  * @FilePath: /vue-form/src/example/jsxForm/index.tsx
  * @Description:
  *
@@ -12,7 +12,7 @@ import { ElDivider } from 'element-plus';
 import style from './index.module.scss';
 import ModernForm from './ModernForm';
 import PopularForm from './PopularForm.vue';
-import { checkEmpty } from '/@/components/DynamicForm/src/hooks/useValidator';
+import { checkEmpty } from '../../components/DynamicForm/src/hooks/useValidator';
 
 // type FormRefType = InstanceType<typeof ElForm>;
 

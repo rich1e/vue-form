@@ -1,8 +1,8 @@
 <!--
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-07 19:22:40
- * @LastEditors: gongyuqi@max-optics.com
- * @LastEditTime: 2022-11-08 11:09:18
+ * @LastEditors: yuqigong@outlook.com
+ * @LastEditTime: 2022-12-06 15:44:13
  * @FilePath: /vue-form/src/views/Http.vue
  * @Description:
  *
@@ -11,13 +11,13 @@
   import { defineComponent } from 'vue';
   import { ElButton } from 'element-plus';
 
-  import { CustomAxiosHttpClientClass } from '/@/helper/request/customAxiosClass';
+  import { CustomAxiosHttpClientClass } from '../helper/request/customAxiosClass';
 
-  import { Warrior } from '/@/helper/IoCDemo/interfaces';
-  import { myContainer } from '/@/helper/IoCDemo/inversify.config';
-  import { TYPES } from '/@/helper/IoCDemo/types';
+  import { Warrior } from '../helper/IoCDemo/interfaces';
+  import { myContainer } from '../helper/IoCDemo/inversify.config';
+  import { TYPES } from '../helper/IoCDemo/types';
 
-  import { httpClient } from '/@/helper/request';
+  import { httpClient } from '../helper/request';
 
   export default defineComponent({
     name: 'Http',

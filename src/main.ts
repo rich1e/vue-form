@@ -1,8 +1,8 @@
 /*
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-03 14:10:27
- * @LastEditors: gongyuqi@max-optics.com
- * @LastEditTime: 2022-11-07 17:42:52
+ * @LastEditors: yuqigong@outlook.com
+ * @LastEditTime: 2022-12-06 15:39:05
  * @FilePath: /vue-form/src/main.ts
  * @Description:
  *
@@ -10,7 +10,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 
-import { router, setupRouter } from '/@/routes';
+import { router, setupRouter } from './routes';
 
 import './style.css';
 

@@ -2,7 +2,7 @@
  * @Author: rich1e
  * @Date: 2022-11-14 12:37:25
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-30 20:17:11
+ * @LastEditTime: 2022-12-06 15:44:43
 -->
 <script lang="ts">
   export default {
@@ -22,7 +22,7 @@
   import { inject } from 'vue';
   import type { PropType } from 'vue';
   import { formInjectionKey } from './keys';
-  import { FieldType } from '/@/components/DynamicForm/types';
+  import { FieldType } from '../../components/DynamicForm/types';
 
   const props = defineProps({
     /** 表单字段列表 */

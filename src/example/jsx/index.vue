@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-21 14:38:54
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-23 20:40:36
+ * @LastEditTime: 2022-12-06 15:42:30
  * @FilePath: /vue-form/src/example/jsx/index.vue
  * @Description:
  *
@@ -12,11 +12,11 @@
   import { ref, defineComponent } from 'vue';
   import { ElDivider, ElCheckbox, ElCheckboxGroup } from 'element-plus';
 
-  import InSwitch from '/@/example/jsx/components/Switch';
-  import InSelect from '/@/example/jsx/components/Select';
-  import InInput from '/@/example/jsx/components/Inputs';
-  import InRadio from '/@/example/jsx/components/Radio';
-  import InCheckbox from '/@/example/jsx/components/Checkbox';
+  import InSwitch from '../../example/jsx/components/Switch';
+  import InSelect from '../../example/jsx/components/Select';
+  import InInput from '../../example/jsx/components/Inputs';
+  import InRadio from '../../example/jsx/components/Radio';
+  import InCheckbox from '../../example/jsx/components/Checkbox';
 
   export default defineComponent({
     name: 'Jsx',

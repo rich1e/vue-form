@@ -9,7 +9,7 @@ import {
   renderSlots,
   renderSwitch,
 } from './components/fields';
-import { checkEmpty } from '/@/components/DynamicForm/src/hooks/useValidator';
+import { checkEmpty } from '../../components/DynamicForm/src/hooks/useValidator';
 
 export default defineComponent({
   name: 'ModernForm',

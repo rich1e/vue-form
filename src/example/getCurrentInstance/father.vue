@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-18 14:23:17
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-21 14:26:47
+ * @LastEditTime: 2022-12-06 15:49:41
  * @FilePath: /vue-form/src/example/getCurrentInstance/father.vue
  * @Description:
  *
@@ -16,7 +16,7 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import { ElButton, ElDivider } from 'element-plus';
-  import Child from '/@/example/getCurrentInstance/child.vue';
+  import Child from './child.vue';
 
   const childName = 'Father';
 

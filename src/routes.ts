@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-07 09:54:23
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-06 15:22:17
+ * @LastEditTime: 2022-12-06 15:49:03
  * @FilePath: /vue-form/src/routes.ts
  * @Description:
  *
@@ -85,7 +85,7 @@ const routes: AppRouteRecord[] = [
 
   {
     path: '/instance',
-    component: () => import('/@/example/getCurrentInstance/index.vue'),
+    component: () => import('./example/getCurrentInstance/index.vue'),
     meta: {
       title: '',
     },
@@ -93,7 +93,7 @@ const routes: AppRouteRecord[] = [
 
   {
     path: '/jsx',
-    component: () => import('/@/example/jsx/index.vue'),
+    component: () => import('./example/jsx/index.vue'),
     meta: {
       title: '',
     },
@@ -101,7 +101,7 @@ const routes: AppRouteRecord[] = [
 
   {
     path: '/form',
-    component: () => import('/@/example/form/index.vue'),
+    component: () => import('./example/form/index.vue'),
     meta: {
       title: '',
     },
@@ -109,7 +109,7 @@ const routes: AppRouteRecord[] = [
 
   {
     path: '/jsx-form',
-    component: () => import('/@/example/jsxForm/index'),
+    component: () => import('./example/jsxForm/index'),
     meta: {
       title: '',
     },
@@ -117,7 +117,7 @@ const routes: AppRouteRecord[] = [
 
   {
     path: '/dynamic-components',
-    component: () => import('/@/example/dynamicComponents/index'),
+    component: () => import('./example/dynamicComponents/index'),
     meta: {
       title: '',
     },
@@ -125,7 +125,7 @@ const routes: AppRouteRecord[] = [
 
   {
     path: '/slots',
-    component: () => import('/@/example/slots/index.vue'),
+    component: () => import('./example/slots/index.vue'),
     meta: {
       title: '',
     },

@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-23 18:36:22
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-30 17:38:32
+ * @LastEditTime: 2022-12-06 15:43:19
  * @FilePath: /vue-form/src/example/slots/index.vue
  * @Description:
  *
@@ -41,7 +41,7 @@
   import { checkAge, checkEmpty } from './rules';
 
   import FormFields from './fields.vue';
-  import { FieldType } from '/@/components/DynamicForm/types';
+  import { FieldType } from '../../components/DynamicForm/types';
   import { formInjectionKey } from './keys';
 
   type FormRefType = InstanceType<typeof ElForm>;

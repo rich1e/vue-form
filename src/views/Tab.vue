@@ -1,15 +1,15 @@
 <!--
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-03 14:10:27
- * @LastEditors: rich1e
- * @LastEditTime: 2022-12-04 18:12:39
+ * @LastEditors: yuqigong@outlook.com
+ * @LastEditTime: 2022-12-06 15:40:55
  * @FilePath: /vue-form/src/views/Tab.vue
  * @Description:
  *
 -->
 <script setup lang="ts">
-  import BaseViewVue from '/@/components/Layouts/BaseView.vue';
-  import DynamicForm from '/@/components/DynamicForm';
+  import BaseViewVue from '../components/Layouts/BaseView.vue';
+  import DynamicForm from '../components/DynamicForm';
   import { ConfigType } from '../components/DynamicForm/types';
   import {
     checkAge,

@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-23 18:36:22
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-24 14:10:55
+ * @LastEditTime: 2022-12-06 15:50:27
  * @FilePath: /vue-form/src/example/form/index.vue
  * @Description:
  *
@@ -82,7 +82,7 @@
     ElOption,
   } from 'element-plus';
 
-  import CustInput from '/@/example/jsx/components/CustInput/index.vue';
+  import CustInput from '../jsx/components/CustInput/index.vue';
 
   type FormRefType = InstanceType<typeof ElForm>;
 

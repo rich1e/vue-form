@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-18 14:23:17
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-21 14:25:00
+ * @LastEditTime: 2022-12-06 15:49:28
  * @FilePath: /vue-form/src/example/getCurrentInstance/index.vue
  * @Description:
  *
@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
   import { ElButton, ElDivider } from 'element-plus';
-  import Father from '/@/example/getCurrentInstance/father.vue';
+  import Father from './father.vue';
 
   const onClick = () => {
     console.log('click');

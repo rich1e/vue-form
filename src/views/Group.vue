@@ -2,14 +2,14 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-03 14:10:27
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-01 17:35:30
+ * @LastEditTime: 2022-12-06 15:44:45
  * @FilePath: /vue-form/src/views/Group.vue
  * @Description:
  *
 -->
 <script setup lang="ts">
-  import BaseViewVue from '/@/components/Layouts/BaseView.vue';
-  import DynamicForm from '/@/components/DynamicForm';
+  import BaseViewVue from '../components/Layouts/BaseView.vue';
+  import DynamicForm from '../components/DynamicForm';
   import {
     checkAge,
     checkEmpty,

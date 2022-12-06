@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-28 13:22:22
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-28 20:10:37
+ * @LastEditTime: 2022-12-06 15:43:03
  * @FilePath: /vue-form/src/example/jsxForm/PopularForm.vue
  * @Description:
  *
@@ -24,7 +24,7 @@
   } from 'element-plus';
   import { defineComponent, reactive, ref } from 'vue';
 
-  import { checkEmpty } from '/@/components/DynamicForm/src/hooks/useValidator';
+  import { checkEmpty } from '../../components/DynamicForm/src/hooks/useValidator';
 
   export default defineComponent({
     name: 'PopularForm',
