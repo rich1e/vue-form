@@ -1,13 +1,14 @@
 {
   "name": "@mg/dynamic-form",
   "author": "rich1e",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "type": "module",
   "files": [
     "dist"
   ],
   "main": "./dist/dynamic-form.umd.cjs",
   "module": "./dist/dynamic-form.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/dynamic-form.js",

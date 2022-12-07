@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-11 09:37:02
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-05 10:05:44
+ * @LastEditTime: 2022-12-07 16:28:40
  * @FilePath: /vue-form/src/components/DynamicForm/Default.vue
  * @Description:
  *
@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
   import type { PropType } from 'vue';
-  import { provide, reactive, watch, computed } from 'vue';
+  import { provide, reactive, computed, withDefaults } from 'vue';
 
   import BiserialTemplate from './src/templates/BiserialTemplate.vue';
   import GroupTemplate from './src/templates/GroupTemplate.vue';

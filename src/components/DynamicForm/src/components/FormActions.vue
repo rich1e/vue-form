@@ -2,7 +2,7 @@
  * @Author: rich1e
  * @Date: 2022-11-14 12:58:36
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-30 15:49:49
+ * @LastEditTime: 2022-12-07 09:13:36
 -->
 <script lang="ts">
   export default {
@@ -34,7 +34,7 @@
   const { scene, actions } = props;
 
   // TODO inject 封装成 hook，inject() can only be used inside setup() or functional components.
-  let injectRef;
+  let injectRef: any;
 
   if (scene && scene === 'biserial') {
     injectRef = inject('FORM_REF');
