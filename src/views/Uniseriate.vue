@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-03 14:10:27
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-06 15:44:35
+ * @LastEditTime: 2022-12-08 15:22:42
  * @FilePath: /vue-form/src/views/Uniseriate.vue
  * @Description:
  *
@@ -28,9 +28,9 @@
   const rule = {
     username: [{ validator: checkEmpty, trigger: 'blur', required: true }],
     age: [{ validator: checkAge, trigger: 'blur', required: true }],
-    birth: [{ validator: checkEmpty, trigger: 'blur', required: true }],
+    birth: [{ validator: checkEmpty, trigger: 'change', required: true }],
     recruit: [{ validator: checkEmpty, trigger: 'change', required: true }],
-    skill: [{ validator: checkEmpty, trigger: 'blur', required: true }],
+    skill: [{ validator: checkEmpty, trigger: 'change', required: true }],
     /** 自定义组件规则 */
     slots1: [{ validator: checkEmpty, trigger: 'blur', required: true }],
     slots3: [{ validator: checkEmpty, trigger: 'blur', required: true }],
