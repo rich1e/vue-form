@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-07 09:54:23
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-06 15:49:03
+ * @LastEditTime: 2022-12-08 10:21:09
  * @FilePath: /vue-form/src/routes.ts
  * @Description:
  *
@@ -62,6 +62,14 @@ const routes: AppRouteRecord[] = [
   {
     path: '/tab',
     component: () => import('./views/Tab.vue'),
+    meta: {
+      title: '',
+    },
+  },
+
+  {
+    path: '/dialog',
+    component: () => import('./views/Dialog.vue'),
     meta: {
       title: '',
     },
