@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-07 10:35:55
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-08 10:31:50
+ * @LastEditTime: 2022-12-19 18:11:21
  * @FilePath: /vue-form/src/views/Default.vue
  * @Description:
  *
@@ -52,6 +52,9 @@
       </li>
       <li>
         <RouterLink to="/dialog">Dialog</RouterLink>
+      </li>
+      <li>
+        <RouterLink to="/multi-column-form">Multi-Column Form</RouterLink>
       </li>
     </ul>
   </div>

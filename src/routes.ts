@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-07 09:54:23
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-08 10:21:09
+ * @LastEditTime: 2022-12-19 18:11:01
  * @FilePath: /vue-form/src/routes.ts
  * @Description:
  *
@@ -134,6 +134,14 @@ const routes: AppRouteRecord[] = [
   {
     path: '/slots',
     component: () => import('./example/slots/index.vue'),
+    meta: {
+      title: '',
+    },
+  },
+
+  {
+    path: '/multi-column-form',
+    component: () => import('./example/multi-column-form/index.vue'),
     meta: {
       title: '',
     },
