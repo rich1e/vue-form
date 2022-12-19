@@ -2,7 +2,7 @@
  * @Author: gongyuqi@max-optics.com
  * @Date: 2022-11-10 14:52:56
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-05 09:55:19
+ * @LastEditTime: 2022-12-19 17:32:07
  * @FilePath: /vue-form/src/components/DynamicForm/types.ts
  * @Description:
  *
@@ -53,7 +53,7 @@ export type DynamicFieldsType = Omit<TabPanesType, 'title'> | {};
 /** 表单tabs数据 */
 export type TabsType = {
   /** Tab 风格类型 */
-  tabType?: string;
+  tabType?: '' | 'card' | 'border-card';
   /** Tab Pane 集合 */
   tabPanes: TabPanesType[];
 };
