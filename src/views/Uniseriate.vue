@@ -1,8 +1,8 @@
 <!--
- * @Author: gongyuqi@max-optics.com
+ * @Author: yuqigong@outlook.com
  * @Date: 2022-11-03 14:10:27
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-08 15:22:42
+ * @LastEditTime: 2022-12-20 16:13:37
  * @FilePath: /vue-form/src/views/Uniseriate.vue
  * @Description:
  *
@@ -77,6 +77,9 @@
 
   const formConfig: ConfigType = {
     scene: 'uniseriate',
+    // multiColumn: {
+    //   cols: 3,
+    // },
     field: [
       {
         control: 'Input',
