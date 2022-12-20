@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-03 14:10:27
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-06 15:44:45
+ * @LastEditTime: 2022-12-20 17:08:05
  * @FilePath: /vue-form/src/views/Group.vue
  * @Description:
  *
@@ -66,6 +66,9 @@
 
   const formConfig: ConfigType = {
     scene: 'group',
+    multiColumn: {
+      cols: 2,
+    },
     groups: [
       [
         {
