@@ -1,7 +1,7 @@
 /*
- * @Author: gongyuqi@max-optics.com
+ * @Author: yuqigong@outlook.com
  * @Date: 2022-11-07 19:18:56
- * @LastEditors: gongyuqi@max-optics.com
+ * @LastEditors: yuqigong@outlook.com
  * @LastEditTime: 2022-11-08 13:43:31
  * @FilePath: /vue-form/src/helper/IoCDemo/inversify.config.ts
  * @Description:

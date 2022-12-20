@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-23 18:36:22
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-19 18:18:21
+ * @LastEditTime: 2022-12-20 13:30:04
  * @FilePath: /vue-form/src/example/multi-column-form/index.vue
  * @Description:
  *
@@ -250,5 +250,15 @@
      * @see https://github.com/element-plus/element-plus/issues/7292
      */
     formEl.resetFields();
+  };
+
+  const sliceArr = (arr: [], pageSize: number) => {
+    const result = [];
+    let count = 0;
+    while (count * pageSize < arr.length) {
+      result.push(arr.slice(count * pageSize, pageSize * (count + 1)));
+      count += 1;
+    }
+    return result;
   };
 </script>

@@ -1,8 +1,8 @@
 /*
- * @Author: gongyuqi@max-optics.com
+ * @Author: yuqigong@outlook.com
  * @Date: 2022-11-10 14:52:56
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-19 17:32:07
+ * @LastEditTime: 2022-12-20 15:31:59
  * @FilePath: /vue-form/src/components/DynamicForm/types.ts
  * @Description:
  *
@@ -106,7 +106,7 @@ export type ActionsEventType = 'onSubmit' | 'onBack' | 'onCancel' | 'onRest';
 /**
  * 表单事件按钮
  */
-export type ActionsDetail = {
+export type ActionsDetailType = {
   /** 按钮文字 */
   btnText: string;
   /** 按钮事件处理函数 */
@@ -121,7 +121,19 @@ export type ActionsDetail = {
 /**
  * 表单操作类型
  */
-export type ActionsType = Partial<Record<ActionsEventType, ActionsDetail>>;
+export type ActionsType = Partial<Record<ActionsEventType, ActionsDetailType>>;
+
+type IsDivisible = 1 | 2 | 3 | 4 | 6 | 8 | 12;
+
+/**
+ * 表单多列属性
+ */
+export type MultiColumnType = {
+  /** 列数 */
+  cols: IsDivisible;
+  /** 间隔距离 */
+  gutter?: number;
+};
 
 /**
  * @type {object}
@@ -130,6 +142,10 @@ export type ActionsType = Partial<Record<ActionsEventType, ActionsDetail>>;
 export type ConfigType = {
   /** UI类型 */
   scene: SceneType;
+  /** form 属性，参考 element plus ElForm */
+  formAttr?: any;
+  /** form 多列 */
+  multiColumn?: MultiColumnType;
   /** tabs数据 */
   tabs?: TabsType;
   /** groups数据 */

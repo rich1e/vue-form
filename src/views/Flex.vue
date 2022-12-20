@@ -1,7 +1,7 @@
 <!--
- * @Author: gongyuqi@max-optics.com
+ * @Author: yuqigong@outlook.com
  * @Date: 2022-11-07 18:19:40
- * @LastEditors: gongyuqi@max-optics.com
+ * @LastEditors: yuqigong@outlook.com
  * @LastEditTime: 2022-11-07 19:05:39
  * @FilePath: /vue-form/src/views/Flex.vue
  * @Description:
