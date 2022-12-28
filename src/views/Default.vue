@@ -56,6 +56,9 @@
       <li>
         <RouterLink to="/multi-column-form">Multi-Column Form</RouterLink>
       </li>
+      <li>
+        <RouterLink to="/table">Table</RouterLink>
+      </li>
     </ul>
   </div>
 </template>
