@@ -1,5 +1,7 @@
 <script setup lang="ts">
   import { ref } from 'vue';
+
+  import type { TableColumnCtx } from 'element-plus';
   import { ElTable, ElTableColumn, ElInput } from 'element-plus';
 
   const isNewItem = ref(false);
@@ -37,6 +39,15 @@
     },
   ]);
 
+  /**
+   * 双击编辑单元格
+   * @param {*} row
+   * @param {*} column
+   * @param {*} cell
+   * @param {*} event
+   * @see https://element-plus.org/en-US/component/table.html#table-events
+   * @see https://blog.csdn.net/weixin_44206947/article/details/123711033
+   */
   const spanDblClickHandler = (event: any, row: any, cell: any) => {
     // row[cell.prop].show = false;
     // event.target.nextElementSibling.firstElementChild
@@ -177,6 +188,64 @@
       return -1;
     }
   };
+
+  interface User {
+    order: number;
+    date: string;
+    name: string;
+    address: string;
+    work: {
+      year: number;
+      seniority: number;
+    };
+  }
+
+  // const formatter = (row: User, column: TableColumnCtx<User>) => {
+  //   return row.address;
+  // };
+
+  const tableData2: User[] = [
+    {
+      order: 1,
+      date: '2016-05-03',
+      name: 'Tom1',
+      address: 'No. 189, Grove St, Los Angeles',
+      work: {
+        year: 10,
+        seniority: 3,
+      },
+    },
+    {
+      order: 2,
+      date: '2016-05-02',
+      name: 'Tom2',
+      address: 'No. 189, Grove St, Los Angeles',
+      work: {
+        year: 10,
+        seniority: 3,
+      },
+    },
+    {
+      order: 3,
+      date: '2016-05-04',
+      name: 'Tom3',
+      address: 'No. 189, Grove St, Los Angeles',
+      work: {
+        year: 10,
+        seniority: 3,
+      },
+    },
+    {
+      order: 4,
+      date: '2016-05-01',
+      name: 'Tom4',
+      address: 'No. 189, Grove St, Los Angeles',
+      work: {
+        year: 10,
+        seniority: 3,
+      },
+    },
+  ];
 </script>
 
 <template>
@@ -233,6 +302,24 @@
   </div>
   <div :style="{ width: '800px', margin: '50px auto' }">
     <span class="new-item" @click="newItem">New Item</span>
+  </div>
+
+  <div
+    :style="{
+      width: '800px',
+      margin: '50px auto',
+    }"
+  >
+    <el-table
+      :data="tableData2"
+      :default-sort="{ prop: 'date', order: 'ascending' }"
+      style="width: 100%"
+    >
+      <el-table-column prop="order" label="Order" sortable width="100" />
+      <el-table-column prop="date" label="Date" sortable width="180" />
+      <el-table-column prop="name" label="Name" width="180" />
+      <el-table-column prop="address" label="Address" />
+    </el-table>
   </div>
 </template>
 
