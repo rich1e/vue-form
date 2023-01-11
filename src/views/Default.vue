@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-07 10:35:55
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-19 18:11:21
+ * @LastEditTime: 2023-01-11 10:58:31
  * @FilePath: /vue-form/src/views/Default.vue
  * @Description:
  *
@@ -58,6 +58,9 @@
       </li>
       <li>
         <RouterLink to="/table">Table</RouterLink>
+      </li>
+      <li>
+        <RouterLink to="/typewriter">TypeWriter</RouterLink>
       </li>
     </ul>
   </div>

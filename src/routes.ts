@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-07 09:54:23
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2023-01-10 18:33:52
+ * @LastEditTime: 2023-01-11 10:57:50
  * @FilePath: /vue-form/src/routes.ts
  * @Description:
  *
@@ -142,6 +142,14 @@ const routes: AppRouteRecord[] = [
   {
     path: '/multi-column-form',
     component: () => import('./example/multi-column-form/index.vue'),
+    meta: {
+      title: '',
+    },
+  },
+
+  {
+    path: '/typewriter',
+    component: () => import('./example/typewriter/index.vue'),
     meta: {
       title: '',
     },
