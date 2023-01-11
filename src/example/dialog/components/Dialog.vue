@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2023-01-10 16:54:38
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2023-01-11 10:54:01
+ * @LastEditTime: 2023-01-11 17:38:44
  * @FilePath: /vue-form/src/example/dialog/components/Dialog.vue
  * @Description:
  *
@@ -23,6 +23,9 @@
 </script>
 
 <script setup lang="ts">
+  /**
+   * @see https://github.com/element-plus/element-plus/blob/v1.0.1-beta.24/website/docs/zh-CN/dialog.md
+   */
   import { ElDialog } from 'element-plus';
   import { ref } from 'vue';
 
@@ -30,5 +33,12 @@
 </script>
 
 <template>
-  <ElDialog v-model="dialogVisible" v-bind="$attrs"></ElDialog>
+  <div>
+    <ElDialog v-model="dialogVisible" v-bind="$attrs">
+      {{ $attrs }}
+      <template v-for="(_, name) in $slots" v-slot:[name]="data">
+        <slot :name="name" v-bind="data" />
+      </template>
+    </ElDialog>
+  </div>
 </template>
