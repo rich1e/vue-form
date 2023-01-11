@@ -1,15 +1,15 @@
 <script setup lang="ts">
+  import { ElButton, ElDialog } from 'element-plus';
   import { ref } from 'vue';
-  import { ElDialog, ElButton } from 'element-plus';
 
-  import type { ConfigType } from '../components/DynamicForm/types';
-  import BaseViewVue from '../components/Layouts/BaseView.vue';
-  import DynamicForm from '../components/DynamicForm';
+  import DynamicForm from '/@/components/DynamicForm';
+  import { pageBack } from '/@/components/DynamicForm/src/hooks/useActions';
   import {
     checkAge,
     checkEmpty,
-  } from '../components/DynamicForm/src/hooks/useValidator';
-  import { pageBack } from '../components/DynamicForm/src/hooks/useActions';
+  } from '/@/components/DynamicForm/src/hooks/useValidator';
+  import type { ConfigType } from '/@/components/DynamicForm/types';
+  import BaseViewVue from '/@/components/Layouts/BaseView.vue';
 
   const dialogVisible = ref(false);
 

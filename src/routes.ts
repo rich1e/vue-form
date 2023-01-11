@@ -2,14 +2,14 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2022-11-07 09:54:23
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-12-19 18:11:01
+ * @LastEditTime: 2023-01-10 18:33:52
  * @FilePath: /vue-form/src/routes.ts
  * @Description:
  *
  */
 import type { App } from 'vue';
+import type { RouteMeta, RouteRecordRaw } from 'vue-router';
 import { createRouter, createWebHistory } from 'vue-router';
-import type { RouteRecordRaw, RouteMeta } from 'vue-router';
 
 /**
  * @description App自定义页面路由信息
@@ -69,7 +69,7 @@ const routes: AppRouteRecord[] = [
 
   {
     path: '/dialog',
-    component: () => import('./views/Dialog.vue'),
+    component: () => import('./example/dialog/index.vue'),
     meta: {
       title: '',
     },
