@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2023-01-10 16:54:38
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2023-01-11 17:38:44
+ * @LastEditTime: 2023-01-12 17:03:16
  * @FilePath: /vue-form/src/example/dialog/components/Dialog.vue
  * @Description:
  *
@@ -23,22 +23,80 @@
 </script>
 
 <script setup lang="ts">
+  import { ref, toRefs, useAttrs, watch } from 'vue';
   /**
    * @see https://github.com/element-plus/element-plus/blob/v1.0.1-beta.24/website/docs/zh-CN/dialog.md
    */
   import { ElDialog } from 'element-plus';
-  import { ref } from 'vue';
+
+  interface Props {
+    updateTitle?: (title: string) => void;
+  }
 
   const dialogVisible = ref(false);
+  const attrs = useAttrs();
+  const props = defineProps<Props>();
+  // const slots = useSlots();
+
+  const { title, modelValue } = toRefs(attrs);
+
+  console.table(attrs);
+  // console.log(slots);
+
+  const toggleEdit = (
+    text: HTMLElement,
+    input: HTMLElement,
+    state: boolean,
+  ) => {
+    if (state) {
+      text.style.display = 'none';
+      input.style.display = 'block';
+    } else {
+      text.style.display = 'block';
+      input.style.display = 'none';
+    }
+  };
+
+  const dblClickHandler = (event: MouseEvent) => {
+    const span = event.target as HTMLSpanElement;
+    const editInput = span.nextElementSibling as HTMLInputElement;
+    // 开启编辑状态
+    toggleEdit(span, editInput, true);
+
+    editInput.onblur = (val: FocusEvent) => {
+      const _self = val.target as HTMLInputElement;
+      span.innerText = _self.value;
+      // 关闭编辑状态
+      toggleEdit(span, _self, false);
+
+      if (props.updateTitle) {
+        props.updateTitle(_self.value);
+      }
+    };
+  };
+
+  watch(
+    () => [modelValue.value, title.value],
+    (newVal1, newVal2) => {
+      console.log('watch', newVal1, newVal2);
+    },
+  );
 </script>
 
 <template>
-  <div>
-    <ElDialog v-model="dialogVisible" v-bind="$attrs">
-      {{ $attrs }}
-      <template v-for="(_, name) in $slots" v-slot:[name]="data">
-        <slot :name="name" v-bind="data" />
-      </template>
-    </ElDialog>
-  </div>
+  <ElDialog v-model="dialogVisible" v-bind="$attrs">
+    <template v-for="(_, name) in $slots" v-slot:[name]="data">
+      <slot :name="name" v-bind="data" />
+    </template>
+    <template #title v-if="title">
+      <span @dblclick="dblClickHandler">{{ title }}</span>
+      <input type="text" class="edit" />
+    </template>
+  </ElDialog>
 </template>
+
+<style scoped lang="scss">
+  .edit {
+    display: none;
+  }
+</style>
