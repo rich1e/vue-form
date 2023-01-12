@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2023-01-10 16:54:38
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2023-01-12 17:03:16
+ * @LastEditTime: 2023-01-12 17:45:39
  * @FilePath: /vue-form/src/example/dialog/components/Dialog.vue
  * @Description:
  *
@@ -17,13 +17,14 @@
      * 当撰写包裹一个目标元素或另一个组件的组件时，这可能不会总是符合预期行为。
      * 通过设置 inheritAttrs 到 false，这些默认行为将会被去掉。
      * @see https://juejin.cn/post/7046282409767092237
+     * @see https://www.cnblogs.com/IwishIcould/p/16815907.html
      */
     inheritAttrs: false,
   };
 </script>
 
 <script setup lang="ts">
-  import { ref, toRefs, useAttrs, watch } from 'vue';
+  import { ref, useAttrs } from 'vue';
   /**
    * @see https://github.com/element-plus/element-plus/blob/v1.0.1-beta.24/website/docs/zh-CN/dialog.md
    */
@@ -31,14 +32,24 @@
 
   interface Props {
     updateTitle?: (title: string) => void;
+    visible?: boolean;
   }
 
-  const dialogVisible = ref(false);
   const attrs = useAttrs();
-  const props = defineProps<Props>();
   // const slots = useSlots();
+  const props = defineProps<Props>();
+  /**
+   * ElDialog 不设置 v-model 会提示 ts 错误，参考下列方式额外提供了 visible 属性
+   * @see https://github.com/Jlnvv-tom/Secondary-development-component/blob/main/packages/modelForm/src/index.vue
+   * @see https://github.com/Jlnvv-tom/Secondary-development-component/blob/main/src/views/modelForm/index.vue
+   */
+  const dialogVisible = ref<boolean>(props.visible!);
 
-  const { title, modelValue } = toRefs(attrs);
+  /**
+   * [Vue Warn] toRefs() expects a reactive object but received a plain one.
+   * @see https://juejin.cn/post/6943053588100825095
+   */
+  const { title } = attrs;
 
   console.table(attrs);
   // console.log(slots);
@@ -75,12 +86,12 @@
     };
   };
 
-  watch(
-    () => [modelValue.value, title.value],
-    (newVal1, newVal2) => {
-      console.log('watch', newVal1, newVal2);
-    },
-  );
+  // watch(
+  //   () => [modelValue.value, title.value],
+  //   (newVal1, newVal2) => {
+  //     console.log('watch', newVal1, newVal2);
+  //   },
+  // );
 </script>
 
 <template>
