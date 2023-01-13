@@ -2,7 +2,7 @@
  * @Author: yuqigong@outlook.com
  * @Date: 2023-01-10 16:54:38
  * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2023-01-12 17:45:39
+ * @LastEditTime: 2023-01-13 17:30:23
  * @FilePath: /vue-form/src/example/dialog/components/Dialog.vue
  * @Description:
  *
@@ -24,7 +24,7 @@
 </script>
 
 <script setup lang="ts">
-  import { ref, useAttrs } from 'vue';
+  import { ref, useAttrs, withDefaults } from 'vue';
   /**
    * @see https://github.com/element-plus/element-plus/blob/v1.0.1-beta.24/website/docs/zh-CN/dialog.md
    */
@@ -36,14 +36,17 @@
   }
 
   const attrs = useAttrs();
-  // const slots = useSlots();
-  const props = defineProps<Props>();
+
+  const props = withDefaults(defineProps<Props>(), {
+    visible: false,
+  });
+
   /**
    * ElDialog 不设置 v-model 会提示 ts 错误，参考下列方式额外提供了 visible 属性
    * @see https://github.com/Jlnvv-tom/Secondary-development-component/blob/main/packages/modelForm/src/index.vue
    * @see https://github.com/Jlnvv-tom/Secondary-development-component/blob/main/src/views/modelForm/index.vue
    */
-  const dialogVisible = ref<boolean>(props.visible!);
+  const dialogVisible = ref(props.visible!);
 
   /**
    * [Vue Warn] toRefs() expects a reactive object but received a plain one.
@@ -52,7 +55,6 @@
   const { title } = attrs;
 
   console.table(attrs);
-  // console.log(slots);
 
   const toggleEdit = (
     text: HTMLElement,
