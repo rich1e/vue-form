@@ -1,7 +1,7 @@
 /*
- * @Author: gongyuqi@max-optics.com
+ * @Author: yuqigong@outlook.com
  * @Date: 2022-11-08 18:12:04
- * @LastEditors: gongyuqi@max-optics.com
+ * @LastEditors: yuqigong@outlook.com
  * @LastEditTime: 2022-11-08 18:25:27
  * @FilePath: /vue-form/src/helper/request/httpInterceptors.ts
  * @Description:

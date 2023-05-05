@@ -1,7 +1,7 @@
 <!--
- * @Author: gongyuqi@max-optics.com
+ * @Author: yuqigong@outlook.com
  * @Date: 2022-11-03 14:10:27
- * @LastEditors: gongyuqi@max-optics.com
+ * @LastEditors: yuqigong@outlook.com
  * @LastEditTime: 2022-11-07 18:49:48
  * @FilePath: /vue-form/src/App.vue
  * @Description:
