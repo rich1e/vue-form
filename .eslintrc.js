@@ -1,10 +1,10 @@
 /*
- * @Author: yuqigong@outlook.com
- * @Date: 2022-11-03 16:46:53
- * @LastEditors: yuqigong@outlook.com
- * @LastEditTime: 2022-11-30 11:27:46
- * @FilePath: /vue-form/.eslintrc.cjs
- * @Description:
+ * @Author       : yuqigong@outlook.com
+ * @Date         : 2022-11-03 16:46:53
+ * @LastEditors  : yuqigong@outlook.com
+ * @LastEditTime : 2023-05-05 23:05:14
+ * @FilePath     : /vue-form/.eslintrc.js
+ * @Description  :
  */
 // https://typescript-eslint.io/docs/linting/typed-linting/monorepos
 

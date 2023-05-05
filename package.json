@@ -2,7 +2,6 @@
   "name": "@mg/dynamic-form",
   "author": "rich1e",
   "version": "1.0.4",
-  "type": "module",
   "files": [
     "dist"
   ],
